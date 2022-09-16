@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
+    //Pasamos como parametro la clase CalendarViewHolder a la clase RecyclerView.Adapter
+    //Heredamos los metodos de la clase RecyclerView.Adapter
 
     private final ArrayList<String> daysOfMonth;
     private final OnItemListener onItemListener;
@@ -28,7 +31,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.16666666);
-        return new CalendarViewHolder(view,onItemListener);
+
+        return new CalendarViewHolder(view, onItemListener);
     }
 
     @Override
