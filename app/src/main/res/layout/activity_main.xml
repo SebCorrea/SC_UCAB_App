@@ -101,9 +101,17 @@
             android:textAlignment="center" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/prueba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="holaa"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+
 
 </LinearLayout>

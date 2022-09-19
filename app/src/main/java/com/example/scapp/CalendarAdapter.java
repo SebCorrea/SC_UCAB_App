@@ -50,10 +50,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     //Recupera los datos correspondientes y los usa para completar el diseño del contenedor de vistas
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
-
         //El textView muestra la posicion del ArrayList
         holder.daysOfMonth.setText(daysOfMonth.get(position));
     }
+
 
     //RecyclerView llama a este metodo para obtener el tamaño del conjunto de datos
     @Override
@@ -61,7 +61,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return daysOfMonth.size();
     }
 
+    //Creamos una interfaz
     public interface OnItemListener{
+        //Metodo OnItemClick
         void onItemClick(int position, String dayText);
     }
 }
