@@ -1,14 +1,12 @@
 package com.example.scapp;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Build;
+
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +14,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
@@ -40,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYear_txtView = findViewById(R.id.monthAndYear_txtView);
         prueba = findViewById(R.id.prueba);
-
     }
 
     private void setMonthView() {
@@ -64,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     private ArrayList<String> daysInMonthArray(LocalDate date) {
         ArrayList<String> daysInMonthArray = new ArrayList<>();
 
-        //El metodo from obtiene el mes y año a traves del TemporalAccessor especificado
+        //El metodo from obtiene el mes y año actual a traves del TemporalAccessor especificado
         YearMonth yearMonth = YearMonth.from(date);
 
         //Metodo lengthOfMonth devuelve la longitud del mes
@@ -99,9 +96,11 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setMonthView();
     }
 
+    //Metodo implementado de la interfaz
     @Override
     public void onItemClick(int position, String dayText) {
         String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
         Toast.makeText(this,message,Toast.LENGTH_LONG).show();
     }
+
 }

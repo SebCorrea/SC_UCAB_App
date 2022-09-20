@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-
+//Clase que genera las vistas en conjunto del calendario
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     //Pasamos como parametro la clase CalendarViewHolder a la clase RecyclerView.Adapter
     //Heredamos los metodos de la clase RecyclerView.Adapter
@@ -24,7 +24,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         this.onItemListener = onItemListener;
     }
 
-    //RecyclerView llama a este método cada vez que necesite crear un ViewHolder nuevo
+    //RecyclerView llama a este método cada vez que necesite crear un ViewHolder nuevo (Vista individual nueva)
     //El ViewHolder contiene el View el cual contiene el diseño del elemento individual de la vista
     @NonNull
     @Override
@@ -65,5 +65,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public interface OnItemListener{
         //Metodo OnItemClick
         void onItemClick(int position, String dayText);
+
     }
 }
