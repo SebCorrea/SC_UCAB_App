@@ -4,17 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".WeekViewActivity"
     android:orientation="vertical"
     >
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@null"
-        android:onClick="WeeklyAction"
-        android:text="Weekly" />
 
     <LinearLayout
         android:id="@+id/monthLinear"
@@ -30,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="PreviousMonthAction"
+            android:onClick="PreviousWeekAction"
             android:text="atras" />
 
         <TextView
@@ -46,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:onClick="NextMonthAction"
+            android:onClick="NextWeekAction"
             android:text="adelante" />
     </LinearLayout>
 
@@ -118,7 +110,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:text="qlq manin"/>
 
 
 

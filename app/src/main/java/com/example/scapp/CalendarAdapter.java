@@ -1,5 +1,6 @@
 package com.example.scapp;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 //Clase que genera las vistas en conjunto del calendario
@@ -14,13 +16,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     //Pasamos como parametro la clase CalendarViewHolder a la clase RecyclerView.Adapter
     //Heredamos los metodos de la clase RecyclerView.Adapter
 
-    private final ArrayList<String> daysOfMonth;
+    private final ArrayList<LocalDate> days;
     private final OnItemListener onItemListener;
 
     //Constructor
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener) {
+    public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener) {
         //Recibimos los parametros
-        this.daysOfMonth = daysOfMonth;
+        this.days = days;
         this.onItemListener = onItemListener;
     }
 
@@ -40,10 +42,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.height = (int)(parent.getHeight() * 0.16666666);
+
+        if(days.size() > 15){
+            layoutParams.height = (int)(parent.getHeight() * 0.16666666);
+        }else{
+            layoutParams.height = parent.getHeight();
+        }
 
         //Retornamos el objeto de tipo CalendarViewHolder
-        return new CalendarViewHolder(view, onItemListener);
+        return new CalendarViewHolder(view, onItemListener, days);
     }
 
     //RecyclerView llama a este metodo para asociar un ViewHolder con los datos
@@ -51,20 +58,30 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
         //El textView muestra la posicion del ArrayList
-        holder.daysOfMonth.setText(daysOfMonth.get(position));
+        final LocalDate date = days.get(position);
+
+        if(date == null){
+            holder.daysOfMonth.setText("");
+        }else{
+            holder.daysOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+
+            if(date.equals(CalendarUtils.selectedDate)){
+                holder.parentView.setBackgroundColor(Color.BLUE);
+            }
+        }
     }
 
 
     //RecyclerView llama a este metodo para obtener el tamaño del conjunto de datos
     @Override
     public int getItemCount() {
-        return daysOfMonth.size();
+        return days.size();
     }
 
     //Creamos una interfaz
     public interface OnItemListener{
         //Metodo OnItemClick
-        void onItemClick(int position, String dayText);
+        void onItemClick(int position, LocalDate date);
 
     }
 }
