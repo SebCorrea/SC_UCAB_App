@@ -48,6 +48,8 @@ public class CalendarUtils {
     }
 
     private static LocalDate sundayForDate(LocalDate current) {
+
+        //Devuelve la semana anterior transcurrida
         LocalDate oneWeekAgo = current.minusWeeks(1);
 
         while (current.isAfter(oneWeekAgo)){

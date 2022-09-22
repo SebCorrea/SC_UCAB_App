@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
 
+
     private TextView monthYear_txtView;
     private TextView prueba;
     private RecyclerView calendarRecyclerView;
@@ -25,7 +26,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
 
         initWidgets();
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
-        setWeekView();
+        setMonthView();
     }
 
     private void initWidgets() {
@@ -34,15 +35,15 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         prueba = findViewById(R.id.prueba);
     }
 
-    private void setWeekView() {
+    private void setMonthView() {
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
 
         //Creamos un ArrayList que contiene los dias del mes
-        ArrayList<LocalDate> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
+        ArrayList<LocalDate> days = CalendarUtils.daysInMonthArray(CalendarUtils.selectedDate);
 
         //Creamos e instanciamos una variable de tipo CalendarAdapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
         //Pasamos el adaptador al RecyclerView
         calendarRecyclerView.setAdapter(calendarAdapter);
 
@@ -50,21 +51,28 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),7);
         //Pasamos el layoutManager al recyclerView
         calendarRecyclerView.setLayoutManager(layoutManager);
+
     }
 
-    public void PreviousWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
-        setWeekView();
+
+    public void PreviousMonthAction(View view) {
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
+        setMonthView();
+
     }
 
-    public void NextWeekAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-        setWeekView();
+    public void NextMonthAction(View view) {
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
+        setMonthView();
     }
 
+    //Metodo implementado de la interfaz
     @Override
     public void onItemClick(int position, LocalDate date) {
-        CalendarUtils.selectedDate = date;
-        setWeekView();
+        if(date != null){
+            CalendarUtils.selectedDate = date;
+            setMonthView();
+        }
+
     }
 }
