@@ -15,7 +15,8 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
     //RecyclerView.ViewHolder es una clase que amplia ViewHolder la cual sera utilizada por el Adaptador
 
     public final View parentView;
-    public final TextView daysOfMonth;
+    public final TextView cellDate;
+    public final TextView cellDay;
     private final CalendarAdapter.OnItemListener onItemListener;
     private final ArrayList<LocalDate> days;
 
@@ -27,7 +28,8 @@ public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.
         //En la clase padre la variable itemView que pasamos como parametro se va a inicializar
         super(itemView);
         parentView = itemView.findViewById(R.id.parentView);
-        daysOfMonth = itemView.findViewById(R.id.cellDay_txtView);
+        cellDate = itemView.findViewById(R.id.cellDate_txtView);
+        cellDay = itemView.findViewById(R.id.cellDay_txtView);
         this.onItemListener = onItemListener;
         itemView.setOnClickListener(this);
         this.days = days;

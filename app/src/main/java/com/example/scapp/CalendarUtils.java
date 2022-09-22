@@ -67,5 +67,32 @@ public class CalendarUtils {
         return date.format(formatter);
     }
 
+    public  static String Days(LocalDate date){
+        String day = "";
+        switch (date.getDayOfWeek()){
+            case MONDAY:
+                day = "Mon";
+                break;
+            case TUESDAY:
+                day = "Tue";
+                break;
+            case WEDNESDAY:
+                day = "Wed";
+                break;
+            case THURSDAY:
+                day = "Thur";
+                break;
+            case FRIDAY:
+                day = "Fri";
+                break;
+            case SATURDAY:
+                day = "Sat";
+                break;
+            case SUNDAY:
+                day = "Sun";
+                break;
+        }
+        return day;
+    }
 
 }

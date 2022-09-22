@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
 
         //Creamos e instanciamos el layoutManager
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),7);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,7);
         //Pasamos el layoutManager al recyclerView
         calendarRecyclerView.setLayoutManager(layoutManager);
     }

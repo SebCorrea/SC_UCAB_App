@@ -46,7 +46,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         if(days.size() > 15){
             layoutParams.height = (int)(parent.getHeight() * 0.16666666);
         }else{
-            layoutParams.height = parent.getHeight();
+            layoutParams.height = (int)(parent.getHeight() * 0.2);
         }
 
         //Retornamos el objeto de tipo CalendarViewHolder
@@ -61,9 +61,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         final LocalDate date = days.get(position);
 
         if(date == null){
-            holder.daysOfMonth.setText("");
+            holder.cellDate.setText("");
+            holder.cellDay.setText("");
         }else{
-            holder.daysOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+            holder.cellDate.setText(String.valueOf(date.getDayOfMonth()));
+            holder.cellDay.setText(CalendarUtils.Days(date));
 
             if(date.equals(CalendarUtils.selectedDate)){
                 holder.parentView.setBackgroundColor(Color.BLUE);
