@@ -46,14 +46,14 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         if(days.size() > 15){
             layoutParams.height = (int)(parent.getHeight() * 0.16666666);
         }else{
-            layoutParams.height = (int)(parent.getHeight() * 0.2);
+            layoutParams.height = (int)(parent.getHeight());
         }
 
         //Retornamos el objeto de tipo CalendarViewHolder
         return new CalendarViewHolder(view, onItemListener, days);
     }
 
-    //RecyclerView llama a este metodo para asociar un ViewHolder con los datos
+    //Pasa por cada item de la lista
     //Recupera los datos correspondientes y los usa para completar el diseño del contenedor de vistas
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
