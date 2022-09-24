@@ -2,11 +2,13 @@ package com.example.scapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         CalendarUtils.selectedDate = LocalDate.now();
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setWeekView();
+
+//        calendarRecyclerView.scrollToPosition(2);
+
     }
 
     private void initWidgets() {
@@ -58,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
 
         //Creamos e instanciamos el layoutManager
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,7);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //Pasamos el layoutManager al recyclerView
         calendarRecyclerView.setLayoutManager(layoutManager);
     }

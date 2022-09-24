@@ -1,13 +1,18 @@
 package com.example.scapp;
 
+import android.content.Context;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class CalendarUtils {
+public class CalendarUtils extends AppCompatActivity {
     public static LocalDate selectedDate;
+
 
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
@@ -43,7 +48,6 @@ public class CalendarUtils {
             days.add(current);
             current = current.plusDays(1);
         }
-
         return days;
     }
 
@@ -67,7 +71,8 @@ public class CalendarUtils {
         return date.format(formatter);
     }
 
-    public  static String Days(LocalDate date){
+
+    public static String Days(LocalDate date){
         String day = "";
         switch (date.getDayOfWeek()){
             case MONDAY:

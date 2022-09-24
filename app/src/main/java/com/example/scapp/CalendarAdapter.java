@@ -1,5 +1,6 @@
 package com.example.scapp;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final ArrayList<LocalDate> days;
     private final OnItemListener onItemListener;
+
 
     //Constructor
     public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener) {
@@ -46,7 +48,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         if(days.size() > 15){
             layoutParams.height = (int)(parent.getHeight() * 0.16666666);
         }else{
-            layoutParams.height = (int)(parent.getHeight());
+            layoutParams.width =(int) (parent.getWidth());
+
         }
 
         //Retornamos el objeto de tipo CalendarViewHolder
@@ -57,7 +60,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     //Recupera los datos correspondientes y los usa para completar el diseño del contenedor de vistas
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
-        //El textView muestra la posicion del ArrayList
+
         final LocalDate date = days.get(position);
 
         if(date == null){
@@ -66,13 +69,11 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         }else{
             holder.cellDate.setText(String.valueOf(date.getDayOfMonth()));
             holder.cellDay.setText(CalendarUtils.Days(date));
-
             if(date.equals(CalendarUtils.selectedDate)){
                 holder.parentView.setBackgroundColor(Color.BLUE);
             }
         }
     }
-
 
     //RecyclerView llama a este metodo para obtener el tamaño del conjunto de datos
     @Override

@@ -24,6 +24,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_view);
 
+
         initWidgets();
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setMonthView();
