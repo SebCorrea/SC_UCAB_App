@@ -1,5 +1,6 @@
 package com.example.scapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
+    public static int firstVisibleInListview;
 
     public void WeeklyAction(View view) {
         startActivity(new Intent(this, WeekViewActivity.class));
@@ -40,9 +42,11 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setWeekView();
 
-//        calendarRecyclerView.scrollToPosition(2);
+
 
     }
+
+
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
@@ -63,19 +67,35 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
 
         //Creamos e instanciamos el layoutManager
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //Pasamos el layoutManager al recyclerView
-        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
+
+        RecyclerScrolls recyclerScrolls = new RecyclerScrolls(calendarRecyclerView);
+        calendarRecyclerView.addOnScrollListener(recyclerScrolls);
+
+
+
+        /*
+        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
+        firstVisibleInListview = linearLayoutManager.findFirstVisibleItemPosition();
+        RecyclerScroll recyclerScroll = new RecyclerScroll(prueba,(LinearLayoutManager) layoutManager);
+
+        calendarRecyclerView.addOnScrollListener(recyclerScroll);*/
     }
 
     public void PreviousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
         setWeekView();
+
+
     }
 
     public void NextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
+        calendarRecyclerView.smoothScrollToPosition(2);
+
     }
 
     @Override
