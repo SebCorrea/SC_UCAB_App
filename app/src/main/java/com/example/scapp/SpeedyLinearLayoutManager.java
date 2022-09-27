@@ -41,7 +41,7 @@ public class SpeedyLinearLayoutManager extends LinearLayoutManager {
             }
         };
 
-        linearSmoothScroller.setTargetPosition(position);
+        linearSmoothScroller.setTargetPosition(3);
         startSmoothScroll(linearSmoothScroller);
     }
 }

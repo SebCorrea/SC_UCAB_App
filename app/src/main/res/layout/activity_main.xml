@@ -57,27 +57,11 @@ android:orientation="vertical">
         android:background="@null"
         android:padding="10dp">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="-1"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
-            android:layout_gravity="center"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/calendarRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"/>
+            android:layout_height="50dp"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-            android:layout_gravity="center"/>
     </LinearLayout>
 
 
