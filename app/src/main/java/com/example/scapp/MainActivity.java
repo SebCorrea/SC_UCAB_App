@@ -23,16 +23,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
-    public static int firstVisibleInListview;
-
     public void WeeklyAction(View view) {
         startActivity(new Intent(this, WeekViewActivity.class));
     }
 
     private TextView monthYear_txtView;
-    private TextView prueba;
+    public static TextView prueba;
     private RecyclerView calendarRecyclerView;
-    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setWeekView();
 
         calendarRecyclerView.addOnScrollListener(new CalendarScroll());
-
-
     }
 
 
@@ -70,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
 
         //Creamos e instanciamos el layoutManager
-        layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         //Pasamos el layoutManager al recyclerView
         //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
 
