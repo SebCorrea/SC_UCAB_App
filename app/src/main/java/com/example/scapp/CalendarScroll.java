@@ -27,15 +27,29 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
             }
         };
 
-        if(newState == recyclerView.SCROLL_STATE_IDLE){
+        if(newState == recyclerView.SCROLL_STATE_IDLE){ //Termina la animación de scroll (3)
             scroll= "Sin Scrollear";
-        }else if(newState == recyclerView.SCROLL_STATE_SETTLING ){
+
+            smoothScroller.setTargetPosition(8);
+            recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
+
+
+        }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";
-        }else if(newState == recyclerView.SCROLL_STATE_DRAGGING){
+
+            smoothScroller.setTargetPosition(8);
+            recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
+
+        }else if(newState == recyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             scroll= "Scrolleando";
+            selectedDate = selectedDate.plusWeeks(1);
+            //MainActivity.prueba.setText(selectedDate.format(formatter));
         }
 
-        MainActivity.prueba.setText(scroll + direccion);
+
+        //MainActivity.prueba.setText(scroll + direccion);
     }
 
     @Override
@@ -53,24 +67,25 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
          */
 
         if(dx > 0){
-            //MainActivity.prueba.setText("Adelante");
             /*
-            smoothScroller.setTargetPosition(8);
-            recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
+            MainActivity.prueba.setText("Adelante");
             //calendarRecyclerView.getLayoutManager().scrollToPosition(1);
             selectedDate = selectedDate.plusWeeks(1);
              */
             direccion = " Derecha";
+
+
         }else{
 
             /*
+            MainActivity.prueba.setText("Atras");
             smoothScroller.setTargetPosition(-8);
             recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
-
-            MainActivity.prueba.setText("Atras");
             selectedDate = selectedDate.minusWeeks(1);*/
             direccion = " Izquierda";
-
+            //selectedDate = selectedDate.minusWeeks(1);
         }
+
     }
 }
