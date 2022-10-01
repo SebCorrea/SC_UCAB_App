@@ -42,7 +42,7 @@ public class CalendarUtils extends AppCompatActivity {
 
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
-        LocalDate endDate = current.plusWeeks(2);
+        LocalDate endDate = current.plusWeeks(1);
 
         while (current.isBefore(endDate)){
             days.add(current);
@@ -54,7 +54,7 @@ public class CalendarUtils extends AppCompatActivity {
     private static LocalDate sundayForDate(LocalDate current) {
 
         //Devuelve la semana anterior transcurrida
-        LocalDate oneWeekAgo = current.minusWeeks(2);
+        LocalDate oneWeekAgo = current.minusWeeks(1);
 
         while (current.isAfter(oneWeekAgo)){
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY){

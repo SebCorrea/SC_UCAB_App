@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setWeekView();
 
         calendarRecyclerView.addOnScrollListener(new CalendarScroll());
+
     }
 
 
