@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class WeekViewActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener {
+public class WeekViewActivity extends AppCompatActivity{
 
 
     private TextView monthYear_txtView;
@@ -44,7 +44,7 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         ArrayList<LocalDate> days = CalendarUtils.daysInMonthArray(CalendarUtils.selectedDate);
 
         //Creamos e instanciamos una variable de tipo CalendarAdapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(days, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(days);
         //Pasamos el adaptador al RecyclerView
         calendarRecyclerView.setAdapter(calendarAdapter);
 
@@ -67,13 +67,5 @@ public class WeekViewActivity extends AppCompatActivity implements CalendarAdapt
         setMonthView();
     }
 
-    //Metodo implementado de la interfaz
-    @Override
-    public void onItemClick(int position, LocalDate date) {
-        if(date != null){
-            CalendarUtils.selectedDate = date;
-            setMonthView();
-        }
 
-    }
 }

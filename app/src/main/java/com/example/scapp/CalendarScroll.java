@@ -1,8 +1,11 @@
 package com.example.scapp;
 
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,56 +13,56 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class CalendarScroll extends RecyclerView.OnScrollListener implements View.OnScrollChangeListener{
+public class CalendarScroll extends RecyclerView.OnScrollListener{
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
     private LocalDate selectedDate = LocalDate.now();
     String scroll;
     String direccion;
-
-
+    public static GestureDetector gestureDetector;
 
     @Override
     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
 
         RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(recyclerView.getContext()) {
-            @Override protected int getHorizontalSnapPreference() {
+            @Override
+            protected int getHorizontalSnapPreference() {
                 return LinearSmoothScroller.SNAP_TO_START;
             }
         };
 
+
         if(newState == recyclerView.SCROLL_STATE_IDLE){ //Termina la animación de scroll (3)
             scroll= "Sin Scrollear";
 
-            //smoothScroller.setTargetPosition(8);
-            //recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+            CalendarUtils.setWeekView2();
 
-
+            smoothScroller.setTargetPosition(0);
+            recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
 
         }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";
 
+            smoothScroller.setTargetPosition(8);
+            recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
 
-            //smoothScroller.setTargetPosition(8);
-            //recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
-
+            //selectedDate = selectedDate.plusWeeks(1);
 
         }else if(newState == recyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             scroll= "Scrolleando";
-            selectedDate = selectedDate.plusWeeks(1);
+
             //MainActivity.prueba.setText(selectedDate.format(formatter));
         }
-
-
-        //MainActivity.prueba.setText(scroll + direccion);
+        MainActivity.prueba.setText(formatter.format(selectedDate));
     }
 
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
-        recyclerView.setOnScrollChangeListener(this);
+        //recyclerView.setOnScrollChangeListener(this);
         /*
         if(recyclerView.getScrollState() == recyclerView.SCROLL_STATE_IDLE){
             MainActivity.prueba.setText("Sin Scrollear");
@@ -70,34 +73,31 @@ public class CalendarScroll extends RecyclerView.OnScrollListener implements Vie
         }
          */
 
-        //MainActivity.prueba.setText(String.valueOf(recyclerView.computeHorizontalScrollOffset()));
-
         if(dx > 0){
-            /*
 
+            /*
             MainActivity.prueba.setText("Adelante");
             //calendarRecyclerView.getLayoutManager().scrollToPosition(1);
-            selectedDate = selectedDate.plusWeeks(1);
              */
-            direccion = " Derecha";
+            //selectedDate = selectedDate.plusWeeks(1);
+            direccion = "Derecha";
 
-
-        }else{
-
+        }else if(dx<0){
+            CalendarUtils.selectedDate.minusWeeks(1);
             /*
             MainActivity.prueba.setText("Atras");
             smoothScroller.setTargetPosition(-8);
             recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             selectedDate = selectedDate.minusWeeks(1);*/
-            direccion = " Izquierda";
+            direccion = "Izquierda";
             //selectedDate = selectedDate.minusWeeks(1);
         }
 
-    }
 
-    @Override
-    public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
     }
+
+
+
 }
 

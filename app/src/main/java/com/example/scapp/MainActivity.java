@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
+public class MainActivity extends AppCompatActivity{
 
     public void WeeklyAction(View view) {
         startActivity(new Intent(this, WeekViewActivity.class));
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     private TextView monthYear_txtView;
     public static TextView prueba;
-    private RecyclerView calendarRecyclerView;
+    public static RecyclerView calendarRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +44,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setWeekView();
 
         calendarRecyclerView.addOnScrollListener(new CalendarScroll());
-
     }
-
 
 
     private void initWidgets() {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         ArrayList<LocalDate> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
 
         //Creamos e instanciamos una variable de tipo CalendarAdapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
         //Pasamos el adaptador al RecyclerView
         calendarRecyclerView.setAdapter(calendarAdapter);
 
@@ -90,23 +90,11 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
     public void PreviousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
         setWeekView();
-
     }
 
     public void NextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
         setWeekView();
-        calendarRecyclerView.getLayoutManager().scrollToPosition(3);
-
-        //<calendarRecyclerView.smoothScrollToPosition(1);
-
     }
-
-    @Override
-    public void onItemClick(int position, LocalDate date) {
-        CalendarUtils.selectedDate = date;
-        setWeekView();
-    }
-
 
 }

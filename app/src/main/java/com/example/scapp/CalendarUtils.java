@@ -1,8 +1,8 @@
 package com.example.scapp;
 
-import android.content.Context;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 public class CalendarUtils extends AppCompatActivity {
     public static LocalDate selectedDate;
+    private final CalendarAdapter.OnItemListener onItemListener;
+
+    public CalendarUtils(CalendarAdapter.OnItemListener onItemListener) {
+        this.onItemListener = onItemListener;
+    }
 
 
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
@@ -38,11 +43,25 @@ public class CalendarUtils extends AppCompatActivity {
         return daysInMonthArray;
     }
 
+    public static void setWeekView2(){
+        ArrayList<LocalDate> daysInWeek = daysInWeekArray(selectedDate);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
+        //Pasamos el adaptador al RecyclerView
+        MainActivity.calendarRecyclerView.setAdapter(calendarAdapter);
+
+        //Creamos e instanciamos el layoutManager
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.calendarRecyclerView.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        //Pasamos el layoutManager al recyclerView
+        //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
+
+        MainActivity.calendarRecyclerView.setLayoutManager(layoutManager);
+
+    }
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate){
 
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
-        LocalDate endDate = current.plusWeeks(1);
+        LocalDate endDate = current.plusWeeks(2);
 
         while (current.isBefore(endDate)){
             days.add(current);

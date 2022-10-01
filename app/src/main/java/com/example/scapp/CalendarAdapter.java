@@ -18,14 +18,12 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     //Heredamos los metodos de la clase RecyclerView.Adapter
 
     private final ArrayList<LocalDate> days;
-    private final OnItemListener onItemListener;
 
 
     //Constructor
-    public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener) {
+    public CalendarAdapter(ArrayList<LocalDate> days) {
         //Recibimos los parametros
         this.days = days;
-        this.onItemListener = onItemListener;
     }
 
     //RecyclerView llama a este método cada vez que necesite crear un ViewHolder nuevo (Vista individual nueva)
@@ -45,15 +43,19 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 
+        /*
         if(days.size() > 15){
             layoutParams.height = (int)(parent.getHeight() * 0.16666666);
         }else{
-            layoutParams.width =(int) (parent.getWidth()/7);
+
 
         }
 
+         */
+
+        layoutParams.width =(int)(parent.getWidth()/7);
         //Retornamos el objeto de tipo CalendarViewHolder
-        return new CalendarViewHolder(view, onItemListener, days);
+        return new CalendarViewHolder(view, days);
     }
 
     //Pasa por cada item de la lista
@@ -69,9 +71,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         }else{
             holder.cellDate.setText(String.valueOf(date.getDayOfMonth()));
             holder.cellDay.setText(CalendarUtils.Days(date));
-            if(date.equals(CalendarUtils.selectedDate)){
-                holder.parentView.setBackgroundColor(Color.BLUE);
-            }
         }
     }
 
