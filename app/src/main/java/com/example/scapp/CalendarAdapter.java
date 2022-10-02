@@ -43,17 +43,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 
-        /*
-        if(days.size() > 15){
-            layoutParams.height = (int)(parent.getHeight() * 0.16666666);
-        }else{
+        layoutParams.width =(parent.getWidth()/7);
 
-
-        }
-
-         */
-
-        layoutParams.width =(int)(parent.getWidth()/7);
         //Retornamos el objeto de tipo CalendarViewHolder
         return new CalendarViewHolder(view, days);
     }

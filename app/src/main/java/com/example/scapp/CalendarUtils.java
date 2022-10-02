@@ -61,12 +61,25 @@ public class CalendarUtils extends AppCompatActivity {
 
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
-        LocalDate endDate = current.plusWeeks(2);
 
+        /*
+        LocalDate endDate = current.plusWeeks(2);
         while (current.isBefore(endDate)){
             days.add(current);
             current = current.plusDays(1);
         }
+        return days;
+
+         */
+
+        LocalDate initialWeek = current.minusWeeks(1);
+        LocalDate finalWeek = current.plusWeeks(2);
+
+        while (initialWeek.isBefore(finalWeek)){
+            days.add(initialWeek);
+            initialWeek = initialWeek.plusDays(1);
+        }
+
         return days;
     }
 

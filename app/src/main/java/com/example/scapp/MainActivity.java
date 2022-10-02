@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity{
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setWeekView();
 
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll());
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(calendarRecyclerView.getContext()));
+
     }
 
 
