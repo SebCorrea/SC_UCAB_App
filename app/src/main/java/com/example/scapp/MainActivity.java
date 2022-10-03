@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity{
         setWeekView();
 
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(calendarRecyclerView.getContext()));
+        calendarRecyclerView.scrollToPosition(7);
 
     }
 

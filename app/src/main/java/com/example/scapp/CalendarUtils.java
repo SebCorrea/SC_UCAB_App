@@ -69,7 +69,6 @@ public class CalendarUtils extends AppCompatActivity {
             current = current.plusDays(1);
         }
         return days;
-
          */
 
         LocalDate initialWeek = current.minusWeeks(1);

@@ -40,6 +40,28 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         if(newState == recyclerView.SCROLL_STATE_IDLE){ //Termina la animación de scroll (3)
             scroll= "Sin Scrollear";
 
+            if(overallScroll < 0 && overallScroll< (-medida) ){
+                CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+                CalendarUtils.setWeekView2();
+
+                smoothScroller.setTargetPosition(0);
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
+            }else if(overallScroll<0 && overallScroll>= (-medida)){
+                smoothScroller.setTargetPosition(7);
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+            }else if(overallScroll>0 && overallScroll<= medida){
+                smoothScroller.setTargetPosition(7);
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+            }else if(overallScroll>0 && overallScroll> medida){
+                CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+                CalendarUtils.setWeekView2();
+
+                smoothScroller.setTargetPosition(14);
+                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+            }
+
+            /*
             if(0 < overallScroll && overallScroll < medida){
 
                 direccion = "izquierda";
@@ -56,6 +78,7 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
                 recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             }
 
+             */
 
         }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";
@@ -75,20 +98,11 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
 
     }
 
-    public boolean scrollHelp(){
-
-
-
-
-        return true;
-    }
-
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
 
         overallScroll = dx + overallScroll;
-
     }
 
 }
