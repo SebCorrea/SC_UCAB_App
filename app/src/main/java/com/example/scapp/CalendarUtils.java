@@ -53,9 +53,7 @@ public class CalendarUtils extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.calendarRecyclerView.getContext(),LinearLayoutManager.HORIZONTAL,false);
         //Pasamos el layoutManager al recyclerView
         //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
-
         MainActivity.calendarRecyclerView.setLayoutManager(layoutManager);
-
     }
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate){
 
@@ -71,12 +69,12 @@ public class CalendarUtils extends AppCompatActivity {
         return days;
          */
 
-        LocalDate initialWeek = current.minusWeeks(1);
-        LocalDate finalWeek = current.plusWeeks(2);
+        LocalDate initialDate = current.minusWeeks(1);
+        LocalDate finalDate = current.plusWeeks(2);
 
-        while (initialWeek.isBefore(finalWeek)){
-            days.add(initialWeek);
-            initialWeek = initialWeek.plusDays(1);
+        while (initialDate.isBefore(finalDate)){
+            days.add(initialDate);
+            initialDate = initialDate.plusDays(1);
         }
 
         return days;

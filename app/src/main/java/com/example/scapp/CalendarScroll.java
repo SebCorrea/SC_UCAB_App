@@ -22,11 +22,14 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     private int overallScroll;
 
     public CalendarScroll(Context context) {
+
         smoothScroller = new LinearSmoothScroller(context) {
             @Override
             protected int getHorizontalSnapPreference() {
                 return LinearSmoothScroller.SNAP_TO_START;
             }
+
+
         };
     }
 
@@ -36,49 +39,38 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
 
         int medida = recyclerView.getWidth()/2;
 
-
         if(newState == recyclerView.SCROLL_STATE_IDLE){ //Termina la animación de scroll (3)
             scroll= "Sin Scrollear";
 
-            if(overallScroll < 0 && overallScroll< (-medida) ){
+            if(overallScroll < 0 && overallScroll < (-medida) ){
+
+                /*
                 CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
                 CalendarUtils.setWeekView2();
 
+                 */
                 smoothScroller.setTargetPosition(0);
                 recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
 
-            }else if(overallScroll<0 && overallScroll>= (-medida)){
+            }else if(overallScroll<0 && overallScroll >= (-medida)){
+
                 smoothScroller.setTargetPosition(7);
                 recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
             }else if(overallScroll>0 && overallScroll<= medida){
+
                 smoothScroller.setTargetPosition(7);
                 recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
+
             }else if(overallScroll>0 && overallScroll> medida){
+
+                /*
                 CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
                 CalendarUtils.setWeekView2();
-
+                 */
                 smoothScroller.setTargetPosition(14);
                 recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             }
-
-            /*
-            if(0 < overallScroll && overallScroll < medida){
-
-                direccion = "izquierda";
-                smoothScroller.setTargetPosition(0);
-                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
-
-            }else if(overallScroll >= medida) {
-
-                direccion = "derecha";
-                CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-                CalendarUtils.setWeekView2();
-
-                smoothScroller.setTargetPosition(0);
-                recyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
-            }
-
-             */
 
         }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";
@@ -94,7 +86,14 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
 
         }
 
-        //MainActivity.prueba.setText(scroll + "  " + String.valueOf(overallScroll));
+        MainActivity.prueba.setText(scroll);
+    }
+
+    private void newScrollWeek(){
+
+    }
+    private void ScrollAnimation(RecyclerView recyclerView){
+
 
     }
 
@@ -103,7 +102,10 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         super.onScrolled(recyclerView, dx, dy);
 
         overallScroll = dx + overallScroll;
+        //MainActivity.prueba.setText(scroll + "  " + String.valueOf(overallScroll));
+
     }
 
 }
+
 

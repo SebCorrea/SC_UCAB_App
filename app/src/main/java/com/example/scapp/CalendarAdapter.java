@@ -19,7 +19,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final ArrayList<LocalDate> days;
 
-
     //Constructor
     public CalendarAdapter(ArrayList<LocalDate> days) {
         //Recibimos los parametros
@@ -43,7 +42,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 
-        layoutParams.width =(parent.getWidth()/7);
+        layoutParams.width = (parent.getWidth()/7);
 
         //Retornamos el objeto de tipo CalendarViewHolder
         return new CalendarViewHolder(view, days);
