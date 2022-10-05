@@ -55,22 +55,15 @@ public class CalendarUtils extends AppCompatActivity {
         //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
         MainActivity.calendarRecyclerView.setLayoutManager(layoutManager);
     }
-    public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate){
+    public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
 
         ArrayList<LocalDate> days = new ArrayList<>();
         LocalDate current = sundayForDate(selectedDate);
 
-        /*
-        LocalDate endDate = current.plusWeeks(2);
-        while (current.isBefore(endDate)){
-            days.add(current);
-            current = current.plusDays(1);
-        }
-        return days;
-         */
-
         LocalDate initialDate = current.minusWeeks(1);
         LocalDate finalDate = current.plusWeeks(2);
+
+        days.clear();
 
         while (initialDate.isBefore(finalDate)){
             days.add(initialDate);

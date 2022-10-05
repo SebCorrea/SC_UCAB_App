@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity{
         //Pasamos el layoutManager al recyclerView
         //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
 
+
         calendarRecyclerView.setLayoutManager(layoutManager);
         //RecyclerScrolls recyclerScrolls = new RecyclerScrolls(calendarRecyclerView);
         //calendarRecyclerView.addOnScrollListener(recyclerScrolls);

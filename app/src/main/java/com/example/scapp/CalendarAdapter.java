@@ -12,17 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-//Clase que genera las vistas en conjunto del calendario
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
-    //Pasamos como parametro la clase CalendarViewHolder a la clase RecyclerView.Adapter
-    //Heredamos los metodos de la clase RecyclerView.Adapter
+
 
     private final ArrayList<LocalDate> days;
 
-    //Constructor
     public CalendarAdapter(ArrayList<LocalDate> days) {
         //Recibimos los parametros
         this.days = days;
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull CalendarViewHolder holder) {
+        super.onViewRecycled(holder);
     }
 
     //RecyclerView llama a este método cada vez que necesite crear un ViewHolder nuevo (Vista individual nueva)
@@ -31,7 +33,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        //Con getContext obtenemos el contexto en el que se ejecuta la vista, donde podremos acceder al tema actual y sus recursos
+        //Con getContext obtenemos el contexto en el que se ejecuta la vista
         //Con from obtenemos el LayoutInflater del contexto dado
         //LayoutInflater instancia un archivo XML
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -41,7 +43,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-
         layoutParams.width = (parent.getWidth()/7);
 
         //Retornamos el objeto de tipo CalendarViewHolder
