@@ -1,25 +1,18 @@
 package com.example.scapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -45,8 +38,11 @@ public class MainActivity extends AppCompatActivity{
 
         //RECORDAR AJUSTAR MEDIDAS DE PANTALLA PARA QUE ADAPTER SEA ENTERO DIVISIBLE ENTRE 7
 
+        /*
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(calendarRecyclerView.getContext()));
         calendarRecyclerView.scrollToPosition(7);
+
+         */
 
     }
 
@@ -79,6 +75,8 @@ public class MainActivity extends AppCompatActivity{
         //RecyclerScrolls recyclerScrolls = new RecyclerScrolls(calendarRecyclerView);
         //calendarRecyclerView.addOnScrollListener(recyclerScrolls);
 
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
 
         //calendarRecyclerView.addOnScrollListener(new RecyclerScrolls(calendarRecyclerView));
 
