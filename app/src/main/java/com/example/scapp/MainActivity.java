@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity{
         prueba = findViewById(R.id.prueba);
     }
 
+
+
     private void setWeekView() {
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
@@ -75,29 +77,27 @@ public class MainActivity extends AppCompatActivity{
         //RecyclerScrolls recyclerScrolls = new RecyclerScrolls(calendarRecyclerView);
         //calendarRecyclerView.addOnScrollListener(recyclerScrolls);
 
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(this));
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
 
-        //calendarRecyclerView.addOnScrollListener(new RecyclerScrolls(calendarRecyclerView));
+        try {
+            pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
+        }catch (Exception e){
 
-        /*
-        LinearLayoutManager linearLayoutManager = (LinearLayoutManager) layoutManager;
-        firstVisibleInListview = linearLayoutManager.findFirstVisibleItemPosition();
-        RecyclerScroll recyclerScroll = new RecyclerScroll(prueba,(LinearLayoutManager) layoutManager);
-
-        calendarRecyclerView.addOnScrollListener(recyclerScroll);*/
-
-
+        }
     }
+
+
+
 
     public void PreviousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
-        setWeekView();
+        CalendarUtils.setWeekView2();
     }
 
     public void NextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-        setWeekView();
+        CalendarUtils.setWeekView2();
     }
 
 }

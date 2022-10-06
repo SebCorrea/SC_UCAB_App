@@ -2,6 +2,7 @@ package com.example.scapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.DayOfWeek;
@@ -54,6 +55,18 @@ public class CalendarUtils extends AppCompatActivity {
         //Pasamos el layoutManager al recyclerView
         //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
         MainActivity.calendarRecyclerView.setLayoutManager(layoutManager);
+
+
+        MainActivity.calendarRecyclerView.addOnScrollListener(new CalendarScroll(MainActivity.calendarRecyclerView.getContext()));
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+
+        //MainActivity.prueba.setText(String.valueOf(selectedDate.getDayOfMonth()));
+        try {
+            pagerSnapHelper.attachToRecyclerView(MainActivity.calendarRecyclerView);
+        }catch (Exception e){
+
+        }
+
     }
     public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
 
@@ -72,6 +85,52 @@ public class CalendarUtils extends AppCompatActivity {
 
         return days;
     }
+
+
+    public static ArrayList<LocalDate[]> WeekArrayPRUEBA(LocalDate selectedDate) {
+
+        ArrayList<LocalDate[]> weeks = new ArrayList<>();
+
+        LocalDate week[] = new LocalDate[7];
+        LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
+        LocalDate initialDate = sundayOfThisWeek.minusWeeks(1);
+        LocalDate endDate = sundayOfThisWeek.plusWeeks(2);
+
+        while (initialDate.isBefore(endDate)){
+            for(int i = 0; i<week.length; i++){
+                week[i] = sundayOfThisWeek;
+                sundayOfThisWeek = sundayOfThisWeek.plusDays(1);
+            }
+            weeks.add(week);
+            initialDate = initialDate.plusWeeks(1);
+        }
+
+        MainActivity.prueba.setText(String.valueOf(weeks.size()));
+        return weeks;
+
+
+
+        /*
+
+        while (sunday.isBefore(selectedDate)){
+
+        }
+        LocalDate current = sundayForDate(selectedDate);
+
+        LocalDate initialDate = current.minusWeeks(1);
+        LocalDate finalDate = current.plusWeeks(2);
+
+        days.clear();
+
+        while (initialDate.isBefore(finalDate)){
+            days.add(initialDate);
+            initialDate = initialDate.plusDays(1);
+        }
+
+         */
+    }
+
+
 
     private static LocalDate sundayForDate(LocalDate current) {
 

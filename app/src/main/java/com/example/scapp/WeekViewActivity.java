@@ -27,7 +27,7 @@ public class WeekViewActivity extends AppCompatActivity{
 
         initWidgets();
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
-        setMonthView();
+        //setMonthView();
     }
 
     private void initWidgets() {
@@ -36,6 +36,7 @@ public class WeekViewActivity extends AppCompatActivity{
         prueba = findViewById(R.id.prueba);
     }
 
+    /*
     private void setMonthView() {
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
@@ -55,16 +56,18 @@ public class WeekViewActivity extends AppCompatActivity{
 
     }
 
+     */
+
 
     public void PreviousMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
-        setMonthView();
+        //setMonthView();
 
     }
 
     public void NextMonthAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
-        setMonthView();
+        //setMonthView();
     }
 
 
