@@ -9,21 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
-
     String scroll;
     RecyclerView.SmoothScroller smoothScroller;
     private int overallScroll;
 
     public CalendarScroll(Context context) {
-
         smoothScroller = new LinearSmoothScroller(context) {
-
             @Override
             protected int getHorizontalSnapPreference() {
                 return LinearSmoothScroller.SNAP_TO_START;
             }
-
-
         };
     }
 
@@ -32,10 +27,8 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         super.onScrollStateChanged(recyclerView, newState);
 
         int medida = recyclerView.getWidth()/2;
-
         if(newState == recyclerView.SCROLL_STATE_IDLE){ //Termina la animación de scroll (3)
             scroll= "Sin Scrollear";
-
 
         }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";

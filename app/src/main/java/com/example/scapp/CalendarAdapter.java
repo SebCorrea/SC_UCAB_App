@@ -52,6 +52,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         if(date1 == null){
             holder.sunDate.setText("");
+            holder.monDate.setText("");
+            holder.tueDate.setText("");
+            holder.wedDate.setText("");
+            holder.thurDate.setText("");
+            holder.friDate.setText("");
+            holder.satDate.setText("");
+
         }else{
             holder.sunDate.setText(String.valueOf(date1[0].getDayOfMonth()));
             holder.monDate.setText(String.valueOf(date1[1].getDayOfMonth()));

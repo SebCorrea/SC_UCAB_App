@@ -48,7 +48,7 @@ public class CalendarUtils extends AppCompatActivity {
         LocalDate week[] = new LocalDate[7];
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
         LocalDate initialDate = sundayOfThisWeek.minusWeeks(1);
-        LocalDate endDate = sundayOfThisWeek.plusWeeks(2);
+        LocalDate endDate = sundayOfThisWeek.plusWeeks(11);
 
         while (initialDate.isBefore(endDate)){
 
@@ -59,8 +59,11 @@ public class CalendarUtils extends AppCompatActivity {
             weeks.add(week);
             week = new LocalDate[7];
         }
-
         return weeks;
+    }
+
+    public static void PruebaWeeks(){
+
     }
 
     private static LocalDate sundayForDate(LocalDate current) {

@@ -30,14 +30,11 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         initWidgets();
+
         CalendarUtils.selectedDate = LocalDate.now();
-        //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setWeekView();
-
     }
-
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
@@ -45,44 +42,30 @@ public class MainActivity extends AppCompatActivity{
         prueba = findViewById(R.id.prueba);
     }
 
-
-
     private void setWeekView() {
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
-
-        //Creamos un ArrayList que contiene los dias del mes
+        //Creamos un List que contiene los dias de la semana
         List<LocalDate[]> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
 
-        //Creamos e instanciamos una variable de tipo CalendarAdapter
+        //Creamos e instanciamos una variable de tipo CalendarAdapter y pasamos el adaptador al RecyclerView
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
-        //Pasamos el adaptador al RecyclerView
         calendarRecyclerView.setAdapter(calendarAdapter);
 
-        //Creamos e instanciamos el layoutManager
+        //Creamos e instanciamos el layoutManager pasamos el layoutManager al recyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        //Pasamos el layoutManager al recyclerView
-        //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
-
-
         calendarRecyclerView.setLayoutManager(layoutManager);
-        //RecyclerScrolls recyclerScrolls = new RecyclerScrolls(calendarRecyclerView);
-        //calendarRecyclerView.addOnScrollListener(recyclerScrolls);
 
+        calendarRecyclerView.scrollToPosition(1);
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(this));
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
 
-        try {
+        try{
             pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
         }catch (Exception e){
 
         }
     }
-
-
-
-
-
 
     public void PreviousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
