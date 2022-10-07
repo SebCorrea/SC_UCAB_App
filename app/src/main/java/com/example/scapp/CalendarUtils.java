@@ -1,15 +1,13 @@
 package com.example.scapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarUtils extends AppCompatActivity {
     public static LocalDate selectedDate;
@@ -18,7 +16,6 @@ public class CalendarUtils extends AppCompatActivity {
     public CalendarUtils(CalendarAdapter.OnItemListener onItemListener) {
         this.onItemListener = onItemListener;
     }
-
 
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
@@ -44,52 +41,9 @@ public class CalendarUtils extends AppCompatActivity {
         return daysInMonthArray;
     }
 
-    public static void setWeekView2(){
-        ArrayList<LocalDate> daysInWeek = daysInWeekArray(selectedDate);
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
-        //Pasamos el adaptador al RecyclerView
-        MainActivity.calendarRecyclerView.setAdapter(calendarAdapter);
+    public static List<LocalDate[]> daysInWeekArray(LocalDate selectedDate) {
 
-        //Creamos e instanciamos el layoutManager
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.calendarRecyclerView.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        //Pasamos el layoutManager al recyclerView
-        //calendarRecyclerView.setLayoutManager(new SpeedyLinearLayoutManager(this, SpeedyLinearLayoutManager.HORIZONTAL, false));
-        MainActivity.calendarRecyclerView.setLayoutManager(layoutManager);
-
-
-        MainActivity.calendarRecyclerView.addOnScrollListener(new CalendarScroll(MainActivity.calendarRecyclerView.getContext()));
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-
-        //MainActivity.prueba.setText(String.valueOf(selectedDate.getDayOfMonth()));
-        try {
-            pagerSnapHelper.attachToRecyclerView(MainActivity.calendarRecyclerView);
-        }catch (Exception e){
-
-        }
-
-    }
-    public static ArrayList<LocalDate> daysInWeekArray(LocalDate selectedDate) {
-
-        ArrayList<LocalDate> days = new ArrayList<>();
-        LocalDate current = sundayForDate(selectedDate);
-
-        LocalDate initialDate = current.minusWeeks(1);
-        LocalDate finalDate = current.plusWeeks(2);
-
-        days.clear();
-
-        while (initialDate.isBefore(finalDate)){
-            days.add(initialDate);
-            initialDate = initialDate.plusDays(1);
-        }
-
-        return days;
-    }
-
-
-    public static ArrayList<LocalDate[]> WeekArrayPRUEBA(LocalDate selectedDate) {
-
-        ArrayList<LocalDate[]> weeks = new ArrayList<>();
+        List<LocalDate[]> weeks = new ArrayList<>();
 
         LocalDate week[] = new LocalDate[7];
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
@@ -97,40 +51,17 @@ public class CalendarUtils extends AppCompatActivity {
         LocalDate endDate = sundayOfThisWeek.plusWeeks(2);
 
         while (initialDate.isBefore(endDate)){
+
             for(int i = 0; i<week.length; i++){
-                week[i] = sundayOfThisWeek;
-                sundayOfThisWeek = sundayOfThisWeek.plusDays(1);
+                week[i] = initialDate;
+                initialDate = initialDate.plusDays(1);
             }
             weeks.add(week);
-            initialDate = initialDate.plusWeeks(1);
+            week = new LocalDate[7];
         }
 
-        MainActivity.prueba.setText(String.valueOf(weeks.size()));
         return weeks;
-
-
-
-        /*
-
-        while (sunday.isBefore(selectedDate)){
-
-        }
-        LocalDate current = sundayForDate(selectedDate);
-
-        LocalDate initialDate = current.minusWeeks(1);
-        LocalDate finalDate = current.plusWeeks(2);
-
-        days.clear();
-
-        while (initialDate.isBefore(finalDate)){
-            days.add(initialDate);
-            initialDate = initialDate.plusDays(1);
-        }
-
-         */
     }
-
-
 
     private static LocalDate sundayForDate(LocalDate current) {
 
@@ -153,32 +84,5 @@ public class CalendarUtils extends AppCompatActivity {
     }
 
 
-    public static String Days(LocalDate date){
-        String day = "";
-        switch (date.getDayOfWeek()){
-            case MONDAY:
-                day = "Mon";
-                break;
-            case TUESDAY:
-                day = "Tue";
-                break;
-            case WEDNESDAY:
-                day = "Wed";
-                break;
-            case THURSDAY:
-                day = "Thur";
-                break;
-            case FRIDAY:
-                day = "Fri";
-                break;
-            case SATURDAY:
-                day = "Sat";
-                break;
-            case SUNDAY:
-                day = "Sun";
-                break;
-        }
-        return day;
-    }
 
 }

@@ -24,13 +24,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/cellDay_txtView"
+                android:id="@+id/sunDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sun" />
 
             <TextView
-                android:id="@+id/cellDate_txtView"
+                android:id="@+id/sunDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"

@@ -1,7 +1,6 @@
 package com.example.scapp;
 
-import android.content.Context;
-import android.graphics.Color;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
 
-    private final ArrayList<LocalDate> days;
+    private final List<LocalDate[]> days;
     private int localPosition;
 
-    public CalendarAdapter(ArrayList<LocalDate> days) {
+    public CalendarAdapter(List<LocalDate[]> days) {
         //Recibimos los parametros
         this.days = days;
     }
@@ -49,25 +48,18 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-
-        final LocalDate date1 = days.get(position);
+        final LocalDate[] date1 = days.get(position);
 
         if(date1 == null){
-            holder.cellDate.setText("");
-            holder.cellDay.setText("");
+            holder.sunDate.setText("");
         }else{
-
-            holder.cellDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.monDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.tueDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.wedDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.thurDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.friDate.setText(String.valueOf(date1.getDayOfMonth()));
-            holder.satDate.setText(String.valueOf(date1.getDayOfMonth()));
-
-
-            holder.cellDay.setText(CalendarUtils.Days(date1));
-
+            holder.sunDate.setText(String.valueOf(date1[0].getDayOfMonth()));
+            holder.monDate.setText(String.valueOf(date1[1].getDayOfMonth()));
+            holder.tueDate.setText(String.valueOf(date1[2].getDayOfMonth()));
+            holder.wedDate.setText(String.valueOf(date1[3].getDayOfMonth()));
+            holder.thurDate.setText(String.valueOf(date1[4].getDayOfMonth()));
+            holder.friDate.setText(String.valueOf(date1[5].getDayOfMonth()));
+            holder.satDate.setText(String.valueOf(date1[6].getDayOfMonth()));
         }
     }
 

@@ -1,16 +1,11 @@
 package com.example.scapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class WeekViewActivity extends AppCompatActivity{
 

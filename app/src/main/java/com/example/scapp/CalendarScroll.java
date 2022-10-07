@@ -1,23 +1,16 @@
 package com.example.scapp;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
-    private LocalDate selectedDate = LocalDate.now();
+
     String scroll;
-    String direccion;
     RecyclerView.SmoothScroller smoothScroller;
     private int overallScroll;
 

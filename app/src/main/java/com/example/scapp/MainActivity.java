@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -36,14 +36,6 @@ public class MainActivity extends AppCompatActivity{
         //El metodo now obtiene la fecha actual del reloj del sistema en la zona horaria predeterminada
         setWeekView();
 
-        //RECORDAR AJUSTAR MEDIDAS DE PANTALLA PARA QUE ADAPTER SEA ENTERO DIVISIBLE ENTRE 7
-
-        /*
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll(calendarRecyclerView.getContext()));
-        calendarRecyclerView.scrollToPosition(7);
-
-         */
-
     }
 
 
@@ -60,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
 
         //Creamos un ArrayList que contiene los dias del mes
-        ArrayList<LocalDate> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
+        List<LocalDate[]> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
 
         //Creamos e instanciamos una variable de tipo CalendarAdapter
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
@@ -90,14 +82,16 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+
+
     public void PreviousWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
-        CalendarUtils.setWeekView2();
+        setWeekView();
     }
 
     public void NextWeekAction(View view) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
-        CalendarUtils.setWeekView2();
+        setWeekView();
     }
 
 }
