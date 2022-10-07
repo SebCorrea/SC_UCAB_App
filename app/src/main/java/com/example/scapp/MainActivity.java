@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
         //Creamos un List que contiene los dias de la semana
-        List<LocalDate[]> daysInWeek = CalendarUtils.daysInWeekArray(CalendarUtils.selectedDate);
+        List<LocalDate[]> daysInWeek = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
 
         //Creamos e instanciamos una variable de tipo CalendarAdapter y pasamos el adaptador al RecyclerView
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity{
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
 
-        calendarRecyclerView.scrollToPosition(1);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll(this));
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        calendarRecyclerView.scrollToPosition(6);
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(this, (LinearLayoutManager)layoutManager, calendarAdapter));
 
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         try{
             pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
         }catch (Exception e){

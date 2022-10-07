@@ -3,8 +3,11 @@ package com.example.scapp;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.time.format.DateTimeFormatter;
 
 
 public class CalendarScroll extends RecyclerView.OnScrollListener{
@@ -12,8 +15,17 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     String scroll;
     RecyclerView.SmoothScroller smoothScroller;
     private int overallScroll;
+    LinearLayoutManager layoutManager;
+    private int position;
+    private int totalItems;
+    private int scrollOutItems;
+    private CalendarAdapter calendarAdapter;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
-    public CalendarScroll(Context context) {
+
+    public CalendarScroll(Context context, LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter) {
+        this.layoutManager= layoutManager;
+        this.calendarAdapter = calendarAdapter;
         smoothScroller = new LinearSmoothScroller(context) {
             @Override
             protected int getHorizontalSnapPreference() {
@@ -32,16 +44,25 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
 
         }else if(newState == recyclerView.SCROLL_STATE_SETTLING){ //Mientras ocurre la animacion del scroll (2)
             scroll= "Despues de Scrollear";
-
         }else if(newState == recyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             scroll= "Scrolleando";
 
+            position = layoutManager.findFirstVisibleItemPosition();
+            totalItems = layoutManager.getItemCount()-1;
+            scrollOutItems = totalItems - position;
+
+
+            if(position == totalItems-3 || position == totalItems+3){
+                CalendarUtils.generateNewWeeks(overallScroll);
+                calendarAdapter.notifyDataSetChanged();
+            }else {
+                MainActivity.prueba.setText("");
+            }
+            MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position));
+
         }
 
-        MainActivity.prueba.setText(String.valueOf(overallScroll));
-
     }
-
 
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -49,6 +70,7 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
 
         overallScroll = dx + overallScroll;
         //MainActivity.prueba.setText(scroll + "  " + String.valueOf(overallScroll));
+
 
 
     }
