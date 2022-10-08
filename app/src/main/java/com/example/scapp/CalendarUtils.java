@@ -53,7 +53,6 @@ public class CalendarUtils extends AppCompatActivity {
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
         initialDate = sundayOfThisWeek.minusWeeks(6);
         endDate = sundayOfThisWeek.plusWeeks(7);
-
         while (initialDate.isBefore(endDate)){
             for(int i = 0; i<week.length; i++){
                 week[i] = initialDate;

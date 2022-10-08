@@ -52,13 +52,15 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
             scrollOutItems = totalItems - position;
 
 
-            if(position == totalItems-3 || position == totalItems+3){
+            if(position >= totalItems-3 || scrollOutItems>= totalItems-3){
                 CalendarUtils.generateNewWeeks(overallScroll);
                 calendarAdapter.notifyDataSetChanged();
+                MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position) + String.valueOf(overallScroll) + " SI");
+
             }else {
-                MainActivity.prueba.setText("");
+                MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position) + String.valueOf(overallScroll) + " NO");
+
             }
-            MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position));
 
         }
 

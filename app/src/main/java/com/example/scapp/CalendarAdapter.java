@@ -13,9 +13,7 @@ import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
-
     private final List<LocalDate[]> days;
-    private int localPosition;
 
     public CalendarAdapter(List<LocalDate[]> days) {
         //Recibimos los parametros
