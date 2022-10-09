@@ -69,6 +69,7 @@ public class CalendarUtils extends AppCompatActivity {
                 endDate = endDate.plusDays(1);
             }
             weeks.add(week);
+            weeks.remove(0);
             week = new LocalDate[7];
         }
     }
@@ -81,6 +82,7 @@ public class CalendarUtils extends AppCompatActivity {
                 initialDate = initialDate.minusDays(1);
             }
             weeks.add(0,week);
+            weeks.remove(weeks.size()-1);
             week = new LocalDate[7];
         }
     }

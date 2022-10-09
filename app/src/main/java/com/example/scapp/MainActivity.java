@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
         startActivity(new Intent(this, WeekViewActivity.class));
     }
 
-    private TextView monthYear_txtView;
+    private static TextView monthYear_txtView;
     public static TextView prueba;
     public static RecyclerView calendarRecyclerView;
 
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         initWidgets();
 
-        CalendarUtils.selectedDate = LocalDate.now();
-        setWeekView();
+        recyclerViewConfig();
     }
 
     private void initWidgets() {
@@ -42,26 +41,32 @@ public class MainActivity extends AppCompatActivity{
         prueba = findViewById(R.id.prueba);
     }
 
+    private void recyclerViewConfig() {
+        //Initial Config
+        CalendarUtils.selectedDate = LocalDate.now();
+        List<LocalDate[]> daysInWeek = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
+        //Adapter
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
+        calendarRecyclerView.setAdapter(calendarAdapter);
+        //Layout
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        //Scroll
+        calendarRecyclerView.scrollToPosition(6);
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter));
+        //Config Scroll
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
+    }
+
     private void setWeekView() {
         //Mostramos el año y el mes en el txtView
         monthYear_txtView.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
         //Creamos un List que contiene los dias de la semana
-        List<LocalDate[]> daysInWeek = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
 
-        //Creamos e instanciamos una variable de tipo CalendarAdapter y pasamos el adaptador al RecyclerView
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
-        calendarRecyclerView.setAdapter(calendarAdapter);
         //Creamos e instanciamos el layoutManager pasamos el layoutManager al recyclerView
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        calendarRecyclerView.setLayoutManager(layoutManager);
 
-        calendarRecyclerView.scrollToPosition(6);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll(this, (LinearLayoutManager)layoutManager, calendarAdapter));
-
-
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         try{
-            pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
         }catch (Exception e){
 
         }

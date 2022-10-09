@@ -14,30 +14,16 @@ import java.time.format.DateTimeFormatter;
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
     String scroll;
-    RecyclerView.SmoothScroller smoothScroller;
     private int overallScroll;
     LinearLayoutManager layoutManager;
     private int position;
     private int totalItems;
     private int scrollOutItems;
-    private int generateNewWeeks;
     private CalendarAdapter calendarAdapter;
-    LocalDate holi;
-    int medida;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-
-
-    public CalendarScroll(Context context, LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter) {
+    public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter) {
         this.layoutManager= layoutManager;
         this.calendarAdapter = calendarAdapter;
-        holi = LocalDate.now();
-        smoothScroller = new LinearSmoothScroller(context) {
-            @Override
-            protected int getHorizontalSnapPreference() {
-                return LinearSmoothScroller.SNAP_TO_START;
-            }
-        };
     }
 
     @Override
@@ -55,12 +41,10 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
             scrollOutItems = totalItems - position;
 
             if(overallScroll>0 && (position >= totalItems-3)){
-
                 CalendarUtils.generatePlusWeeks();
                 calendarAdapter.notifyDataSetChanged();
-
+                layoutManager.scrollToPosition(position-3);
             }else if(overallScroll<0 && position<=3){
-
                 CalendarUtils.generateMinusWeeks();
                 calendarAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPosition(position+3);
@@ -72,7 +56,6 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-
         overallScroll = dx + overallScroll;
     }
 
