@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.format.DateTimeFormatter;
+
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
     String scroll;
@@ -13,6 +15,7 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     private int totalItems;
     private int scrollOutItems;
     private CalendarAdapter calendarAdapter;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
     public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter) {
         this.layoutManager= layoutManager;

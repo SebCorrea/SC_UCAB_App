@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity{
         startActivity(new Intent(this, WeekViewActivity.class));
     }
 
-    private static TextView monthYear_txtView;
+    public static TextView monthYear_txtView;
     public static TextView prueba;
     public static RecyclerView calendarRecyclerView;
 
