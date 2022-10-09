@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity{
         //Creamos e instanciamos una variable de tipo CalendarAdapter y pasamos el adaptador al RecyclerView
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
         calendarRecyclerView.setAdapter(calendarAdapter);
-
         //Creamos e instanciamos el layoutManager pasamos el layoutManager al recyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
 
         calendarRecyclerView.scrollToPosition(6);
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(this, (LinearLayoutManager)layoutManager, calendarAdapter));
+
 
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         try{
