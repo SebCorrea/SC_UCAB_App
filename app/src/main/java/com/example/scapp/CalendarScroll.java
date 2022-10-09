@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
@@ -15,9 +17,11 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     private int totalItems;
     private int scrollOutItems;
     private CalendarAdapter calendarAdapter;
+    private List<LocalDate[]> weeks;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
-    public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter) {
+    public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter, List<LocalDate[]> weeks) {
+        this.weeks = weeks;
         this.layoutManager= layoutManager;
         this.calendarAdapter = calendarAdapter;
     }
@@ -32,16 +36,18 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
             scroll= "Despues de Scrollear";
         }else if(newState == recyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             scroll= "Scrolleando";
+
             position = layoutManager.findFirstVisibleItemPosition();
+            MainActivity.monthYear_txtView.setText(CalendarUtils.monthYearFromDate(weeks.get(position)[0]));
+
             totalItems = layoutManager.getItemCount()-1;
             scrollOutItems = totalItems - position;
-
             if(overallScroll>0 && (position >= totalItems-3)){
-                CalendarUtils.generatePlusWeeks();
+                CalendarUtils.generatePlusWeeks2(calendarAdapter);
                 calendarAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPosition(position-3);
             }else if(overallScroll<0 && position<=3){
-                CalendarUtils.generateMinusWeeks();
+                CalendarUtils.generateMinusWeeks2(calendarAdapter);
                 calendarAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPosition(position+3);
             }

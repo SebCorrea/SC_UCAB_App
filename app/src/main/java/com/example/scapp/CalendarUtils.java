@@ -50,8 +50,8 @@ public class CalendarUtils extends AppCompatActivity {
         initialDate = sundayOfThisWeek.minusWeeks(6);
         endDate = sundayOfThisWeek.plusWeeks(7);
         while (initialDate.isBefore(endDate)){
-            for(int i = 0; i<week.length; i++){
-                week[i] = initialDate;
+            for(int i=0; i<week.length; i++){
+                week[i]= initialDate;
                 initialDate = initialDate.plusDays(1);
             }
             weeks.add(week);
@@ -61,7 +61,7 @@ public class CalendarUtils extends AppCompatActivity {
         return weeks;
     }
 
-    public static void generatePlusWeeks(){
+    public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
         LocalDate newEndDate = endDate.plusWeeks(3);
         while (endDate.isBefore(newEndDate)){
             for(int i = 0; i<week.length; i++){
@@ -69,12 +69,14 @@ public class CalendarUtils extends AppCompatActivity {
                 endDate = endDate.plusDays(1);
             }
             weeks.add(week);
+            calendarAdapter.notifyItemInserted(weeks.size()-1);
             weeks.remove(0);
+            calendarAdapter.notifyItemRemoved(0);
             week = new LocalDate[7];
         }
     }
 
-    public static void generateMinusWeeks(){
+    public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
         LocalDate newInitialDate = initialDate.minusWeeks(3);
         while (initialDate.isAfter(newInitialDate)){
             for(int i=week.length-1; i>=0; i--){
@@ -82,11 +84,47 @@ public class CalendarUtils extends AppCompatActivity {
                 initialDate = initialDate.minusDays(1);
             }
             weeks.add(0,week);
+            calendarAdapter.notifyItemInserted(0);
             weeks.remove(weeks.size()-1);
+            calendarAdapter.notifyItemRemoved(weeks.size()-1);
             week = new LocalDate[7];
         }
     }
 
+    public static void generatePlusWeeks2(CalendarAdapter calendarAdapter){
+        LocalDate[] week = weeks.get(weeks.size()-1);
+        LocalDate endDate = week[6].plusDays(1);
+
+        LocalDate newEndDate = endDate.plusWeeks(3);
+        while (endDate.isBefore(newEndDate)){
+            week = new LocalDate[7];
+            for(int i = 0; i<week.length; i++){
+                week[i] = endDate;
+                endDate = endDate.plusDays(1);
+            }
+            weeks.add(week);
+            calendarAdapter.notifyItemInserted(weeks.size()-1);
+            weeks.remove(0);
+            calendarAdapter.notifyItemRemoved(0);
+        }
+    }
+    public static void generateMinusWeeks2(CalendarAdapter calendarAdapter){
+        LocalDate[] week = weeks.get(0);
+        LocalDate initialDate = week[0].minusDays(1);
+        LocalDate newInitialDate = initialDate.minusWeeks(3);
+
+        while (initialDate.isAfter(newInitialDate)){
+            week = new LocalDate[7];
+            for(int i=week.length-1; i>=0; i--){
+                week[i] = initialDate;
+                initialDate = initialDate.minusDays(1);
+            }
+            weeks.add(0,week);
+            calendarAdapter.notifyItemInserted(0);
+            weeks.remove(weeks.size()-1);
+            calendarAdapter.notifyItemRemoved(weeks.size()-1);
+        }
+    }
 
     private static LocalDate sundayForDate(LocalDate current) {
 
@@ -104,7 +142,7 @@ public class CalendarUtils extends AppCompatActivity {
     }
 
     public static String monthYearFromDate(LocalDate date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
         return date.format(formatter);
     }
 

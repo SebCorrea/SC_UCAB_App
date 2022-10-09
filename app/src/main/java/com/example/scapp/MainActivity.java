@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity{
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
         calendarRecyclerView.scrollToPosition(6);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter));
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter, daysInWeek));
         //Config Scroll
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
