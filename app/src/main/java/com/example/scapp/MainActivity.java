@@ -15,7 +15,6 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity{
 
     public void WeeklyAction(View view) {
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initWidgets();
 
+        initWidgets();
         recyclerViewConfig();
     }
 

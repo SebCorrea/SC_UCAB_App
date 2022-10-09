@@ -1,15 +1,8 @@
 package com.example.scapp;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 
 public class CalendarScroll extends RecyclerView.OnScrollListener{
 
@@ -44,13 +37,13 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
                 CalendarUtils.generatePlusWeeks();
                 calendarAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPosition(position-3);
-                overallScroll =0;
             }else if(overallScroll<0 && position<=3){
                 CalendarUtils.generateMinusWeeks();
                 calendarAdapter.notifyDataSetChanged();
                 layoutManager.scrollToPosition(position+3);
-                overallScroll = 0;
             }
+            overallScroll = 0;
+
             MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position) + " Scroll: " + String.valueOf(overallScroll));
         }
     }
