@@ -19,21 +19,15 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         //Recibimos los parametros
         this.days = days;
     }
-    //RecyclerView llama a este método cada vez que necesite crear un ViewHolder nuevo (Vista individual nueva)
-    //El ViewHolder contiene el View el cual contiene el diseño del elemento individual de la vista
+
     @NonNull
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        //Con getContext obtenemos el contexto en el que se ejecuta la vista
-        //Con from obtenemos el LayoutInflater del contexto dado
-        //LayoutInflater instancia un archivo XML
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-
         //Infla una nueva jerarquía de vistas desde el XML especificado
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
 
-        //getLayoutParams obtiene los parametros asociados al View
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.width = parent.getWidth();
 
