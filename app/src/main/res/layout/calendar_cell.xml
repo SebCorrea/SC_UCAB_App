@@ -17,12 +17,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/sunDay_txtView"
                 android:layout_width="wrap_content"
@@ -38,12 +38,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/monDay_txtView"
                 android:layout_width="wrap_content"
@@ -56,17 +56,15 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="@color/black" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/tueDay_txtView"
                 android:layout_width="wrap_content"
@@ -79,17 +77,15 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="@color/black" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/wedDay_txtView"
                 android:layout_width="wrap_content"
@@ -102,17 +98,15 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="@color/black" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/thurDay_txtView"
                 android:layout_width="wrap_content"
@@ -128,12 +122,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/friDay_txtView"
                 android:layout_width="wrap_content"
@@ -146,17 +140,15 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="@color/black" />
-
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="5dp">
             <TextView
                 android:id="@+id/satDay_txtView"
                 android:layout_width="wrap_content"
@@ -169,11 +161,6 @@
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textColor="@color/black" />
-
-
         </LinearLayout>
-
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
