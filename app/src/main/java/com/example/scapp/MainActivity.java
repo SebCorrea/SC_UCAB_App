@@ -14,10 +14,9 @@ import android.widget.TextView;
 
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
     private static TextView monthYear_txtView;
     public static TextView prueba;
@@ -41,16 +40,16 @@ public class MainActivity extends AppCompatActivity{
     private void recyclerViewConfig() {
         //Initial Config
         CalendarUtils.selectedDate = LocalDate.now();
-        List<LocalDate[]> daysInWeek = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
+        List<LocalDate[]> weeks = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
         //Adapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInWeek);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks, this);
         calendarRecyclerView.setAdapter(calendarAdapter);
         //Layout
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
         calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter, daysInWeek));
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter, weeks));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
@@ -65,4 +64,9 @@ public class MainActivity extends AppCompatActivity{
         startActivity(new Intent(this, WeekViewActivity.class));
     }
 
+    @Override
+    public void onItemClick(int position, LocalDate date) {
+        String message = "Selected Day";
+        prueba.setText(String.valueOf(date.getDayOfMonth()));
+    }
 }

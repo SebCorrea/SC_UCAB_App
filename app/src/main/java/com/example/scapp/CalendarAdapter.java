@@ -1,6 +1,5 @@
 package com.example.scapp;
-
-
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,12 @@ import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
-    private final List<LocalDate[]> days;
+    private final List<LocalDate[]> weeks;
+    private final CalendarAdapter.OnItemListener onItemListener;
 
-    public CalendarAdapter(List<LocalDate[]> days) {
-        //Recibimos los parametros
-        this.days = days;
+    public CalendarAdapter(List<LocalDate[]> days, OnItemListener onItemListener) {
+        this.weeks = days;
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
@@ -31,8 +31,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.width = parent.getWidth();
 
-        //Retornamos el objeto de tipo CalendarViewHolder
-        return new CalendarViewHolder(view);
+        return new CalendarViewHolder(weeks, view, onItemListener);
     }
 
     //Pasa por cada item de la lista
@@ -40,35 +39,24 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        final LocalDate[] date1 = days.get(position);
-
-        if(date1 == null){
-            holder.sunDate.setText("");
-            holder.monDate.setText("");
-            holder.tueDate.setText("");
-            holder.wedDate.setText("");
-            holder.thurDate.setText("");
-            holder.friDate.setText("");
-            holder.satDate.setText("");
-
-        }else{
-            holder.sunDate.setText(String.valueOf(date1[0].getDayOfMonth()));
-            holder.monDate.setText(String.valueOf(date1[1].getDayOfMonth()));
-            holder.tueDate.setText(String.valueOf(date1[2].getDayOfMonth()));
-            holder.wedDate.setText(String.valueOf(date1[3].getDayOfMonth()));
-            holder.thurDate.setText(String.valueOf(date1[4].getDayOfMonth()));
-            holder.friDate.setText(String.valueOf(date1[5].getDayOfMonth()));
-            holder.satDate.setText(String.valueOf(date1[6].getDayOfMonth()));
+        final LocalDate[] week = weeks.get(position);
+        for(int i = 0; i<week.length; i++){
+            holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
+            ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
+            if (week[i].equals(CalendarUtils.selectedDate)){
+                view.setBackgroundColor(Color.BLUE);
+            }else{
+                view.setBackgroundColor(Color.TRANSPARENT);
+            }
         }
     }
 
     //RecyclerView llama a este metodo para obtener el tamaño del conjunto de datos
     @Override
     public int getItemCount() {
-        return days.size();
+        return weeks.size();
     }
 
-    //Creamos una interfaz
     public interface OnItemListener{
         //Metodo OnItemClick
         void onItemClick(int position, LocalDate date);

@@ -27,7 +27,7 @@
                 android:id="@+id/sunDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sun" />
+                android:text="Dom" />
 
             <TextView
                 android:id="@+id/sunDate_txtView"
@@ -48,7 +48,7 @@
                 android:id="@+id/monDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mon" />
+                android:text="Lun" />
 
             <TextView
                 android:id="@+id/monDate_txtView"
@@ -71,7 +71,7 @@
                 android:id="@+id/tueDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tue" />
+                android:text="Mar" />
 
             <TextView
                 android:id="@+id/tueDate_txtView"
@@ -94,7 +94,7 @@
                 android:id="@+id/wedDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wed" />
+                android:text="Mie" />
 
             <TextView
                 android:id="@+id/wedDate_txtView"
@@ -117,7 +117,7 @@
                 android:id="@+id/thurDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thur" />
+                android:text="Jue" />
 
             <TextView
                 android:id="@+id/thurDate_txtView"
@@ -138,7 +138,7 @@
                 android:id="@+id/friDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fri" />
+                android:text="Vie" />
 
             <TextView
                 android:id="@+id/friDate_txtView"
@@ -161,7 +161,7 @@
                 android:id="@+id/satDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sat" />
+                android:text="Sab" />
 
             <TextView
                 android:id="@+id/satDate_txtView"
