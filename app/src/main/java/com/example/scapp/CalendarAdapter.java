@@ -46,7 +46,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             if (week[i].equals(CalendarUtils.selectedDate)){
                 view.setBackgroundColor(Color.BLUE);
             }else{
-                view.setBackgroundColor(Color.TRANSPARENT);
+                //view.setBackgroundColor(Color.TRANSPARENT);
             }
         }
     }
