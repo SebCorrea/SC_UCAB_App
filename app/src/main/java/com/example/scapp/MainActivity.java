@@ -1,6 +1,5 @@
 package com.example.scapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
 
-    private static TextView monthYear_txtView;
+    public static TextView monthYear_txtView;
     public static TextView prueba;
     private RecyclerView calendarRecyclerView;
     private final int ACTUAL_WEEK = 6;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
-        monthYear_txtView = findViewById(R.id.monthAndYear_txtView);
+        monthYear_txtView = findViewById(R.id.monthYear_txtView);
         prueba = findViewById(R.id.prueba);
     }
 
@@ -45,19 +44,19 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         CalendarAdapter calendarAdapter = new CalendarAdapter(weeks, this);
         calendarRecyclerView.setAdapter(calendarAdapter);
         //Layout
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
         calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll((LinearLayoutManager)layoutManager, calendarAdapter, weeks));
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, weeks));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
 
     }
 
-    public static void monthAndYearTxtView(@NonNull String scrollMonth, @NonNull String scrollYear){
-        monthYear_txtView.setText(scrollMonth + " " + scrollYear);
+    public static void monthAndYearTxtView(String scrollMonthDate){
+        monthYear_txtView.setText(scrollMonthDate);
     }
 
     public void WeeklyAction(View view) {
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     @Override
     public void onItemClick(int position, LocalDate date) {
-        String message = "Selected Day";
         prueba.setText(String.valueOf(date.getDayOfMonth()));
     }
 }

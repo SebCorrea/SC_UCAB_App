@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:baselineAligned="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dom"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -49,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lun"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -71,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mar"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -92,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mie"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -113,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jue"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -134,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vie"
-                android:textSize="38px"/>
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"
@@ -154,7 +155,8 @@
                 android:id="@+id/satDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sab" />
+                android:text="Sab"
+                android:textSize="13sp"/>
 
             <TextView
                 style="@style/dateCalendarText"

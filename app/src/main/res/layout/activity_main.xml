@@ -9,12 +9,12 @@ tools:context=".MainActivity"
 android:orientation="vertical">
 
     <TextView
-        android:id="@+id/monthAndYear_txtView"
+        android:id="@+id/monthYear_txtView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:layout_margin="10dp"
-        android:textSize="50px"
+        android:layout_margin="5dp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +28,7 @@ android:orientation="vertical">
         android:layout_marginHorizontal="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthAndYear_txtView" />
-
+        app:layout_constraintTop_toBottomOf="@+id/monthYear_txtView" />
 
     <Button
         android:id="@+id/button"
@@ -40,7 +39,7 @@ android:orientation="vertical">
         android:onClick="WeeklyAction"
         android:text="Weekly"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/prueba"
@@ -48,4 +47,16 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         android:text="holaa"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Materias"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

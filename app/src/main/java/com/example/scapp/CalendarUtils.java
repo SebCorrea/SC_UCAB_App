@@ -3,21 +3,16 @@ package com.example.scapp;
 import androidx.appcompat.app.AppCompatActivity;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalendarUtils extends AppCompatActivity {
     public static LocalDate selectedDate;
-    private final CalendarAdapter.OnItemListener onItemListener;
     public static List<LocalDate[]> weeks = new ArrayList<>();
 
 
-    public CalendarUtils(CalendarAdapter.OnItemListener onItemListener){
-        this.onItemListener = onItemListener;
-    }
-
+    /*
     public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
         ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
 
@@ -42,9 +37,11 @@ public class CalendarUtils extends AppCompatActivity {
         return daysInMonthArray;
     }
 
+     */
+
     public static List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
 
-        LocalDate week[];
+        LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
         LocalDate initialDate = sundayOfThisWeek.minusWeeks(6);
         LocalDate endDate = sundayOfThisWeek.plusWeeks(7);
