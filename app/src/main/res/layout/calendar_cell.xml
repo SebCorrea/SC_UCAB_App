@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,146 +16,140 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingVertical="13dp"
-            android:layout_marginRight="12dp"
-            android:background="@drawable/calendar_style">
+            android:layout_marginLeft="12dp">
 
             <TextView
                 android:id="@+id/sunDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dom"/>
+                android:text="Dom"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/sunDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black"/>
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginRight="12dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/monDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lun" />
+                android:text="Lun"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/monDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginRight="12dp">
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tueDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mar" />
+                android:text="Mar"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/tueDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginRight="12dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/wedDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mie" />
+                android:text="Mie"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/wedDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginRight="12dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/thurDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jue" />
+                android:text="Jue"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/thurDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:layout_marginRight="12dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/friDay_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vie" />
+                android:text="Vie"
+                android:textSize="38px"/>
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/friDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
 
         <LinearLayout
+            style="@style/dateCalendarStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/satDay_txtView"
                 android:layout_width="wrap_content"
@@ -164,11 +157,11 @@
                 android:text="Sab" />
 
             <TextView
+                style="@style/dateCalendarText"
                 android:id="@+id/satDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/black" />
+                android:text="1"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

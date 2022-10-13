@@ -12,42 +12,20 @@ import java.util.List;
 public class CalendarViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final List<LocalDate[]> weeks;
-    //public final TextView sunDate, monDate,tueDate,wedDate,thurDate,friDate,satDate;
-    public String[] s;
     private final CalendarAdapter.OnItemListener onItemListener;
-    TextView[] weeksDaysTxtViews = {itemView.findViewById(R.id.sunDate_txtView),
-                                    itemView.findViewById(R.id.monDate_txtView),
-                                    itemView.findViewById(R.id.tueDate_txtView),
-                                    itemView.findViewById(R.id.wedDate_txtView),
-                                    itemView.findViewById(R.id.thurDate_txtView),
-                                    itemView.findViewById(R.id.friDate_txtView),
-                                    itemView.findViewById(R.id.satDate_txtView)};
+    TextView[] weeksDaysTxtViews = new TextView[7];
 
-    //Constructor
     public CalendarViewHolder(List<LocalDate[]> weeks, @NonNull View itemView, CalendarAdapter.OnItemListener onItemListener) {
         super(itemView);
         this.weeks = weeks;
-
-
-        TextView[] weeksDaysTxtViews = {itemView.findViewById(R.id.sunDate_txtView),
-                                itemView.findViewById(R.id.monDate_txtView),
-                                itemView.findViewById(R.id.tueDate_txtView),
-                                itemView.findViewById(R.id.wedDate_txtView),
-                                itemView.findViewById(R.id.thurDate_txtView),
-                                itemView.findViewById(R.id.friDate_txtView),
-                                itemView.findViewById(R.id.satDate_txtView)};
-
-        /*
-        sunDate = itemView.findViewById(R.id.sunDate_txtView);
-        monDate = itemView.findViewById(R.id.monDate_txtView);
-        tueDate = itemView.findViewById(R.id.tueDate_txtView);
-        wedDate = itemView.findViewById(R.id.wedDate_txtView);
-        thurDate = itemView.findViewById(R.id.thurDate_txtView);
-        friDate = itemView.findViewById(R.id.friDate_txtView);
-        satDate = itemView.findViewById(R.id.satDate_txtView);
-
-         */
         this.onItemListener = onItemListener;
+        weeksDaysTxtViews[0] = itemView.findViewById(R.id.sunDate_txtView);
+        weeksDaysTxtViews[1] = itemView.findViewById(R.id.monDate_txtView);
+        weeksDaysTxtViews[2] = itemView.findViewById(R.id.tueDate_txtView);
+        weeksDaysTxtViews[3] = itemView.findViewById(R.id.wedDate_txtView);
+        weeksDaysTxtViews[4] = itemView.findViewById(R.id.thurDate_txtView);
+        weeksDaysTxtViews[5] = itemView.findViewById(R.id.friDate_txtView);
+        weeksDaysTxtViews[6] = itemView.findViewById(R.id.satDate_txtView);
         itemView.setOnClickListener(this);
     }
 

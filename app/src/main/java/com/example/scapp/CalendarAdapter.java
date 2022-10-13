@@ -1,10 +1,11 @@
 package com.example.scapp;
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final List<LocalDate[]> weeks;
     private final CalendarAdapter.OnItemListener onItemListener;
+    Drawable calendarBackground;
 
     public CalendarAdapter(List<LocalDate[]> days, OnItemListener onItemListener) {
         this.weeks = days;
@@ -24,7 +26,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        //Infla una nueva jerarquía de vistas desde el XML especificado
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
 
@@ -34,32 +35,30 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return new CalendarViewHolder(weeks, view, onItemListener);
     }
 
-    //Pasa por cada item de la lista
-    //Recupera los datos correspondientes y los usa para completar el diseño del contenedor de vistas
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
         final LocalDate[] week = weeks.get(position);
+
         for(int i = 0; i<week.length; i++){
             holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
+
             ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
             if (week[i].equals(CalendarUtils.selectedDate)){
-                view.setBackgroundColor(Color.BLUE);
+                calendarBackground = ContextCompat.getDrawable(view.getContext(), R.drawable.calendar_background_actualdate);
             }else{
-                //view.setBackgroundColor(Color.TRANSPARENT);
+                calendarBackground = ContextCompat.getDrawable(view.getContext(), R.drawable.calendar_background);
             }
+            view.setBackground(calendarBackground);
         }
     }
 
-    //RecyclerView llama a este metodo para obtener el tamaño del conjunto de datos
     @Override
     public int getItemCount() {
         return weeks.size();
     }
 
     public interface OnItemListener{
-        //Metodo OnItemClick
         void onItemClick(int position, LocalDate date);
-
     }
 }
