@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
-
     }
 
     public static void monthAndYearTxtView(String scrollMonthDate){
