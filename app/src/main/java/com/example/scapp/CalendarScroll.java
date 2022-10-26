@@ -51,6 +51,5 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         String scrollMonthYear = CalendarUtils.month(scrollDate) + scrollDate.getYear();
         MainActivity.monthAndYearTxtView(scrollMonthYear);
     }
-
 }
 
