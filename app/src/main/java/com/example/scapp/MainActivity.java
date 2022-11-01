@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         initWidgets();
         recyclerViewConfig();
-        subject_btn.setOnClickListener(this::showSubjectPopup);
+        subject_btn.setOnClickListener(view -> showSubjectPopup());
     }
 
     private void initWidgets() {
@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    private void showSubjectPopup(View view) {
+    private void showSubjectPopup() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
-        view = inflater.inflate(R.layout.subjects_popup, null);
+        View view = inflater.inflate(R.layout.subjects_popup, null);
         builder.setView(view);
         AlertDialog myDialog = builder.create();
         myDialog.show();
@@ -69,20 +69,14 @@ public class MainActivity extends AppCompatActivity{
         Button cancel_btn = view.findViewById(R.id.cancel_btn);
         Button agregar_btn = view.findViewById(R.id.agregar_btn);
 
-        cancel_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prueba.setText("Cancelado");
-                myDialog.dismiss();
-            }
+        cancel_btn.setOnClickListener(v -> {
+            prueba.setText("Cancelado");
+            myDialog.dismiss();
         });
 
-        agregar_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prueba.setText("Agregado");
-                myDialog.dismiss();
-            }
+        agregar_btn.setOnClickListener(v -> {
+            prueba.setText("Agregado");
+            myDialog.dismiss();
         });
     }
 }
