@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
-        int ACTUAL_WEEK = 6;
+        int ACTUAL_WEEK = 6; // se generan 13 semanas donde la 6ta es la semana actual
         calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, weeks, monthYear_txtView));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
+        pagerSnapHelper.attachToRecyclerView(calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2
     }
 
 }

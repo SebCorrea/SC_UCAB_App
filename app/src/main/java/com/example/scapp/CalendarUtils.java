@@ -12,6 +12,7 @@ public class CalendarUtils{
     public static List<LocalDate[]> weeks = new ArrayList<>();
 
     public static List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
+
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
         LocalDate initialDate = Objects.requireNonNull(sundayOfThisWeek).minusWeeks(6);
@@ -29,6 +30,7 @@ public class CalendarUtils{
     }
 
     public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
+
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[6].plusDays(1);
         LocalDate newEndDate = endDate.plusWeeks(3);
@@ -47,6 +49,7 @@ public class CalendarUtils{
         }
     }
     public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
+
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
         LocalDate newInitialDate = initialDate.minusWeeks(3);
@@ -78,6 +81,7 @@ public class CalendarUtils{
     }
 
     public static String month(LocalDate localDate){
+
         String month="";
         switch (localDate.getMonth()){
             case JANUARY:

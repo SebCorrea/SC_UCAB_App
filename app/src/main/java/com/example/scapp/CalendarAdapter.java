@@ -26,11 +26,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
-
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        return new CalendarViewHolder(weeks, view);
+        return new CalendarViewHolder(view);
     }
 
     @Override
@@ -40,7 +38,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
         for(int i = 0; i<week.length; i++){
             holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
-
             ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
             if (week[i].equals(CalendarUtils.selectedDate)){
                 calendarBackground = ContextCompat.getDrawable(view.getContext(), R.drawable.calendar_background_actualdate);

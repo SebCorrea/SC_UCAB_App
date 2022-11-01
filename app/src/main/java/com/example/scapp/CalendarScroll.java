@@ -29,13 +29,12 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         super.onScrollStateChanged(recyclerView, newState);
 
         if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
-            //scrollOutItems = totalItems - position;
             int totalItems = layoutManager.getItemCount()-1;
             if(position >= totalItems-3){
-                CalendarUtils.generatePlusWeeks(calendarAdapter);
+                CalendarUtils.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
                 layoutManager.scrollToPosition(position-3);
             }else if(position<=3){
-                CalendarUtils.generateMinusWeeks(calendarAdapter);
+                CalendarUtils.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
                 layoutManager.scrollToPosition(position+3);
             }
         }

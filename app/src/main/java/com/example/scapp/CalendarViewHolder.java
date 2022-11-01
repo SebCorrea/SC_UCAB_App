@@ -12,9 +12,8 @@ import java.util.List;
 public class CalendarViewHolder extends RecyclerView.ViewHolder{
 
     public TextView[] weeksDaysTxtViews = new TextView[7];
-    public CalendarViewHolder(List<LocalDate[]> weeks, @NonNull View itemView) {
+    public CalendarViewHolder(@NonNull View itemView) {
         super(itemView);
-
         weeksDaysTxtViews[0] = itemView.findViewById(R.id.sunDate_txtView);
         weeksDaysTxtViews[1] = itemView.findViewById(R.id.monDate_txtView);
         weeksDaysTxtViews[2] = itemView.findViewById(R.id.tueDate_txtView);
