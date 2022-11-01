@@ -14,12 +14,10 @@ import java.util.List;
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final List<LocalDate[]> weeks;
-    private final CalendarAdapter.OnItemListener onItemListener;
     Drawable calendarBackground;
 
-    public CalendarAdapter(List<LocalDate[]> days, OnItemListener onItemListener) {
+    public CalendarAdapter(List<LocalDate[]> days) {
         this.weeks = days;
-        this.onItemListener = onItemListener;
     }
 
     @NonNull
@@ -30,9 +28,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
 
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        layoutParams.height =(int) (ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.height = (ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        return new CalendarViewHolder(weeks, view, onItemListener);
+        return new CalendarViewHolder(weeks, view);
     }
 
     @Override
@@ -58,7 +56,4 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return weeks.size();
     }
 
-    public interface OnItemListener{
-        void onItemClick(int position, LocalDate date);
-    }
 }

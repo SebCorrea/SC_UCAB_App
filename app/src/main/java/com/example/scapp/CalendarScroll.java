@@ -1,5 +1,7 @@
 package com.example.scapp;
 
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +15,13 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     private final LinearLayoutManager layoutManager;
     private final CalendarAdapter calendarAdapter;
     private final List<LocalDate[]> weeks;
+    private final TextView monthYear_txtView;
 
-    public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter, List<LocalDate[]> weeks) {
+    public CalendarScroll(LinearLayoutManager layoutManager, CalendarAdapter calendarAdapter, List<LocalDate[]> weeks, TextView monthYear_txtView) {
         this.weeks = weeks;
         this.layoutManager= layoutManager;
         this.calendarAdapter = calendarAdapter;
+        this.monthYear_txtView = monthYear_txtView;
     }
 
     @Override
@@ -28,28 +32,26 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
             //scrollOutItems = totalItems - position;
             int totalItems = layoutManager.getItemCount()-1;
             if(position >= totalItems-3){
-
                 CalendarUtils.generatePlusWeeks(calendarAdapter);
                 layoutManager.scrollToPosition(position-3);
-
             }else if(position<=3){
-
                 CalendarUtils.generateMinusWeeks(calendarAdapter);
                 layoutManager.scrollToPosition(position+3);
             }
-            //calendarAdapter.notifyDataSetChanged();
-            //MainActivity.prueba.setText(String.valueOf(totalItems-position) + " totalItems: " + String.valueOf(totalItems) + " position: " + String.valueOf(position) + " Scroll: " + String.valueOf(overallScroll));
         }
     }
 
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        //overallScroll = dx + overallScroll;
         position = layoutManager.findFirstVisibleItemPosition();
+        showMonthYear();
+    }
+
+    public void showMonthYear(){
         LocalDate scrollDate = weeks.get(position)[0];
-        String scrollMonthYear = CalendarUtils.month(scrollDate) + scrollDate.getYear();
-        MainActivity.monthAndYearTxtView(scrollMonthYear);
+        String scrollMonthYear = CalendarUtils.month(scrollDate) + " " +scrollDate.getYear();
+        monthYear_txtView.setText(scrollMonthYear);
     }
 }
 

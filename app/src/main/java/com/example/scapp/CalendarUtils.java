@@ -1,49 +1,20 @@
 package com.example.scapp;
 
-import androidx.appcompat.app.AppCompatActivity;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class CalendarUtils extends AppCompatActivity {
+public class CalendarUtils{
+
     public static LocalDate selectedDate;
     public static List<LocalDate[]> weeks = new ArrayList<>();
 
-
-    /*
-    public static ArrayList<LocalDate> daysInMonthArray(LocalDate date) {
-        ArrayList<LocalDate> daysInMonthArray = new ArrayList<>();
-
-        //El metodo from obtiene el mes y año actual a traves del TemporalAccessor especificado
-        YearMonth yearMonth = YearMonth.from(date);
-
-        //Metodo lengthOfMonth devuelve la longitud del mes
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        //Con el metodo withDayOfMonth obtenemos una copia de LocalDate con el día del mes alterado.
-        //Obtenemos el primer dia del mes
-        LocalDate firstOfMonth = CalendarUtils.selectedDate.withDayOfMonth(1);
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for(int i=1; i <= 42; i++){
-            if(i<=dayOfWeek || i>daysInMonth + dayOfWeek){
-                daysInMonthArray.add(null);
-            }else{
-                daysInMonthArray.add(LocalDate.of(selectedDate.getYear(),selectedDate.getMonth(),i - dayOfWeek));
-            }
-        }
-        return daysInMonthArray;
-    }
-
-     */
-
     public static List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
-
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
-        LocalDate initialDate = sundayOfThisWeek.minusWeeks(6);
+        LocalDate initialDate = Objects.requireNonNull(sundayOfThisWeek).minusWeeks(6);
         LocalDate endDate = sundayOfThisWeek.plusWeeks(7);
 
         while (initialDate.isBefore(endDate)){
@@ -97,12 +68,10 @@ public class CalendarUtils extends AppCompatActivity {
     private static LocalDate sundayForDate(LocalDate current) {
 
         LocalDate oneWeekAgo = current.minusWeeks(1);
-
         while (current.isAfter(oneWeekAgo)){
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
                 return current;
             }
-
             current = current.minusDays(1);
         }
         return null;
@@ -150,6 +119,4 @@ public class CalendarUtils extends AppCompatActivity {
         }
         return month;
     }
-
-
 }

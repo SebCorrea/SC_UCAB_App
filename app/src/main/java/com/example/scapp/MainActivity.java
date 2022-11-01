@@ -15,12 +15,11 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CalendarAdapter.OnItemListener{
+public class MainActivity extends AppCompatActivity{
 
-    public static TextView monthYear_txtView;
+    private TextView monthYear_txtView;
     public static TextView prueba;
     private RecyclerView calendarRecyclerView;
-    private final int ACTUAL_WEEK = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,29 +40,18 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         CalendarUtils.selectedDate = LocalDate.now();
         List<LocalDate[]> weeks = CalendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
         //Adapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks, this);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks);
         calendarRecyclerView.setAdapter(calendarAdapter);
         //Layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
+        int ACTUAL_WEEK = 6;
         calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, weeks));
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, weeks, monthYear_txtView));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView);
     }
 
-    public static void monthAndYearTxtView(String scrollMonthDate){
-        monthYear_txtView.setText(scrollMonthDate);
-    }
-
-    public void WeeklyAction(View view) {
-        startActivity(new Intent(this, WeekViewActivity.class));
-    }
-
-    @Override
-    public void onItemClick(int position, LocalDate date) {
-        prueba.setText(String.valueOf(date.getDayOfMonth()));
-    }
 }
