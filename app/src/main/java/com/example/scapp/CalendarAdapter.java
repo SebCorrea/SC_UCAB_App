@@ -14,7 +14,6 @@ import java.util.List;
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final List<LocalDate[]> weeks;
-    Drawable calendarBackground;
 
     public CalendarAdapter(List<LocalDate[]> days) {
         this.weeks = days;
@@ -35,6 +34,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
         final LocalDate[] week = weeks.get(position);
+        Drawable calendarBackground;
 
         for(int i = 0; i<week.length; i++){
             holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));

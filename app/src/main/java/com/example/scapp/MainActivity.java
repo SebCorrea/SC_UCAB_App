@@ -5,13 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import android.content.Intent;
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class MainActivity extends AppCompatActivity{
     private TextView monthYear_txtView;
     public static TextView prueba;
     private RecyclerView calendarRecyclerView;
+    private Button subject_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         initWidgets();
         recyclerViewConfig();
+        subject_btn.setOnClickListener(this::showSubjectPopup);
     }
 
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         monthYear_txtView = findViewById(R.id.monthYear_txtView);
         prueba = findViewById(R.id.prueba);
+        subject_btn = findViewById(R.id.subject_btn);
     }
 
     private void recyclerViewConfig() {
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
-        int ACTUAL_WEEK = 6; // se generan 13 semanas donde la 6ta es la semana actual
+        final int ACTUAL_WEEK = 6; // se generan 13 semanas donde la 6ta es la semana actual
         calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, weeks, monthYear_txtView));
         //Scroll Animation
@@ -54,4 +56,33 @@ public class MainActivity extends AppCompatActivity{
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2
     }
 
+
+    private void showSubjectPopup(View view) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = LayoutInflater.from(this);
+        view = inflater.inflate(R.layout.subjects_popup, null);
+        builder.setView(view);
+        AlertDialog myDialog = builder.create();
+        myDialog.show();
+
+        Button cancel_btn = view.findViewById(R.id.cancel_btn);
+        Button agregar_btn = view.findViewById(R.id.agregar_btn);
+
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prueba.setText("Cancelado");
+                myDialog.dismiss();
+            }
+        });
+
+        agregar_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prueba.setText("Agregado");
+                myDialog.dismiss();
+            }
+        });
+    }
 }
