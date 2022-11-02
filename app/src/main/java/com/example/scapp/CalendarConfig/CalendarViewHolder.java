@@ -1,4 +1,4 @@
-package com.example.scapp;
+package com.example.scapp.CalendarConfig;
 
 import android.view.View;
 import android.widget.TextView;
@@ -6,12 +6,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDate;
-import java.util.List;
+import com.example.scapp.R;
 
 public class CalendarViewHolder extends RecyclerView.ViewHolder{
 
     public TextView[] weeksDaysTxtViews = new TextView[7];
+
     public CalendarViewHolder(@NonNull View itemView) {
         super(itemView);
         weeksDaysTxtViews[0] = itemView.findViewById(R.id.sunDate_txtView);

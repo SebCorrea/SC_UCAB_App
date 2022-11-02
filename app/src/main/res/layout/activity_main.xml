@@ -32,14 +32,6 @@ android:orientation="vertical">
 
 
     <TextView
-        android:id="@+id/prueba"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="holaa"
-        app:layout_constraintTop_toBottomOf="@+id/subject_btn" />
-
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +42,7 @@ android:orientation="vertical">
         app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView"/>
 
     <Button
-        android:id="@+id/subject_btn"
+        android:id="@+id/addSubjects_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
@@ -60,5 +52,22 @@ android:orientation="vertical">
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/subjectRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addSubjects_btn"
+        tools:itemCount="3" />
+
+    <TextView
+        android:id="@+id/prueba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="holaa"
+        app:layout_constraintTop_toBottomOf="@+id/subjectRecyclerView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

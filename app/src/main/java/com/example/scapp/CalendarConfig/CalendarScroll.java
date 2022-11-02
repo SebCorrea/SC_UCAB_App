@@ -1,4 +1,4 @@
-package com.example.scapp;
+package com.example.scapp.CalendarConfig;
 
 import android.widget.TextView;
 

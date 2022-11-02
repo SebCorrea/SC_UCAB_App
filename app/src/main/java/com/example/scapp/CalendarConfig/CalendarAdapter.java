@@ -1,13 +1,12 @@
-package com.example.scapp;
+package com.example.scapp.CalendarConfig;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.scapp.R;
 import java.time.LocalDate;
 import java.util.List;
 
