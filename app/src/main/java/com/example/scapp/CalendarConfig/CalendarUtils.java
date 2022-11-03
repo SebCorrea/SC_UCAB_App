@@ -1,5 +1,8 @@
 package com.example.scapp.CalendarConfig;
 
+import android.widget.TextView;
+
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,8 +13,13 @@ public class CalendarUtils{
 
     public static LocalDate selectedDate;
     public static List<LocalDate[]> weeks = new ArrayList<>();
+    private final TextView monthYear_txtView;
 
-    public static List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
+    public CalendarUtils(TextView monthYear_txtView){
+        this.monthYear_txtView = monthYear_txtView;
+    }
+
+    public List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
 
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
@@ -32,7 +40,7 @@ public class CalendarUtils{
     public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(weeks.size()-1);
-        LocalDate endDate = week[6].plusDays(1);
+        LocalDate endDate = week[week.length-1].plusDays(1);
         LocalDate newEndDate = endDate.plusWeeks(3);
         while (endDate.isBefore(newEndDate)){
             week = new LocalDate[7];
@@ -48,7 +56,7 @@ public class CalendarUtils{
             calendarAdapter.notifyItemRemoved(0);
         }
     }
-    public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
+    public void generateMinusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
@@ -68,7 +76,7 @@ public class CalendarUtils{
         }
     }
 
-    private static LocalDate sundayForDate(LocalDate current) {
+    private LocalDate sundayForDate(LocalDate current) {
 
         LocalDate oneWeekAgo = current.minusWeeks(1);
         while (current.isAfter(oneWeekAgo)){
@@ -80,7 +88,13 @@ public class CalendarUtils{
         return null;
     }
 
-    public static String month(LocalDate localDate){
+    public void showMonthAndYear(int position){
+        LocalDate scrollDate = weeks.get(position)[0];
+        String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
+        monthYear_txtView.setText(scrollMonthYear);
+    }
+
+    public String month(LocalDate localDate){
 
         String month="";
         switch (localDate.getMonth()){
