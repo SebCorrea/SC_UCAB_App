@@ -55,12 +55,13 @@ android:orientation="vertical">
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/addSubjects_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:text="Add"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            android:drawableLeft="@drawable/ic_baseline_add_subject"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
