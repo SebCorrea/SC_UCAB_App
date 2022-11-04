@@ -1,5 +1,6 @@
 package com.example.scapp.CalendarConfig;
-import android.graphics.drawable.Drawable;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,18 +33,17 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        final LocalDate[] week = weeks.get(position);
-        Drawable calendarBackground;
+        LocalDate[] week = weeks.get(position);
 
         for(int i = 0; i<week.length; i++){
             holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
             ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
+
             if (week[i].equals(CalendarUtils.selectedDate)){
-                calendarBackground = ContextCompat.getDrawable(view.getContext(), R.drawable.calendar_background_actualdate);
+                view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.teal_700)));
             }else{
-                calendarBackground = ContextCompat.getDrawable(view.getContext(), R.drawable.calendar_background);
+                view.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
             }
-            view.setBackground(calendarBackground);
         }
     }
 

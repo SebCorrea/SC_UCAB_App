@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/parentView">
 
     <LinearLayout
@@ -32,7 +33,7 @@
                 android:id="@+id/sunDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -53,7 +54,7 @@
                 android:id="@+id/monDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="2"/>
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +76,7 @@
                 android:id="@+id/tueDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="3"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +84,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:backgroundTint="@color/teal_700">
             <TextView
                 android:id="@+id/wedDay_txtView"
                 android:layout_width="wrap_content"
@@ -96,7 +98,7 @@
                 android:id="@+id/wedDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="4"/>
         </LinearLayout>
 
         <LinearLayout
@@ -117,7 +119,7 @@
                 android:id="@+id/thurDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="5"/>
         </LinearLayout>
 
         <LinearLayout
@@ -138,7 +140,7 @@
                 android:id="@+id/friDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="6"/>
         </LinearLayout>
 
         <LinearLayout
@@ -159,7 +161,7 @@
                 android:id="@+id/satDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"/>
+                tools:text="7"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

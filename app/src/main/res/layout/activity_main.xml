@@ -18,17 +18,18 @@ android:orientation="vertical">
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Octubre, 2022"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        tools:itemCount="3"
         android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monthYear_txtView"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/monthYear_txtView"
+        tools:listitem="@layout/calendar_cell"
+        tools:itemCount="1"/>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -48,21 +49,19 @@ android:orientation="vertical">
             android:layout_weight="1"
             android:text="Materias"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
 
         <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/addSubjects_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@null"
             android:text="Add"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
     </LinearLayout>
-
-
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/subjectRecyclerView"
@@ -72,7 +71,8 @@ android:orientation="vertical">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        tools:itemCount="3" />
+        tools:itemCount="1"
+        tools:listitem="@layout/subjects"/>
 
     <TextView
         android:id="@+id/prueba"
