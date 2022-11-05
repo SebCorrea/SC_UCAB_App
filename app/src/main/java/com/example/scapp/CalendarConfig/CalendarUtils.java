@@ -37,7 +37,7 @@ public class CalendarUtils{
         return weeks;
     }
 
-    public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
+    public void generatePlusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[week.length-1].plusDays(1);

@@ -24,11 +24,9 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
         if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             int totalItems = layoutManager.getItemCount()-1;
             if(position >= totalItems-3){
-                CalendarUtils.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
-                layoutManager.scrollToPosition(position-3);
+                calendarUtils.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
             }else if(position<=3){
                 calendarUtils.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
-                layoutManager.scrollToPosition(position+3);
             }
         }
     }
