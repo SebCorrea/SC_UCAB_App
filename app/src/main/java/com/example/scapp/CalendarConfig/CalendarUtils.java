@@ -11,20 +11,21 @@ import java.util.Objects;
 
 public class CalendarUtils{
 
-    public static LocalDate selectedDate;
+    public static LocalDate actualDate;
     public static List<LocalDate[]> weeks = new ArrayList<>();
     private final TextView monthYear_txtView;
+    public static final int ACTUAL_WEEK = 6;
 
     public CalendarUtils(TextView monthYear_txtView){
         this.monthYear_txtView = monthYear_txtView;
     }
 
-    public List<LocalDate[]> daysOfThisWeeks(LocalDate selectedDate) {
+    public List<LocalDate[]> daysOfThisWeeks(LocalDate actualDate) {
 
         LocalDate[] week;
-        LocalDate sundayOfThisWeek = sundayForDate(selectedDate);
-        LocalDate initialDate = Objects.requireNonNull(sundayOfThisWeek).minusWeeks(6);
-        LocalDate endDate = sundayOfThisWeek.plusWeeks(7);
+        LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
+        LocalDate initialDate = Objects.requireNonNull(sundayOfThisWeek, "").minusWeeks(6); //Cuando inicie la app se van a generar 6 semanas pasadas a la actual
+        LocalDate endDate = sundayOfThisWeek.plusWeeks(7); //Cuando inicie la app se van a generar 6 semanas futuras a la actual (Semana actual + 6 futuras)
 
         while (initialDate.isBefore(endDate)){
             week = new LocalDate[7];
@@ -37,47 +38,46 @@ public class CalendarUtils{
         return weeks;
     }
 
+    //Metodo para generar 3 semanas futuras
     public void generatePlusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[week.length-1].plusDays(1);
         LocalDate newEndDate = endDate.plusWeeks(3);
-        while (endDate.isBefore(newEndDate)){
+        while (endDate.isBefore(newEndDate)){ //Se añadirán 3 semanas superiores a la semana actual
             week = new LocalDate[7];
             for(int i = 0; i<week.length; i++){
                 week[i] = endDate;
                 endDate = endDate.plusDays(1);
             }
-            //Se generan nuevas semanas
-            weeks.add(week);
+
+            weeks.add(week); //Se añaden las 3 semanas futuras a la semana actual
             calendarAdapter.notifyItemInserted(weeks.size()-1);
-            //Se eliminan semanas antiguas
-            weeks.remove(0);
+            weeks.remove(0); //Se eliminan 3 semanas anteriores a la semana actual
             calendarAdapter.notifyItemRemoved(0);
         }
     }
+    //Metodo para generar 3 semanas pasadas
     public void generateMinusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
         LocalDate newInitialDate = initialDate.minusWeeks(3);
-        while (initialDate.isAfter(newInitialDate)){
+        while (initialDate.isAfter(newInitialDate)){ //Se añadirán 3 semanas pasadas a la semana actual
             week = new LocalDate[7];
             for(int i=week.length-1; i>=0; i--){
                 week[i] = initialDate;
                 initialDate = initialDate.minusDays(1);
             }
-            //Se generan nuevas semanas
-            weeks.add(0,week);
+            weeks.add(0,week); //Se añaden las 3 semanas pasadas a la semana actual
             calendarAdapter.notifyItemInserted(0);
-            //Se eliminan semanas antiguas
-            weeks.remove(weeks.size()-1);
+            weeks.remove(weeks.size()-1); //Se eliminan 3 semanas futuras a la semana actual
             calendarAdapter.notifyItemRemoved(weeks.size()-1);
         }
     }
 
+    //Metodo para obtener el dia domingo
     private LocalDate sundayForDate(LocalDate current) {
-
         LocalDate oneWeekAgo = current.minusWeeks(1);
         while (current.isAfter(oneWeekAgo)){
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
@@ -88,12 +88,14 @@ public class CalendarUtils{
         return null;
     }
 
+    //Metoto para mostrar en el txtView el mes con el año
     public void showMonthAndYear(int position){
         LocalDate scrollDate = weeks.get(position)[0];
         String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
         monthYear_txtView.setText(scrollMonthYear);
     }
 
+    //Metodo para obtener el mes
     public String month(LocalDate localDate){
 
         String month="";

@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity{
     private void recyclerCalendarConfig() {
         CalendarUtils calendarUtils = new CalendarUtils(monthYear_txtView);
         //Initial Config
-        CalendarUtils.selectedDate = LocalDate.now();
-        List<LocalDate[]> weeks = calendarUtils.daysOfThisWeeks(CalendarUtils.selectedDate);
+        CalendarUtils.actualDate = LocalDate.now();
+        List<LocalDate[]> weeks = calendarUtils.daysOfThisWeeks(CalendarUtils.actualDate);
         //Adapter
         CalendarAdapter calendarAdapter = new CalendarAdapter(weeks);
         calendarRecyclerView.setAdapter(calendarAdapter);
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
-        final int ACTUAL_WEEK = 6; // se generan 13 semanas donde la 6ta es la semana actual
-        calendarRecyclerView.scrollToPosition(ACTUAL_WEEK);
+         // se generan 13 semanas donde la 6ta es la semana actual
+        calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK);
         calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, calendarUtils));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();

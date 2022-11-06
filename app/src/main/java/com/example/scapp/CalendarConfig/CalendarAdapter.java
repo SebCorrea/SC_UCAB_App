@@ -39,7 +39,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
             ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
 
-            if (week[i].equals(CalendarUtils.selectedDate)){
+            if (week[i].equals(CalendarUtils.actualDate)){
                 view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.teal_700)));
             }else{
                 view.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
