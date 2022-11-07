@@ -10,5 +10,6 @@
         android:layout_height="65dp"
         android:background="@drawable/subject_background_btn"
         android:text="C"
+        android:textColor="@color/white"
         android:layout_gravity="center"/>
 </FrameLayout>

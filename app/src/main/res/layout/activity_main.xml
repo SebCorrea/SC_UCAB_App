@@ -61,7 +61,7 @@ android:orientation="vertical">
             android:textAlignment="textEnd"
             android:textAllCaps="false"
             android:textSize="13sp"
-            android:drawableLeft="@drawable/ic_baseline_add_subject"/>
+            android:drawableStart="@drawable/ic_baseline_add_subject"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

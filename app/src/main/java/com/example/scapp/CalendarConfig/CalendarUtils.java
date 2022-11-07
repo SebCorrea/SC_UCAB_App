@@ -1,18 +1,15 @@
 package com.example.scapp.CalendarConfig;
 
 import android.widget.TextView;
-
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class CalendarUtils{
 
     public static LocalDate actualDate;
-    public static List<LocalDate[]> weeks = new ArrayList<>();
+    private final List<LocalDate[]> weeks = new ArrayList<>();
     private final TextView monthYear_txtView;
     public static final int ACTUAL_WEEK = 6;
 
@@ -20,20 +17,22 @@ public class CalendarUtils{
         this.monthYear_txtView = monthYear_txtView;
     }
 
-    public List<LocalDate[]> daysOfThisWeeks(LocalDate actualDate) {
+    public List<LocalDate[]> generateInitialWeeks(LocalDate actualDate) {
 
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
-        LocalDate initialDate = Objects.requireNonNull(sundayOfThisWeek, "").minusWeeks(6); //Cuando inicie la app se van a generar 6 semanas pasadas a la actual
-        LocalDate endDate = sundayOfThisWeek.plusWeeks(7); //Cuando inicie la app se van a generar 6 semanas futuras a la actual (Semana actual + 6 futuras)
+        if(sundayOfThisWeek != null){
+            LocalDate initialDate = sundayOfThisWeek.minusWeeks(6); //Cuando inicie la app se van a generar 6 semanas pasadas a la actual
+            LocalDate endDate = sundayOfThisWeek.plusWeeks(7); //Cuando inicie la app se van a generar 6 semanas futuras a la actual (Semana actual + 6 futuras)
 
-        while (initialDate.isBefore(endDate)){
-            week = new LocalDate[7];
-            for(int i=0; i<week.length; i++){
-                week[i]= initialDate;
-                initialDate = initialDate.plusDays(1);
+            while (initialDate.isBefore(endDate)){
+                week = new LocalDate[7];
+                for(int i=0; i<week.length; i++){
+                    week[i]= initialDate;
+                    initialDate = initialDate.plusDays(1);
+                }
+                weeks.add(week); //Añadimos las semanas a la lista
             }
-            weeks.add(week);
         }
         return weeks;
     }
@@ -50,7 +49,6 @@ public class CalendarUtils{
                 week[i] = endDate;
                 endDate = endDate.plusDays(1);
             }
-
             weeks.add(week); //Se añaden las 3 semanas futuras a la semana actual
             calendarAdapter.notifyItemInserted(weeks.size()-1);
             weeks.remove(0); //Se eliminan 3 semanas anteriores a la semana actual
@@ -97,7 +95,6 @@ public class CalendarUtils{
 
     //Metodo para obtener el mes
     public String month(LocalDate localDate){
-
         String month="";
         switch (localDate.getMonth()){
             case JANUARY:

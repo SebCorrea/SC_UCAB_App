@@ -36,13 +36,16 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         LocalDate[] week = weeks.get(position);
 
         for(int i = 0; i<week.length; i++){
-            holder.weeksDaysTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
-            ViewGroup view = (ViewGroup) holder.weeksDaysTxtViews[i].getParent();
-
+            holder.weeksDatesTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
+            ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent();
             if (week[i].equals(CalendarUtils.actualDate)){
                 view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.teal_700)));
+                holder.weeksDatesTxtViews[i].setTextColor(Color.WHITE);
+                holder.weeksDaysTxtViews[i].setTextColor(Color.WHITE);
             }else{
                 view.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
+                holder.weeksDatesTxtViews[i].setTextColor(Color.BLACK);
+                holder.weeksDaysTxtViews[i].setTextColor(Color.GRAY);
             }
         }
     }

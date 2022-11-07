@@ -91,14 +91,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mie"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                tools:textColor="@color/white"/>
 
             <TextView
                 style="@style/dateCalendarText"
                 android:id="@+id/wedDate_txtView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="4"/>
+                tools:text="4"
+                tools:textColor="@color/white"/>
         </LinearLayout>
 
         <LinearLayout
