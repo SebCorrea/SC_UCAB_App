@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/monthYear_txtView"
         tools:itemCount="1"
-        tools:listitem="@layout/calendar_cell" />
+        tools:listitem="@layout/calendar_cell"/>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -50,7 +50,7 @@
             android:layout_weight="1"
             android:text="Materias"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/addSubjects_btn"
@@ -61,7 +61,7 @@
             android:text="Add"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
-            android:textSize="13sp" />
+            android:textSize="13sp"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:itemCount="1"
-        tools:listitem="@layout/subjects" />
+        tools:listitem="@layout/subjects"/>
 
     <TextView
         android:id="@+id/prueba"
@@ -82,7 +82,7 @@
         android:text="holaa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subjectRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/subjectRecyclerView"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

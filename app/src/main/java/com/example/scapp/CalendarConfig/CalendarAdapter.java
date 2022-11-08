@@ -36,17 +36,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         LocalDate[] week = weeks.get(position);
 
         for(int i = 0; i<week.length; i++){
-            holder.weeksDatesTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth()));
-            ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent();
-            if (week[i].equals(CalendarUtils.actualDate)){
-                view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.teal_700)));
-                holder.weeksDatesTxtViews[i].setTextColor(Color.WHITE);
-                holder.weeksDaysTxtViews[i].setTextColor(Color.WHITE);
-            }else{
-                view.setBackgroundTintList(ColorStateList.valueOf(Color.TRANSPARENT));
-                holder.weeksDatesTxtViews[i].setTextColor(Color.BLACK);
-                holder.weeksDaysTxtViews[i].setTextColor(Color.GRAY);
-            }
+            holder.weeksDatesTxtViews[i].setText(String.valueOf(week[i].getDayOfMonth())); //Colocamos los dias del mes en el calendario
+
+            calendarColors(holder, week[i], i);
         }
     }
 
@@ -55,4 +47,23 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return weeks.size();
     }
 
+    private static void calendarColors(CalendarViewHolder holder, LocalDate localDate, int i){
+
+        int backgroundColor;
+        int dateTextViewColor;
+        int dayTextViewColor;
+        ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent(); //Obtenemos la vista padre
+        if (localDate.equals(CalendarUtils.actualDate)){
+            backgroundColor = R.color.teal_700;
+            dateTextViewColor = Color.WHITE;
+            dayTextViewColor = Color.WHITE;
+        }else{
+            backgroundColor = R.color.transparent;
+            dateTextViewColor = Color.BLACK;
+            dayTextViewColor = Color.GRAY;
+        }
+        view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),backgroundColor)));
+        holder.weeksDatesTxtViews[i].setTextColor(dateTextViewColor);
+        holder.weeksDaysTxtViews[i].setTextColor(dayTextViewColor);
+    }
 }
