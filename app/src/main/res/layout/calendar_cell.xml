@@ -1,169 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/parentView">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/parentView"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="7dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:baselineAligned="false"
-        android:layout_gravity="center">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/sunDay_txtView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginLeft="13dp">
+            android:text="Dom"
+            android:textSize="13sp"/>
 
-            <TextView
-                android:id="@+id/sunDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dom"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/sunDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="1"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/sunDate_txtView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/monDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lun"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/monDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="2"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tueDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mar"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/tueDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="3"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            tools:backgroundTint="@color/teal_700">
-            <TextView
-                android:id="@+id/wedDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mie"
-                android:textSize="13sp"
-                tools:textColor="@color/white"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/wedDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="4"
-                tools:textColor="@color/white"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/thurDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jue"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/thurDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="5"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/friDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Vie"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/friDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="6"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/dateCalendarStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/satDay_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sab"
-                android:textSize="13sp"/>
-
-            <TextView
-                style="@style/dateCalendarText"
-                android:id="@+id/satDate_txtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="7"/>
-        </LinearLayout>
+            tools:text="1"/>
     </LinearLayout>
-</FrameLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/monDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lun"
+            android:textSize="13sp"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/monDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tueDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mar"
+            android:textSize="13sp"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/tueDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="3"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        tools:backgroundTint="@color/teal_700">
+        <TextView
+            android:id="@+id/wedDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mie"
+            android:textSize="13sp"
+            tools:textColor="@color/white"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/wedDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="4"
+            tools:textColor="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/thurDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jue"
+            android:textSize="13sp"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/thurDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="5"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/friDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vie"
+            android:textSize="13sp"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/friDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="6"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/dateCalendarStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/satDay_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sab"
+            android:textSize="13sp"/>
+
+        <TextView
+            style="@style/dateCalendarText"
+            android:id="@+id/satDate_txtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="7"/>
+    </LinearLayout>
+</LinearLayout>

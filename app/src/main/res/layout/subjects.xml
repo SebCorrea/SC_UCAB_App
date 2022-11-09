@@ -2,14 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginEnd="5dp">
 
     <Button
         android:id="@+id/subjects_btn"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:background="@drawable/subject_background_btn"
-        android:text="C"
-        android:textColor="@color/white"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        tools:text="C" />
 </FrameLayout>
