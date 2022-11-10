@@ -35,8 +35,8 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     @Override
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        position = layoutManager.findFirstVisibleItemPosition();
-        CalendarDesing.showMonthAndYear(position,monthYearTxt_View);
+        position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
+        CalendarDesing.showMonthAndYearTxt_View(position,monthYearTxt_View);
     }
 
 

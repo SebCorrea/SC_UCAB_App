@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class CalendarDesing {
 
     //Metodo para establecer el Background y los colorpalette del calendario
-    public static void CalendarStyleBackground(@NonNull TextView weekDateTxtView, TextView weekDayTxtView, @NonNull LocalDate date){
+    public static void CalendarStyle(@NonNull TextView weekDateTxtView, TextView weekDayTxtView, @NonNull LocalDate date){
         ViewGroup parentView = (ViewGroup) weekDateTxtView.getParent();
         if(date.equals(CalendarUtils.getActualDate())){
             parentView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(parentView.getContext(), R.color.teal_700)));
@@ -29,13 +29,13 @@ public class CalendarDesing {
     }
 
     //Metoto para mostrar en el txtView el mes con el año
-    public static void showMonthAndYear(int position, @NonNull TextView monthYear_txtView){
+    public static void showMonthAndYearTxt_View(int position, @NonNull TextView monthYear_txtView){
         LocalDate scrollDate = CalendarUtils.getWeeks().get(position)[0];
         String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
         monthYear_txtView.setText(scrollMonthYear);
     }
 
-    //Metodo para obtener el mes
+    //Editamos la forma en la que se muestra el texto
     public static String month(@NonNull LocalDate localDate){
         String month="";
         switch (localDate.getMonth()){
