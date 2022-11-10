@@ -10,9 +10,9 @@ import java.util.List;
 
 public class SubjectsUtils {
 
-    public static List<String> subjectsNames = new ArrayList<>();
-    Button agregar_btn;
-    EditText subject_EditText;
+    public static List<String> subjectsNames = new ArrayList<>(); //CAMBIAR
+    private final Button agregar_btn;
+    private final EditText subject_EditText;
 
     public SubjectsUtils(View view) {
         this.agregar_btn = view.findViewById(R.id.agregar_btn);
