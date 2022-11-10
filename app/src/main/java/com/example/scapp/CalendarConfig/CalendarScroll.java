@@ -22,7 +22,6 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     @Override
     public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
-
         if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
             int totalItems = layoutManager.getItemCount()-1;
             if(position >= totalItems-3){
@@ -37,7 +36,7 @@ public class CalendarScroll extends RecyclerView.OnScrollListener{
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
         position = layoutManager.findFirstVisibleItemPosition();
-        CalendarUtils.showMonthAndYear(position,monthYearTxt_View);
+        CalendarDesing.showMonthAndYear(position,monthYearTxt_View);
     }
 
 

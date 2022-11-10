@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity{
     private Button addSubject_btn;
     private RecyclerView subjectRecyclerView;
 
-
     private void initWidgets() {
         calendarRecyclerView = findViewById(R.id.calendarRecyclerView);
         subjectRecyclerView = findViewById(R.id.subjectRecyclerView);

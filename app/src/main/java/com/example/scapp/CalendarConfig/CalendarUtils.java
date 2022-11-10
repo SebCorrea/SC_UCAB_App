@@ -1,15 +1,6 @@
 package com.example.scapp.CalendarConfig;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-
-import com.example.scapp.R;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,8 +16,15 @@ public class CalendarUtils{
         CalendarUtils.actualDate = actualDate;
     }
 
-    public static List<LocalDate[]> generateInitialWeeks() {
+    public static LocalDate getActualDate(){
+        return actualDate;
+    }
 
+    public static List<LocalDate[]> getWeeks(){
+        return weeks;
+    }
+
+    public static List<LocalDate[]> generateInitialWeeks() {
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
         if(sundayOfThisWeek != null){
@@ -47,7 +45,6 @@ public class CalendarUtils{
 
     //Metodo para generar 3 semanas futuras
     public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
-
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[week.length-1].plusDays(1);
         LocalDate newEndDate = endDate.plusWeeks(3);
@@ -65,7 +62,6 @@ public class CalendarUtils{
     }
     //Metodo para generar 3 semanas pasadas
     public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
-
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
         LocalDate newInitialDate = initialDate.minusWeeks(3);
@@ -94,71 +90,5 @@ public class CalendarUtils{
         return null;
     }
 
-    //CALENDAR DESING----------------------------------------------------------------------------------------
-
-    //Metoto para mostrar en el txtView el mes con el año
-    public static void showMonthAndYear(int position, @NonNull TextView monthYear_txtView){
-        LocalDate scrollDate = weeks.get(position)[0];
-        String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
-        monthYear_txtView.setText(scrollMonthYear);
-    }
-
-    //Metodo para establecer el BackGround y los colorpalette del calendario
-    public static void calendarColors(@NonNull CalendarViewHolder holder, @NonNull LocalDate localDate, int i){
-        ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent(); //Obtenemos la vista padre
-        if (localDate.equals(actualDate)){
-            view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.teal_700)));
-            holder.weeksDatesTxtViews[i].setTextColor(Color.WHITE);
-            holder.weeksDaysTxtViews[i].setTextColor(Color.WHITE);
-        }else{
-            view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.transparent)));
-            holder.weeksDatesTxtViews[i].setTextColor(Color.BLACK);
-            holder.weeksDaysTxtViews[i].setTextColor(Color.GRAY);
-        }
-    }
-
-    //Metodo para obtener el mes
-    public static String month(@NonNull LocalDate localDate){
-        String month="";
-        switch (localDate.getMonth()){
-            case JANUARY:
-                month="Enero";
-                break;
-            case FEBRUARY:
-                month="Febrero";
-                break;
-            case MARCH:
-                month="Marzo";
-                break;
-            case APRIL:
-                month="Abril";
-                break;
-            case MAY:
-                month="Mayo";
-                break;
-            case JUNE:
-                month="Junio";
-                break;
-            case JULY:
-                month="Julio";
-                break;
-            case AUGUST:
-                month="Agosto";
-                break;
-            case SEPTEMBER:
-                month="Septiembre";
-                break;
-            case OCTOBER:
-                month="Octubre";
-                break;
-            case NOVEMBER:
-                month="Noviembre";
-                break;
-            case DECEMBER:
-                month="Diciembre";
-                break;
-        }
-        return month;
-    }
 }
 
