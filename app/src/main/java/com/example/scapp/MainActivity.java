@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //App configs
         initWidgets();
         recyclerCalendarConfig();
@@ -50,10 +49,10 @@ public class MainActivity extends AppCompatActivity{
 
     private void recyclerCalendarConfig() {
         //Initial Config
-        CalendarUtils calendarUtils = new CalendarUtils(monthYear_txtView, LocalDate.now());
-        List<LocalDate[]> weeks = calendarUtils.generateInitialWeeks();
+        CalendarUtils.setActualDate(LocalDate.now());
+        List<LocalDate[]> weeks = CalendarUtils.generateInitialWeeks();
         //Adapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks, calendarUtils.getActualDate());
+        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks);
         calendarRecyclerView.setAdapter(calendarAdapter);
         //Layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity{
         //Scroll
          // se generan 13 semanas donde la 6ta es la semana actual
         calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK);
-        calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, calendarUtils));
+        calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, monthYear_txtView));
         //Scroll Animation
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2

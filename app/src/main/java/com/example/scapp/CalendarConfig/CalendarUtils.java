@@ -8,21 +8,20 @@ import java.util.List;
 
 public class CalendarUtils{
 
-    private final LocalDate actualDate;
-    private final List<LocalDate[]> weeks = new ArrayList<>();
-    private final TextView monthYear_txtView;
+    private static LocalDate actualDate;
+    private static final List<LocalDate[]> weeks = new ArrayList<>();
     public static final int ACTUAL_WEEK = 6;
 
-    public CalendarUtils(TextView monthYear_txtView, LocalDate actualDate){
-        this.monthYear_txtView = monthYear_txtView;
-        this.actualDate = actualDate;
-    }
 
-    public LocalDate getActualDate() {
+    public static LocalDate getActualDate() {
         return actualDate;
     }
 
-    public List<LocalDate[]> generateInitialWeeks() {
+    public static void setActualDate(LocalDate actualDate){
+        CalendarUtils.actualDate = actualDate;
+    }
+
+    public static List<LocalDate[]> generateInitialWeeks() {
 
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
@@ -43,7 +42,7 @@ public class CalendarUtils{
     }
 
     //Metodo para generar 3 semanas futuras
-    public void generatePlusWeeks(CalendarAdapter calendarAdapter){
+    public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[week.length-1].plusDays(1);
@@ -61,7 +60,7 @@ public class CalendarUtils{
         }
     }
     //Metodo para generar 3 semanas pasadas
-    public void generateMinusWeeks(CalendarAdapter calendarAdapter){
+    public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
 
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
@@ -80,7 +79,7 @@ public class CalendarUtils{
     }
 
     //Metodo para obtener el dia domingo
-    private LocalDate sundayForDate(LocalDate current) {
+    private static LocalDate sundayForDate(LocalDate current) {
         LocalDate oneWeekAgo = current.minusWeeks(1);
         while (current.isAfter(oneWeekAgo)){
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
@@ -92,14 +91,14 @@ public class CalendarUtils{
     }
 
     //Metoto para mostrar en el txtView el mes con el año
-    public void showMonthAndYear(int position){
+    public static void showMonthAndYear(int position, TextView monthYear_txtView){
         LocalDate scrollDate = weeks.get(position)[0];
         String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
         monthYear_txtView.setText(scrollMonthYear);
     }
 
     //Metodo para obtener el mes
-    public String month(LocalDate localDate){
+    public static String month(LocalDate localDate){
         String month="";
         switch (localDate.getMonth()){
             case JANUARY:
