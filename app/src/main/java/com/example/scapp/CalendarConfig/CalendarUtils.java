@@ -1,6 +1,15 @@
 package com.example.scapp.CalendarConfig;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
+import com.example.scapp.R;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,11 +20,6 @@ public class CalendarUtils{
     private static LocalDate actualDate;
     private static final List<LocalDate[]> weeks = new ArrayList<>();
     public static final int ACTUAL_WEEK = 6;
-
-
-    public static LocalDate getActualDate() {
-        return actualDate;
-    }
 
     public static void setActualDate(LocalDate actualDate){
         CalendarUtils.actualDate = actualDate;
@@ -79,7 +83,7 @@ public class CalendarUtils{
     }
 
     //Metodo para obtener el dia domingo
-    private static LocalDate sundayForDate(LocalDate current) {
+    private static LocalDate sundayForDate(@NonNull LocalDate current) {
         LocalDate oneWeekAgo = current.minusWeeks(1);
         while (current.isAfter(oneWeekAgo)){
             if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
@@ -90,15 +94,31 @@ public class CalendarUtils{
         return null;
     }
 
+    //CALENDAR DESING----------------------------------------------------------------------------------------
+
     //Metoto para mostrar en el txtView el mes con el año
-    public static void showMonthAndYear(int position, TextView monthYear_txtView){
+    public static void showMonthAndYear(int position, @NonNull TextView monthYear_txtView){
         LocalDate scrollDate = weeks.get(position)[0];
         String scrollMonthYear = month(scrollDate) + ", " +scrollDate.getYear();
         monthYear_txtView.setText(scrollMonthYear);
     }
 
+    //Metodo para establecer el BackGround y los colorpalette del calendario
+    public static void calendarColors(@NonNull CalendarViewHolder holder, @NonNull LocalDate localDate, int i){
+        ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent(); //Obtenemos la vista padre
+        if (localDate.equals(actualDate)){
+            view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(), R.color.teal_700)));
+            holder.weeksDatesTxtViews[i].setTextColor(Color.WHITE);
+            holder.weeksDaysTxtViews[i].setTextColor(Color.WHITE);
+        }else{
+            view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.transparent)));
+            holder.weeksDatesTxtViews[i].setTextColor(Color.BLACK);
+            holder.weeksDaysTxtViews[i].setTextColor(Color.GRAY);
+        }
+    }
+
     //Metodo para obtener el mes
-    public static String month(LocalDate localDate){
+    public static String month(@NonNull LocalDate localDate){
         String month="";
         switch (localDate.getMonth()){
             case JANUARY:
@@ -140,6 +160,5 @@ public class CalendarUtils{
         }
         return month;
     }
-
-
 }
+
