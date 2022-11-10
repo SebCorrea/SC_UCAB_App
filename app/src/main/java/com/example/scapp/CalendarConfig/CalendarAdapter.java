@@ -9,14 +9,17 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.scapp.R;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final List<LocalDate[]> weeks;
+    private final LocalDate actualDate;
 
-    public CalendarAdapter(List<LocalDate[]> days) {
+    public CalendarAdapter(List<LocalDate[]> days, LocalDate actualDate) {
         this.weeks = days;
+        this.actualDate = actualDate;
     }
 
     @NonNull
@@ -48,7 +51,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     private void calendarColors(@NonNull CalendarViewHolder holder, @NonNull LocalDate localDate, int i){
 
         ViewGroup view = (ViewGroup) holder.weeksDatesTxtViews[i].getParent(); //Obtenemos la vista padre
-        if (localDate.equals(CalendarUtils.actualDate)){
+        if (localDate.equals(actualDate)){
             view.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(view.getContext(),R.color.teal_700)));
             holder.weeksDatesTxtViews[i].setTextColor(Color.WHITE);
             holder.weeksDaysTxtViews[i].setTextColor(Color.WHITE);

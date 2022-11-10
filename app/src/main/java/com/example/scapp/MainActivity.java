@@ -49,12 +49,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void recyclerCalendarConfig() {
-        CalendarUtils calendarUtils = new CalendarUtils(monthYear_txtView);
         //Initial Config
-        CalendarUtils.actualDate = LocalDate.now();
-        List<LocalDate[]> weeks = calendarUtils.generateInitialWeeks(CalendarUtils.actualDate);
+        CalendarUtils calendarUtils = new CalendarUtils(monthYear_txtView, LocalDate.now());
+        List<LocalDate[]> weeks = calendarUtils.generateInitialWeeks();
         //Adapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks, calendarUtils.getActualDate());
         calendarRecyclerView.setAdapter(calendarAdapter);
         //Layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);

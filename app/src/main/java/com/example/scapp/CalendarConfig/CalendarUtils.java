@@ -8,16 +8,21 @@ import java.util.List;
 
 public class CalendarUtils{
 
-    public static LocalDate actualDate;
+    private final LocalDate actualDate;
     private final List<LocalDate[]> weeks = new ArrayList<>();
     private final TextView monthYear_txtView;
     public static final int ACTUAL_WEEK = 6;
 
-    public CalendarUtils(TextView monthYear_txtView){
+    public CalendarUtils(TextView monthYear_txtView, LocalDate actualDate){
         this.monthYear_txtView = monthYear_txtView;
+        this.actualDate = actualDate;
     }
 
-    public List<LocalDate[]> generateInitialWeeks(LocalDate actualDate) {
+    public LocalDate getActualDate() {
+        return actualDate;
+    }
+
+    public List<LocalDate[]> generateInitialWeeks() {
 
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
