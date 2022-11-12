@@ -4,12 +4,9 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-
 import com.example.scapp.R;
-
 import java.time.LocalDate;
 
 public class CalendarDesing {
