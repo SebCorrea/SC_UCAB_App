@@ -23,6 +23,7 @@
         android:textSize="14sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/subject_TextInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="30"
-            android:textSize="14sp"/>
+            android:textSize="14sp"
+            android:inputType="textCapWords"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

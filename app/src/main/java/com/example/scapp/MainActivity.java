@@ -9,16 +9,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.example.scapp.CalendarConfig.CalendarAdapter;
 import com.example.scapp.CalendarConfig.CalendarScroll;
 import com.example.scapp.CalendarConfig.CalendarUtils;
 import com.example.scapp.SubjectsConfig.SubjectsAdapter;
 import com.example.scapp.SubjectsConfig.SubjectsUtils;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
 
     private TextView monthYear_txtView;
     public static TextView prueba;
@@ -66,15 +69,15 @@ public class MainActivity extends AppCompatActivity{
 
     private void recyclerSubjectsConfig(){
         //Adapter
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(SubjectsUtils.subjectsNames);
+        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(SubjectsUtils.getSubjectsNames(), this);
         subjectRecyclerView.setAdapter(subjectsAdapter);
         //Layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         subjectRecyclerView.setLayoutManager(layoutManager);
     }
 
+    //Generamos el AlertDialog
     private void showSubjectAlertDialogConfig() {
-
         //Initial Config to generate and show AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -83,9 +86,16 @@ public class MainActivity extends AppCompatActivity{
         AlertDialog myDialog = builder.create();
         myDialog.show();
 
-        SubjectsUtils subjectsUtils = new SubjectsUtils(view);
-        subjectsUtils.SubjectAlertDialogOptions(myDialog,(SubjectsAdapter) subjectRecyclerView.getAdapter() );
+        Button agregar_btn = view.findViewById(R.id.agregar_btn);
+        EditText subject_EditText = view.findViewById(R.id.subject_EditText);
+        TextInputLayout subject_TextInputLayout = view.findViewById(R.id.subject_TextInputLayout);
 
+        new SubjectsUtils(agregar_btn, subject_EditText,subject_TextInputLayout);
+        SubjectsUtils.SubjectAlertDialogOptions(agregar_btn, subject_EditText, (SubjectsAdapter) subjectRecyclerView.getAdapter(), myDialog );
     }
 
+    @Override
+    public void onItemClickListener(String dayText) {
+        prueba.setText(dayText);
+    }
 }

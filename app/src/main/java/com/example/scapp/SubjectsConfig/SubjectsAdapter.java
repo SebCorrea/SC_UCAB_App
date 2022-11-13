@@ -14,9 +14,11 @@ import java.util.List;
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
     private final List<String> subjectsNames;
+    private final onItemListener onItemListener;
 
-    public SubjectsAdapter(List<String> subjectsNames) {
+    public SubjectsAdapter(List<String> subjectsNames, onItemListener onItemListener) {
         this.subjectsNames = subjectsNames;
+        this.onItemListener = onItemListener;
     }
 
     @NonNull
@@ -26,7 +28,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
         View view = layoutInflater.inflate(R.layout.subjects,parent,false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (ViewGroup.LayoutParams.WRAP_CONTENT);
-        return new SubjectsViewHolder(view);
+        return new SubjectsViewHolder(view, onItemListener);
     }
 
     @Override
@@ -40,5 +42,9 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
     @Override
     public int getItemCount() {
         return subjectsNames.size();
+    }
+
+    public interface onItemListener{
+        void onItemClickListener(String dayText);
     }
 }

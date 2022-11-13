@@ -8,12 +8,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scapp.R;
 
-public class SubjectsViewHolder extends RecyclerView.ViewHolder {
+public class SubjectsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public Button subjects_btn;
-    public SubjectsViewHolder(@NonNull View itemView) {
+    private final SubjectsAdapter.onItemListener onItemListener;
+    public SubjectsViewHolder(@NonNull View itemView, SubjectsAdapter.onItemListener onItemListener) {
         super(itemView);
         subjects_btn = itemView.findViewById(R.id.subjects_btn);
+        this.onItemListener = onItemListener;
 
+        subjects_btn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        onItemListener.onItemClickListener(subjects_btn.getText().toString());
     }
 }

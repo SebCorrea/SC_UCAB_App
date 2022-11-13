@@ -1,25 +1,36 @@
 package com.example.scapp.SubjectsConfig;
 
 import android.app.AlertDialog;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import com.example.scapp.R;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectsUtils {
 
-    public static List<String> subjectsNames = new ArrayList<>(); //CAMBIAR
-    private final Button agregar_btn;
-    private final EditText subject_EditText;
+    private static final List<String> subjectsNames = new ArrayList<>();
 
-    public SubjectsUtils(View view) {
-        this.agregar_btn = view.findViewById(R.id.agregar_btn);
-        this.subject_EditText = view.findViewById(R.id.subject_EditText);
+    public static List<String> getSubjectsNames(){
+        return subjectsNames;
     }
 
-    public void SubjectAlertDialogOptions(AlertDialog myDialog, SubjectsAdapter subjectsAdapter) {
+    public SubjectsUtils(Button agregar_btn, EditText subject_EditText, TextInputLayout subject_TextInputLayout) {
+
+    }
+
+
+    public static void SubjectAlertDialogOptions(@NonNull Button agregar_btn, @NonNull EditText subject_EditText, SubjectsAdapter subjectsAdapter, AlertDialog myDialog) {
 
         agregar_btn.setOnClickListener(v -> {
             if(!subject_EditText.getText().toString().trim().equals("")){
@@ -27,8 +38,64 @@ public class SubjectsUtils {
                 subjectsAdapter.notifyItemInserted(0);
             }
             myDialog.dismiss();
-
         });
+
+        subject_EditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
+        //subject_EditText.setFilters(new InputFilter[] {new TextWatchers()});
+    }
+
+    private static void TextFilterOptions(){
+
+        InputFilter filter = new InputFilter() {
+            @Nullable
+            public CharSequence filter(CharSequence source, int start, int end,
+                                       Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    if (!Character.isLetter(source.charAt(i))) {
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        subject_EditText.setFilters(new InputFilter[] { filter });
+
+    }
+
+
+
+}
+
+class TextWatchers implements TextWatcher, InputFilter {
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+
+    @Override
+    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+        for (int i = start; i < end; i++) {
+            if (!Character.isLetterOrDigit(source.charAt(i))) {
+                return "";
+            }
+        }
+        return null;
     }
 
 }
