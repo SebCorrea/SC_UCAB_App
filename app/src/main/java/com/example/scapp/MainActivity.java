@@ -4,19 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.example.scapp.CalendarConfig.CalendarAdapter;
 import com.example.scapp.CalendarConfig.CalendarScroll;
 import com.example.scapp.CalendarConfig.CalendarUtils;
 import com.example.scapp.SubjectsConfig.SubjectsAdapter;
+import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
 import com.example.scapp.SubjectsConfig.SubjectsUtils;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -79,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
     //Generamos el AlertDialog
     private void showSubjectAlertDialogConfig() {
         //Initial Config to generate and show AlertDialog
+        /*
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.subjects_alert_dialog, null);
@@ -90,8 +87,15 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         EditText subject_EditText = view.findViewById(R.id.subject_EditText);
         TextInputLayout subject_TextInputLayout = view.findViewById(R.id.subject_TextInputLayout);
 
-        new SubjectsUtils(agregar_btn, subject_EditText,subject_TextInputLayout);
+        //new SubjectsUtils(agregar_btn, subject_EditText,subject_TextInputLayout);
         SubjectsUtils.SubjectAlertDialogOptions(agregar_btn, subject_EditText, (SubjectsAdapter) subjectRecyclerView.getAdapter(), myDialog );
+
+         */
+
+        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment();
+        subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
+
+
     }
 
     @Override
