@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingVertical="15dp"
-    android:orientation="vertical"
-    android:paddingHorizontal="15dp">
+    android:padding="15dp"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,8 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Agregar"
-        android:background="@color/teal_700"
-        android:textColor="@color/white"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"/>
+
+
 
 </LinearLayout>

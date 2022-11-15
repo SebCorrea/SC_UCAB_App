@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 public class CalendarDesing {
 
+
     //Metodo para establecer el Background y los colorpalette del calendario
     public static void CalendarStyle(@NonNull TextView weekDateTxtView, TextView weekDayTxtView, @NonNull LocalDate date){
         ViewGroup parentView = (ViewGroup) weekDateTxtView.getParent();

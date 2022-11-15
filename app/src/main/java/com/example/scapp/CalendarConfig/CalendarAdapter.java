@@ -37,6 +37,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             TextView weekDateTxtView = holder.weeksDatesTxtViews[i];
             TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
             weekDateTxtView.setText(String.valueOf(date.getDayOfMonth())); //Colocamos los dias del mes en el calendario
+
             CalendarDesing.CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
         }
     }

@@ -1,37 +1,61 @@
 package com.example.scapp.SubjectsConfig;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
-import com.example.scapp.MainActivity;
 import com.example.scapp.R;
+import com.example.scapp.databinding.SubjectsDialogFragmentBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectsDialogFragment extends DialogFragment {
 
-    Button pruebita;
+    private SubjectsDialogFragmentBinding binding;
+    private static final List<String> subjectsNames = new ArrayList<>();
+    private final SubjectsAdapter subjectsAdapter;
 
-
-
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.subjects_alert_dialog,container,false);
-        pruebita = view.findViewById(R.id.agregar_btn);
-
-        pruebita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity.prueba.setText("hablame manao");
-            }
-        });
-        return view;
+    public static List<String> getSubjectsNames(){
+        return subjectsNames;
     }
+    private Dialog dialog;
+
+
+    public SubjectsDialogFragment(SubjectsAdapter subjectsAdapter) {
+        this.subjectsAdapter = subjectsAdapter;
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = requireActivity().getLayoutInflater();
+        View view = inflater.inflate(R.layout.subjects_dialog_fragment, null);
+        binding = SubjectsDialogFragmentBinding.bind(view);
+        builder.setView(view);
+
+        dialog = builder.create();
+        binding.agregarBtn.setOnClickListener(this::addSubject);
+
+        return dialog;
+    }
+
+
+    public void addSubject(View v) {
+
+        if(!binding.subjectEditText.getText().toString().trim().equals("")){
+            subjectsNames.add(0,binding.subjectEditText.getText().toString());
+            subjectsAdapter.notifyItemInserted(0);
+            dialog.dismiss();
+
+        }
+    }
+
+
 }
