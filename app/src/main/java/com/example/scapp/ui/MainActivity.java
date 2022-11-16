@@ -1,4 +1,4 @@
-package com.example.scapp;
+package com.example.scapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,12 +10,14 @@ import com.example.scapp.CalendarConfig.CalendarUtils;
 import com.example.scapp.SubjectsConfig.SubjectsAdapter;
 import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
+
 import java.time.LocalDate;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
 
     private ActivityMainBinding binding;
+    private CalendarAdapter calendarAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
         //Scroll
-         // se generan 13 semanas donde la 6ta es la semana actual
+        // se generan 13 semanas donde la 6ta es la semana actual
         binding.calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK);
         binding.calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, binding.monthYearTxtView));
         //Scroll Animation
