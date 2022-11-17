@@ -78,11 +78,6 @@ public class CalendarDatesProvider {
         }
     }
 
-    @NonNull
-    public static String showMonthAndYear(LocalDate scrollDate){
-        return month(scrollDate) + ", " +scrollDate.getYear();
-    }
-
     public static String month(@NonNull LocalDate localDate){
         String month="";
         switch (localDate.getMonth()){

@@ -1,17 +1,16 @@
 package com.example.scapp.ui.calendarUI;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.scapp.CalendarConfig.CalendarDesing;
 import com.example.scapp.R;
 import com.example.scapp.databinding.CalendarCellBinding;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -41,8 +40,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
             TextView weekDateTxtView = holder.weeksDatesTxtViews[i];
             TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
             weekDateTxtView.setText(String.valueOf(date.getDayOfMonth())); //Colocamos los dias del mes en el calendario
-
-            CalendarDesing.CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
+            CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
         }
     }
 
@@ -51,9 +49,21 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         return weeks.size();
     }
 
-    public interface pruebita{
-        void mostrarMes(String month);
+    //Metodo para establecer el Background y los colorpalette del calendario
+    private void CalendarStyle(@NonNull TextView weekDateTxtView, TextView weekDayTxtView, @NonNull LocalDate date){
+
+        ViewGroup parentView = (ViewGroup) weekDateTxtView.getParent();
+        if(date.equals(LocalDate.now())){
+            parentView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(parentView.getContext(), R.color.teal_700)));
+            weekDateTxtView.setTextColor(Color.WHITE);
+            weekDayTxtView.setTextColor(Color.WHITE);
+        }else{
+            parentView.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(parentView.getContext(), R.color.transparent)));
+            weekDateTxtView.setTextColor(Color.BLACK);
+            weekDayTxtView.setTextColor(Color.GRAY);
+        }
     }
+
 }
 
 class CalendarViewHolder extends RecyclerView.ViewHolder {
@@ -65,7 +75,6 @@ class CalendarViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         CalendarCellBinding binding = CalendarCellBinding.bind(itemView);
-
         weeksDatesTxtViews[0] = binding.sunDateTxtView;
         weeksDatesTxtViews[1] = binding.monDateTxtView;
         weeksDatesTxtViews[2] = binding.tueDateTxtView;
@@ -81,6 +90,5 @@ class CalendarViewHolder extends RecyclerView.ViewHolder {
         weeksDaysTxtViews[4] = binding.thurDayTxtView;
         weeksDaysTxtViews[5] = binding.friDayTxtView;
         weeksDaysTxtViews[6] = binding.satDayTxtView;
-
     }
 }

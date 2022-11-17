@@ -17,7 +17,7 @@ import com.example.scapp.viewmodel.CalendarViewModel;
 
 import java.time.LocalDate;
 
-public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener, CalendarAdapter.pruebita{
+public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
 
     private ActivityMainBinding binding;
     private CalendarViewModel viewModel;
@@ -90,13 +90,8 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
     }
 
     @Override
-    public void onItemClickListener(String dayText) {
-        binding.prueba.setText(dayText);
+    public void onItemClickListener(String subject) {
+        binding.prueba.setText(subject);
     }
 
-
-    @Override
-    public void mostrarMes(String month) {
-        binding.monthYearTxtView.setText(month);
-    }
 }

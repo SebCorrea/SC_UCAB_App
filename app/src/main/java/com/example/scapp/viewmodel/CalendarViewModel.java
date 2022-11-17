@@ -16,7 +16,6 @@ public class CalendarViewModel extends ViewModel{
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
         monthAndYear = new MutableLiveData<>();
-
         weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
@@ -37,6 +36,6 @@ public class CalendarViewModel extends ViewModel{
     }
 
     public void setMonthAndYear(LocalDate scrollDate){
-        monthAndYear.setValue(CalendarDatesProvider.showMonthAndYear(scrollDate));
+        monthAndYear.setValue(CalendarDatesProvider.month(scrollDate) + ", " + scrollDate.getYear());
     }
 }
