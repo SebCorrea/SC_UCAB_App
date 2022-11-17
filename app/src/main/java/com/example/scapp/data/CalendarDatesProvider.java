@@ -1,35 +1,20 @@
-package com.example.scapp.CalendarConfig;
+package com.example.scapp.data;
+
 
 import androidx.annotation.NonNull;
-
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarUtils{
+public class CalendarDatesProvider {
 
-    private static LocalDate actualDate;
     private static final List<LocalDate[]> weeks = new ArrayList<>();
-    public static final int ACTUAL_WEEK = 6;
-
-    public static void setActualDate(LocalDate actualDate){
-        CalendarUtils.actualDate = actualDate;
-    }
-
-    public static LocalDate getActualDate(){
-        return actualDate;
-    }
-
-    public static List<LocalDate[]> getWeeks(){
-        return weeks;
-    }
 
     public static List<LocalDate[]> generateInitialWeeks() {
         LocalDate[] week;
-        LocalDate sundayOfThisWeek = sundayForDate(actualDate); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
+        LocalDate sundayOfThisWeek = sundayForDate(LocalDate.now()); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
         if(sundayOfThisWeek != null){
             LocalDate initialDate = sundayOfThisWeek.minusWeeks(6); //Cuando inicie la app se van a generar 6 semanas pasadas a la actual
             LocalDate endDate = sundayOfThisWeek.plusWeeks(7); //Cuando inicie la app se van a generar 6 semanas futuras a la actual (Semana actual + 6 futuras)
@@ -44,6 +29,18 @@ public class CalendarUtils{
             }
         }
         return weeks;
+    }
+
+    //Metodo para obtener el dia domingo
+    private static LocalDate sundayForDate(@NonNull LocalDate current) {
+        LocalDate oneWeekAgo = current.minusWeeks(1);
+        while (current.isAfter(oneWeekAgo)){
+            if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
+                return current;
+            }
+            current = current.minusDays(1);
+        }
+        return null;
     }
 
     //Metodo para generar 3 semanas futuras
@@ -81,17 +78,51 @@ public class CalendarUtils{
         }
     }
 
-    //Metodo para obtener el dia domingo
-    private static LocalDate sundayForDate(@NonNull LocalDate current) {
-        LocalDate oneWeekAgo = current.minusWeeks(1);
-        while (current.isAfter(oneWeekAgo)){
-            if(current.getDayOfWeek() == DayOfWeek.SUNDAY){
-                return current;
-            }
-            current = current.minusDays(1);
-        }
-        return null;
+    @NonNull
+    public static String showMonthAndYear(LocalDate scrollDate){
+        return month(scrollDate) + ", " +scrollDate.getYear();
     }
 
+    public static String month(@NonNull LocalDate localDate){
+        String month="";
+        switch (localDate.getMonth()){
+            case JANUARY:
+                month="Enero";
+                break;
+            case FEBRUARY:
+                month="Febrero";
+                break;
+            case MARCH:
+                month="Marzo";
+                break;
+            case APRIL:
+                month="Abril";
+                break;
+            case MAY:
+                month="Mayo";
+                break;
+            case JUNE:
+                month="Junio";
+                break;
+            case JULY:
+                month="Julio";
+                break;
+            case AUGUST:
+                month="Agosto";
+                break;
+            case SEPTEMBER:
+                month="Septiembre";
+                break;
+            case OCTOBER:
+                month="Octubre";
+                break;
+            case NOVEMBER:
+                month="Noviembre";
+                break;
+            case DECEMBER:
+                month="Diciembre";
+                break;
+        }
+        return month;
+    }
 }
-

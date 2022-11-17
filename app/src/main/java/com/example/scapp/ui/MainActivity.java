@@ -1,29 +1,30 @@
 package com.example.scapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import android.os.Bundle;
-import com.example.scapp.CalendarConfig.CalendarAdapter;
-import com.example.scapp.CalendarConfig.CalendarScroll;
+import com.example.scapp.ui.calendarUI.CalendarAdapter;
+import com.example.scapp.ui.calendarUI.CalendarScroll;
 import com.example.scapp.CalendarConfig.CalendarUtils;
 import com.example.scapp.SubjectsConfig.SubjectsAdapter;
 import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
+import com.example.scapp.viewmodel.CalendarViewModel;
 
-import java.time.LocalDate;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
+public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener, CalendarAdapter.pruebita{
 
     private ActivityMainBinding binding;
-    private CalendarAdapter calendarAdapter;
+    private CalendarViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        viewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
 
         //App configs
         recyclerCalendarConfig();
@@ -32,6 +33,24 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
     }
 
     private void recyclerCalendarConfig() {
+
+        //viewModel.generateInitialWeeks(LocalDate.now());
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(viewModel.getWeeks().getValue());
+        binding.calendarRecyclerView.setAdapter(calendarAdapter);
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
+        binding.calendarRecyclerView.setLayoutManager(layoutManager);
+
+        //Scroll
+        binding.calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK); //Se generan 13 semanas donde la 6ta es la semana actual
+        binding.calendarRecyclerView.addOnScrollListener(new CalendarScroll(this,this,viewModel,layoutManager, calendarAdapter));
+
+        //Scroll Animation
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(binding.calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2
+
+        /*
         //Initial Config
         CalendarUtils.setActualDate(LocalDate.now());
         List<LocalDate[]> weeks = CalendarUtils.generateInitialWeeks();
@@ -45,9 +64,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         // se generan 13 semanas donde la 6ta es la semana actual
         binding.calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK);
         binding.calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, binding.monthYearTxtView));
-        //Scroll Animation
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(binding.calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2
+         */
     }
 
     private void recyclerSubjectsConfig(){
@@ -69,5 +86,11 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
     @Override
     public void onItemClickListener(String dayText) {
         binding.prueba.setText(dayText);
+    }
+
+
+    @Override
+    public void mostrarMes(String month) {
+        binding.monthYearTxtView.setText(month);
     }
 }

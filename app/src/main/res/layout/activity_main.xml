@@ -8,6 +8,8 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
+
+
     <TextView
         android:id="@+id/monthYear_txtView"
         android:layout_width="match_parent"
@@ -86,5 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subjectRecyclerView"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

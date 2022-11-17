@@ -1,4 +1,4 @@
-package com.example.scapp.CalendarConfig;
+package com.example.scapp.ui.calendarUI;
 
 import android.view.View;
 import android.widget.TextView;

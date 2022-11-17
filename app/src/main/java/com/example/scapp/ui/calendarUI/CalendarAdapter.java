@@ -1,4 +1,4 @@
-package com.example.scapp.CalendarConfig;
+package com.example.scapp.ui.calendarUI;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scapp.CalendarConfig.CalendarDesing;
 import com.example.scapp.R;
 
 import java.time.LocalDate;
@@ -47,6 +48,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public int getItemCount() {
         return weeks.size();
+    }
+
+    public interface pruebita{
+        void mostrarMes(String month);
     }
 
 
