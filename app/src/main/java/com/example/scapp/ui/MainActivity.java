@@ -1,17 +1,21 @@
 package com.example.scapp.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
-import com.example.scapp.ui.calendarUI.CalendarScroll;
-import com.example.scapp.CalendarConfig.CalendarUtils;
 import com.example.scapp.SubjectsConfig.SubjectsAdapter;
 import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
+
+import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener, CalendarAdapter.pruebita{
 
@@ -25,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
-
         //App configs
         recyclerCalendarConfig();
         recyclerSubjectsConfig();
@@ -34,38 +37,41 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
 
     private void recyclerCalendarConfig() {
 
-        //viewModel.generateInitialWeeks(LocalDate.now());
-
         CalendarAdapter calendarAdapter = new CalendarAdapter(viewModel.getWeeks().getValue());
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
+        new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation
+        final int ACTUALWEEK = 6;
+        binding.calendarRecyclerView.scrollToPosition(ACTUALWEEK); //Se generan 13 semanas donde la 6ta es la semana actual
+        binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-        //Scroll
-        binding.calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK); //Se generan 13 semanas donde la 6ta es la semana actual
-        binding.calendarRecyclerView.addOnScrollListener(new CalendarScroll(this,this,viewModel,layoutManager, calendarAdapter));
-
-        //Scroll Animation
-        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(binding.calendarRecyclerView); //El RecyclerView obtiene propiedades de ViewPager2
-
-        /*
-        //Initial Config
-        CalendarUtils.setActualDate(LocalDate.now());
-        List<LocalDate[]> weeks = CalendarUtils.generateInitialWeeks();
-        //Adapter
-        CalendarAdapter calendarAdapter = new CalendarAdapter(weeks);
-        binding.calendarRecyclerView.setAdapter(calendarAdapter);
-        //Layout
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
-        binding.calendarRecyclerView.setLayoutManager(layoutManager);
-        //Scroll
-        // se generan 13 semanas donde la 6ta es la semana actual
-        binding.calendarRecyclerView.scrollToPosition(CalendarUtils.ACTUAL_WEEK);
-        binding.calendarRecyclerView.addOnScrollListener(new CalendarScroll(layoutManager, calendarAdapter, binding.monthYearTxtView));
-         */
+            private int position;
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
+                    int totalItems = layoutManager.getItemCount()-1;
+                    if(position >= totalItems-3){
+                        viewModel.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
+                    }else if(position<=3){
+                        viewModel.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
+                    }
+                }
+            }
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
+                viewModel.getWeeks().observe(MainActivity.this, weeks->{
+                    LocalDate scrollDate = weeks.get(position)[0];
+                    viewModel.setMonthAndYear(scrollDate);
+                    viewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear -> binding.monthYearTxtView.setText(monthAndYear));
+                });
+            }
+        });
     }
+
 
     private void recyclerSubjectsConfig(){
         //Adapter

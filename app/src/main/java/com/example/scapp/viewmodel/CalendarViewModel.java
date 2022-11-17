@@ -15,15 +15,16 @@ public class CalendarViewModel extends ViewModel{
 
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
-        weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
         monthAndYear = new MutableLiveData<>();
+
+        weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
     public LiveData<List<LocalDate[]>> getWeeks(){
         return weeks;
     }
 
-    public MutableLiveData<String> getMonthAndYear() {
+    public LiveData<String> getMonthAndYear() {
         return monthAndYear;
     }
 

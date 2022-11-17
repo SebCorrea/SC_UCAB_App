@@ -9,7 +9,6 @@
     tools:context=".ui.MainActivity">
 
 
-
     <TextView
         android:id="@+id/monthYear_txtView"
         android:layout_width="match_parent"
