@@ -9,23 +9,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsDialogFragmentBinding;
-import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
 public class SubjectsDialogFragment extends DialogFragment {
 
     private SubjectsDialogFragmentBinding binding;
     private final SubjectsAdapter subjectsAdapter;
-    private final SubjectsViewModel subjectsViewModel;
-
+    private SubjectsViewModel subjectsViewModel;
     private Dialog dialog;
 
-    public SubjectsDialogFragment(SubjectsAdapter subjectsAdapter, ViewModelStoreOwner lifecycleOwner) {
+    public SubjectsDialogFragment(SubjectsAdapter subjectsAdapter) {
         this.subjectsAdapter = subjectsAdapter;
-        subjectsViewModel = new ViewModelProvider(lifecycleOwner).get(SubjectsViewModel.class);
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        subjectsViewModel = new ViewModelProvider(requireActivity()).get(SubjectsViewModel.class);
+
     }
 
     @NonNull
@@ -45,9 +49,10 @@ public class SubjectsDialogFragment extends DialogFragment {
 
     public void addSubject(View v) {
 
-        if(!binding.subjectEditText.getText().toString().trim().equals("")){
+        String subject = binding.subjectEditText.getText().toString();
+        if(!subject.trim().equals("")){
             //subjectsNames.add(0,binding.subjectEditText.getText().toString());
-            subjectsViewModel.addNewSubject(binding.subjectEditText.getText().toString(), subjectsAdapter);
+            subjectsViewModel.addNewSubject(subject, subjectsAdapter);
             //subjectsAdapter.notifyItemInserted(0);
             dialog.dismiss();
         }

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void showSubjectAlertDialogConfig() {
-        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter(), this );
+        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
         subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
     }
 
