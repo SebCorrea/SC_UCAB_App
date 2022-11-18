@@ -6,12 +6,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
-import com.example.scapp.SubjectsConfig.SubjectsAdapter;
-import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
+import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
+import com.example.scapp.ui.subjectsUI.SubjectsDialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
@@ -44,8 +42,10 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
+
         new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation
         final int ACTUALWEEK = 6;
+
         binding.calendarRecyclerView.scrollToPosition(ACTUALWEEK); //Se generan 13 semanas donde la 6ta es la semana actual
         binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -77,13 +77,10 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
 
 
     private void recyclerSubjectsConfig(){
-        //Adapter
-        subjectsViewModel.getSubject().observe(this, subject ->{
 
-        });
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubject().getValue(),this);
+        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(),this);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
-        //Layout
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.subjectRecyclerView.setLayoutManager(layoutManager);
     }

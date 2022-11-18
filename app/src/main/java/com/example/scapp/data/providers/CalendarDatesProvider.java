@@ -1,4 +1,4 @@
-package com.example.scapp.data;
+package com.example.scapp.data.providers;
 
 
 import androidx.annotation.NonNull;

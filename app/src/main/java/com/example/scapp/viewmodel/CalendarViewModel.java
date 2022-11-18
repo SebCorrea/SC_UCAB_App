@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
-import com.example.scapp.data.CalendarDatesProvider;
+import com.example.scapp.data.providers.CalendarDatesProvider;
 import java.time.LocalDate;
 import java.util.List;
 
