@@ -28,14 +28,14 @@ public class SubjectsDialogFragment extends DialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        subjectsViewModel = new ViewModelProvider(requireActivity()).get(SubjectsViewModel.class);
-
     }
+
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
+        subjectsViewModel = new ViewModelProvider(requireActivity()).get(SubjectsViewModel.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.subjects_dialog_fragment, null);
@@ -46,6 +46,10 @@ public class SubjectsDialogFragment extends DialogFragment {
         return dialog;
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     public void addSubject(View v) {
 

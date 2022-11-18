@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.ui.subjectsUI.SubjectsDialogFragment;
@@ -87,6 +89,19 @@ public class MainActivity extends AppCompatActivity{
     private void showSubjectAlertDialogConfig() {
         SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
         subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        binding.prueba.setText("qlq putaaa");
+
     }
 
     public void onItemClickListener(String subject) {
