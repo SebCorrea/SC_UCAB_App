@@ -14,13 +14,15 @@ import com.example.scapp.SubjectsConfig.SubjectsAdapter;
 import com.example.scapp.SubjectsConfig.SubjectsDialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
+import com.example.scapp.viewmodel.SubjectsViewModel;
 
 import java.time.LocalDate;
 
 public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
 
     private ActivityMainBinding binding;
-    private CalendarViewModel viewModel;
+    private CalendarViewModel calendarViewModel;
+    private SubjectsViewModel subjectsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,8 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
         //App configs
         recyclerCalendarConfig();
         recyclerSubjectsConfig();
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
 
     private void recyclerCalendarConfig() {
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(viewModel.getWeeks().getValue());
+        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel.getWeeks().getValue());
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
@@ -53,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
                 if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
                     int totalItems = layoutManager.getItemCount()-1;
                     if(position >= totalItems-3){
-                        viewModel.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
+                        calendarViewModel.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
                     }else if(position<=3){
-                        viewModel.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
+                        calendarViewModel.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
                     }
                 }
             }
@@ -63,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
-                viewModel.getWeeks().observe(MainActivity.this, weeks->{
+                calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
                     LocalDate scrollDate = weeks.get(position)[0];
-                    viewModel.setMonthAndYear(scrollDate);
-                    viewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear -> binding.monthYearTxtView.setText(monthAndYear));
+                    calendarViewModel.setMonthAndYear(scrollDate);
+                    calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear -> binding.monthYearTxtView.setText(monthAndYear));
                 });
             }
         });
@@ -75,7 +78,10 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
 
     private void recyclerSubjectsConfig(){
         //Adapter
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(SubjectsDialogFragment.getSubjectsNames(), this);
+        subjectsViewModel.getSubject().observe(this, subject ->{
+
+        });
+        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubject().getValue(),this);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
         //Layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -85,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
     //Generamos el AlertDialog
     private void showSubjectAlertDialogConfig() {
         //Initial Config to generate and show AlertDialog
-        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter() );
+        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter(), this );
         subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
     }
 
