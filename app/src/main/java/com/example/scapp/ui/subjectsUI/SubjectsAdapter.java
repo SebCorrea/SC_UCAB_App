@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsBinding;
-
 import java.util.List;
+
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
@@ -57,7 +57,6 @@ class SubjectsViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         SubjectsBinding binding = SubjectsBinding.bind(itemView);
         subjects_btn = binding.subjectsBtn;
-
         subjects_btn.setOnClickListener(v -> onItemListener.onItemClickListener(subjects_btn.getText().toString()));
     }
 }

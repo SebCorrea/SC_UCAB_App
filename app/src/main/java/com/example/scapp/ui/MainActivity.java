@@ -16,7 +16,7 @@ import com.example.scapp.viewmodel.SubjectsViewModel;
 
 import java.time.LocalDate;
 
-public class MainActivity extends AppCompatActivity implements SubjectsAdapter.onItemListener{
+public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
     private CalendarViewModel calendarViewModel;
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
 
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
+
         //App configs
         recyclerCalendarConfig();
         recyclerSubjectsConfig();
@@ -75,26 +76,20 @@ public class MainActivity extends AppCompatActivity implements SubjectsAdapter.o
         });
     }
 
-
     private void recyclerSubjectsConfig(){
 
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(),this);
+        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(), this::onItemClickListener);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.subjectRecyclerView.setLayoutManager(layoutManager);
     }
 
-    //Generamos el AlertDialog
     private void showSubjectAlertDialogConfig() {
-        //Initial Config to generate and show AlertDialog
         SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter(), this );
         subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
     }
 
-    @Override
     public void onItemClickListener(String subject) {
         binding.prueba.setText(subject);
     }
-
 }
