@@ -91,19 +91,6 @@ public class MainActivity extends AppCompatActivity{
         subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        binding.prueba.setText("qlq putaaa");
-
-    }
-
     public void onItemClickListener(String subject) {
         binding.prueba.setText(subject);
     }
