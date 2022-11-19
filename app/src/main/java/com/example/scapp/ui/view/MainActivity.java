@@ -1,4 +1,4 @@
-package com.example.scapp.ui;
+package com.example.scapp.ui.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
