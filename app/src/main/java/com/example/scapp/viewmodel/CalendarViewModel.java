@@ -12,11 +12,16 @@ import java.util.List;
 public class CalendarViewModel extends ViewModel{
     private final MutableLiveData<List<LocalDate[]>> weeks;
     private final MutableLiveData<String> monthAndYear;
+    private final MutableLiveData<List<LocalDate[]>> weeks2;
+
 
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
         monthAndYear = new MutableLiveData<>();
+        weeks2 = new MutableLiveData<>();
+
         weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
+
     }
 
     public LiveData<List<LocalDate[]>> getWeeks(){
@@ -31,6 +36,13 @@ public class CalendarViewModel extends ViewModel{
         CalendarDatesProvider.generatePlusWeeks(calendarAdapter);
     }
 
+    public void generatePlusWeeks2 (){
+        weeks2.setValue(CalendarDatesProvider.generatePlusWeeks2());
+    }
+
+    public LiveData<List<LocalDate[]>> getWeeks2(){
+        return weeks2;
+    }
     public void generateMinusWeeks(CalendarAdapter calendarAdapter){
         CalendarDatesProvider.generateMinusWeeks(calendarAdapter);
     }

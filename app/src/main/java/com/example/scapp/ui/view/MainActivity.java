@@ -17,6 +17,7 @@ import com.example.scapp.viewmodel.SubjectsViewModel;
 
 import java.time.LocalDate;
 
+
 public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
@@ -58,7 +59,19 @@ public class MainActivity extends AppCompatActivity{
                 if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
                     int totalItems = layoutManager.getItemCount()-1;
                     if(position >= totalItems-3){
-                        calendarViewModel.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
+                        //calendarViewModel.generatePlusWeeks(calendarAdapter); //Se generan 3 semanas siguientes y se borra 3 anteriores
+
+                        calendarViewModel.generatePlusWeeks2();
+                        calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
+                            weeks.addAll(weeks.size(),calendarViewModel.getWeeks2().getValue());
+                            calendarAdapter.notifyItemRangeInserted(weeks.size()-3,3);
+                            //weeks.remove(0);
+                            //weeks.removeAll(weeks.subList(0,3));
+                            //calendarAdapter.notifyItemRemoved(0);
+
+                        });
+
+
                     }else if(position<=3){
                         calendarViewModel.generateMinusWeeks(calendarAdapter); //Se generan 3 semenas anteriores y se borran 3 siguientes
                     }

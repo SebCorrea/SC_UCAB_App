@@ -11,6 +11,8 @@ import java.util.List;
 public class CalendarDatesProvider {
 
     private static final List<LocalDate[]> weeks = new ArrayList<>();
+    private static final List<LocalDate[]> weeks2 = new ArrayList<>();
+
 
     public static List<LocalDate[]> generateInitialWeeks() {
         LocalDate[] week;
@@ -59,6 +61,30 @@ public class CalendarDatesProvider {
             weeks.remove(0); //Se eliminan 3 semanas anteriores a la semana actual
             calendarAdapter.notifyItemRemoved(0);
         }
+    }
+
+    public static List<LocalDate[]> generatePlusWeeks2(){
+        List<LocalDate[]> weeks2 = new ArrayList<>();
+        LocalDate[] week = weeks.get(weeks.size()-1);
+        LocalDate endDate = week[week.length-1].plusDays(1);
+        LocalDate newEndDate = endDate.plusWeeks(3);
+        while (endDate.isBefore(newEndDate)){ //Se añadirán 3 semanas superiores a la semana actual
+            week = new LocalDate[7];
+            for(int i = 0; i<week.length; i++){
+                week[i] = endDate;
+                endDate = endDate.plusDays(1);
+            }
+
+            weeks2.add(week); //Se añaden las 3 semanas futuras a la semana actual
+
+            //weeks2.add(week); //Se añaden las 3 semanas futuras a la semana actual
+            //weeks2.set(0,week);
+            //calendarAdapter.notifyItemInserted(weeks.size()-1);
+            //weeks2.remove(0); //Se eliminan 3 semanas anteriores a la semana actual
+            //calendarAdapter.notifyItemRemoved(0);
+        }
+
+        return weeks2;
     }
     //Metodo para generar 3 semanas pasadas
     public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
