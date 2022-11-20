@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
                         calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
                             weeks.addAll(weeks.size(),calendarViewModel.getNewPlusWeeks());
                             calendarAdapter.notifyItemRangeInserted(weeks.size(),3);
-                            weeks.removeAll(weeks.subList(0,3));
+                            weeks.subList(0,3).clear();
                             calendarAdapter.notifyItemRangeRemoved(0,3);
                         });
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity{
                         calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
                             weeks.addAll(0,calendarViewModel.getNewMinusWeeks());
                             calendarAdapter.notifyItemRangeInserted(0,3);
-                            weeks.removeAll(weeks.subList(weeks.size()-3,weeks.size()));
+                            weeks.subList(weeks.size()-3, weeks.size()).clear();
                             calendarAdapter.notifyItemRangeRemoved(weeks.size()-3,3);
                         });
                     }
