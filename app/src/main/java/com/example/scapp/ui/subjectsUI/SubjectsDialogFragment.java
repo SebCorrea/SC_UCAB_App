@@ -56,8 +56,15 @@ public class SubjectsDialogFragment extends DialogFragment {
         String subject = binding.subjectEditText.getText().toString();
         if(!subject.trim().equals("")){
             //subjectsNames.add(0,binding.subjectEditText.getText().toString());
+            /*
+            subjectsViewModel.getSubjects().observe(requireActivity(), subjects ->{
+                subjects.add(subject);
+                subjectsAdapter.notifyItemInserted(0);
+
+            });
+
+             */
             subjectsViewModel.addNewSubject(subject, subjectsAdapter);
-            //subjectsAdapter.notifyItemInserted(0);
             dialog.dismiss();
         }
     }

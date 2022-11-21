@@ -19,21 +19,19 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity{
 
-    private ActivityMainBinding binding;
-
     @Inject
     CalendarViewModel calendarViewModel;
     @Inject
     SubjectsViewModel subjectsViewModel;
+
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        //calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
-        //subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
 
         //App configs
         recyclerCalendarConfig();
@@ -53,7 +51,8 @@ public class MainActivity extends AppCompatActivity{
         binding.calendarRecyclerView.scrollToPosition(ACTUALWEEK); //Se generan 13 semanas donde la 6ta es la semana actual
         binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
-            private int position;
+            int position;
+
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -95,7 +94,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void recyclerSubjectsConfig(){
-
         SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(), this::onItemClickListener);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);

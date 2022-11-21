@@ -14,12 +14,16 @@ import com.example.scapp.databinding.CalendarCellBinding;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.inject.Inject;
+
+
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     private final List<LocalDate[]> weeks;
 
 
+    @Inject
     public CalendarAdapter(List<LocalDate[]> days) {
         this.weeks = days;
     }

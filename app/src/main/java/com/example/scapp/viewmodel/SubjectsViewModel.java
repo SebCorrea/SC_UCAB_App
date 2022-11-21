@@ -5,15 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.data.providers.SubjectsProvider;
-
 import java.util.List;
-
 import javax.inject.Inject;
-
-import dagger.Module;
-import dagger.hilt.InstallIn;
-import dagger.hilt.components.SingletonComponent;
-
 
 public class SubjectsViewModel extends ViewModel {
 
