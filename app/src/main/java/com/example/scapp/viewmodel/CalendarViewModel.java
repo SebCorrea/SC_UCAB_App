@@ -3,16 +3,18 @@ package com.example.scapp.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.scapp.data.providers.CalendarDatesProvider;
 import java.time.LocalDate;
 import java.util.List;
+import javax.inject.Inject;
+
 
 public class CalendarViewModel extends ViewModel{
     private final MutableLiveData<List<LocalDate[]>> weeks, newPlusWeeks, newMinusWeeks;
     private final MutableLiveData<String> monthAndYear;
 
 
+    @Inject
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
         monthAndYear = new MutableLiveData<>();

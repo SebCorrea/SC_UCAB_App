@@ -2,7 +2,6 @@ package com.example.scapp.ui.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,13 +13,18 @@ import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 import java.time.LocalDate;
+import javax.inject.Inject;
+import dagger.hilt.android.AndroidEntryPoint;
 
-
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity{
 
     private ActivityMainBinding binding;
-    private CalendarViewModel calendarViewModel;
-    private SubjectsViewModel subjectsViewModel;
+
+    @Inject
+    CalendarViewModel calendarViewModel;
+    @Inject
+    SubjectsViewModel subjectsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +32,8 @@ public class MainActivity extends AppCompatActivity{
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
-        subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
-
-
+        //calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+        //subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
 
         //App configs
         recyclerCalendarConfig();
@@ -45,7 +47,6 @@ public class MainActivity extends AppCompatActivity{
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
-
         new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation
         final int ACTUALWEEK = 6;
 

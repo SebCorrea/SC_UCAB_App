@@ -8,10 +8,18 @@ import com.example.scapp.data.providers.SubjectsProvider;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.Module;
+import dagger.hilt.InstallIn;
+import dagger.hilt.components.SingletonComponent;
+
+
 public class SubjectsViewModel extends ViewModel {
 
     private final MutableLiveData<List<String>> subjects;
 
+    @Inject
     public SubjectsViewModel() {
         subjects = new MutableLiveData<>();
         subjects.setValue(SubjectsProvider.getSubjects());
