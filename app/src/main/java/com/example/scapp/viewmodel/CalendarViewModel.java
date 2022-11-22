@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.scapp.data.providers.CalendarDatesProvider;
 import java.time.LocalDate;
 import java.util.List;
-import javax.inject.Inject;
 
 
 public class CalendarViewModel extends ViewModel{
@@ -14,7 +13,6 @@ public class CalendarViewModel extends ViewModel{
     private final MutableLiveData<String> monthAndYear;
 
 
-    @Inject
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
         monthAndYear = new MutableLiveData<>();

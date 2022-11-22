@@ -6,13 +6,11 @@ import androidx.lifecycle.ViewModel;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.data.providers.SubjectsProvider;
 import java.util.List;
-import javax.inject.Inject;
 
 public class SubjectsViewModel extends ViewModel {
 
     private final MutableLiveData<List<String>> subjects;
 
-    @Inject
     public SubjectsViewModel() {
         subjects = new MutableLiveData<>();
         subjects.setValue(SubjectsProvider.getSubjects());

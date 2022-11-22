@@ -13,11 +13,13 @@ import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsDialogFragmentBinding;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
+
 public class SubjectsDialogFragment extends DialogFragment {
 
     private SubjectsDialogFragmentBinding binding;
     private final SubjectsAdapter subjectsAdapter;
-    private SubjectsViewModel subjectsViewModel;
+
+    SubjectsViewModel subjectsViewModel;
     private Dialog dialog;
 
     public SubjectsDialogFragment(SubjectsAdapter subjectsAdapter) {

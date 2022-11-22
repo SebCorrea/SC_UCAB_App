@@ -2,6 +2,7 @@ package com.example.scapp.ui.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,15 +14,10 @@ import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 import java.time.LocalDate;
-import javax.inject.Inject;
-import dagger.hilt.android.AndroidEntryPoint;
 
-@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity{
 
-    @Inject
     CalendarViewModel calendarViewModel;
-    @Inject
     SubjectsViewModel subjectsViewModel;
 
     private ActivityMainBinding binding;
@@ -32,6 +28,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
+        calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
 
         //App configs
         recyclerCalendarConfig();
