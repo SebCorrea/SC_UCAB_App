@@ -9,6 +9,8 @@ import java.util.List;
 public class CalendarDatesProvider {
 
     private static final List<LocalDate[]> weeks = new ArrayList<>();
+    public static final String[] months = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre" , "Noviembre", "Diciembre"};
+
 
     public static List<LocalDate[]> generateInitialWeeks() {
         LocalDate[] week;

@@ -87,11 +87,18 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
 
+                calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
+                    calendarViewModel.setMonthAndYear(weeks.get(position)[0]);
+                });
+
+
+
+                /*
 
                 calendarViewModel.getWeeks().observe(MainActivity.this, new Observer<List<LocalDate[]>>() {
-
                     @Override
                     public void onChanged(List<LocalDate[]> weeks) {
                         LocalDate scrollDate = weeks.get(position)[0];
@@ -99,7 +106,6 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
 
-                /*
                 calendarViewModel.getMonthAndYear().observe(MainActivity.this, new Observer<String>() {
                     @Override
                     public void onChanged(String s) {
