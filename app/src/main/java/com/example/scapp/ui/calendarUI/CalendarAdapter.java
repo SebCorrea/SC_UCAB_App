@@ -42,9 +42,9 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         for(int i = 0; i<week.length; i++){
             LocalDate date = week[i];
             TextView weekDateTxtView = holder.weeksDatesTxtViews[i];
-            TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
+            //TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
             weekDateTxtView.setText(String.valueOf(date.getDayOfMonth())); //Colocamos los dias del mes en el calendario
-            CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
+            //CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
         }
     }
 

@@ -2,12 +2,14 @@ package com.example.scapp.ui.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
+import com.example.scapp.data.providers.CalendarDatesProvider;
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.ui.subjectsUI.SubjectsDialogFragment;
@@ -15,12 +17,12 @@ import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 import java.time.LocalDate;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 
-    CalendarViewModel calendarViewModel;
-    SubjectsViewModel subjectsViewModel;
-
+    private CalendarViewModel calendarViewModel;
+    private SubjectsViewModel subjectsViewModel;
     private ActivityMainBinding binding;
 
 
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity{
         final int ACTUALWEEK = 6;
 
         binding.calendarRecyclerView.scrollToPosition(ACTUALWEEK); //Se generan 13 semanas donde la 6ta es la semana actual
+
+
         binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             int position;
@@ -84,13 +88,38 @@ public class MainActivity extends AppCompatActivity{
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
+
+
+                calendarViewModel.getWeeks().observe(MainActivity.this, new Observer<List<LocalDate[]>>() {
+
+                    @Override
+                    public void onChanged(List<LocalDate[]> weeks) {
+                        LocalDate scrollDate = weeks.get(position)[0];
+                        calendarViewModel.setMonthAndYear(scrollDate);
+                    }
+                });
+
+                /*
+                calendarViewModel.getMonthAndYear().observe(MainActivity.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                        binding.monthYearTxtView.setText(s);
+
+                    }
+                });
+                 */
+
+                /*
                 calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
                     LocalDate scrollDate = weeks.get(position)[0];
                     calendarViewModel.setMonthAndYear(scrollDate);
                     calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear -> binding.monthYearTxtView.setText(monthAndYear));
                 });
+
+                 */
             }
         });
+
     }
 
     private void recyclerSubjectsConfig(){

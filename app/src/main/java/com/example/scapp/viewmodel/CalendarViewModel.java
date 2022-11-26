@@ -9,9 +9,9 @@ import java.util.List;
 
 
 public class CalendarViewModel extends ViewModel{
+
     private final MutableLiveData<List<LocalDate[]>> weeks, newPlusWeeks, newMinusWeeks;
     private final MutableLiveData<String> monthAndYear;
-
 
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
