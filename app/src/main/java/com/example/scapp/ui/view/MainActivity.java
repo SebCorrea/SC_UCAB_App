@@ -90,14 +90,11 @@ public class MainActivity extends AppCompatActivity{
 
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
 
-                calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
-                    calendarViewModel.setMonthAndYear(weeks.get(position)[0]);
-                });
-
+                calendarViewModel.getWeeks().observe(MainActivity.this, weeks-> calendarViewModel.setMonthAndYear(weeks.get(position)[0]));
+                //calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear-> binding.monthYearTxtView.setText(monthAndYear));
 
 
                 /*
-
                 calendarViewModel.getWeeks().observe(MainActivity.this, new Observer<List<LocalDate[]>>() {
                     @Override
                     public void onChanged(List<LocalDate[]> weeks) {
@@ -124,6 +121,7 @@ public class MainActivity extends AppCompatActivity{
 
                  */
             }
+
         });
 
     }

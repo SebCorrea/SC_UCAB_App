@@ -18,7 +18,6 @@ public class CalendarViewModel extends ViewModel{
         monthAndYear = new MutableLiveData<>();
         newPlusWeeks = new MutableLiveData<>();
         newMinusWeeks = new MutableLiveData<>();
-
         weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
@@ -43,6 +42,7 @@ public class CalendarViewModel extends ViewModel{
     public List<LocalDate[]> getNewMinusWeeks(){
         return newMinusWeeks.getValue();
     }
+
 
     public LiveData<String> getMonthAndYear() {
         return monthAndYear;
