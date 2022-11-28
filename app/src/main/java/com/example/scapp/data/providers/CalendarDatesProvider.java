@@ -1,6 +1,12 @@
 package com.example.scapp.data.providers;
 
+import android.widget.LinearLayout;
+
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.scapp.ui.calendarUI.CalendarAdapter;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,8 +15,6 @@ import java.util.List;
 public class CalendarDatesProvider {
 
     private static final List<LocalDate[]> weeks = new ArrayList<>();
-    public static final String[] months = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-
 
     public static List<LocalDate[]> generateInitialWeeks() {
         LocalDate[] week;
@@ -43,9 +47,7 @@ public class CalendarDatesProvider {
         return null;
     }
 
-    @NonNull
-    public static List<LocalDate[]> generatePlusWeeks(){
-        List<LocalDate[]> newPlusWeeks = new ArrayList<>();
+    public static void generatePlusWeeks(CalendarAdapter calendarAdapter){
         LocalDate[] week = weeks.get(weeks.size()-1);
         LocalDate endDate = week[week.length-1].plusDays(1);
         LocalDate newEndDate = endDate.plusWeeks(3);
@@ -55,15 +57,14 @@ public class CalendarDatesProvider {
                 week[i] = endDate;
                 endDate = endDate.plusDays(1);
             }
-            newPlusWeeks.add(week); //Se añaden las 3 semanas futuras a la semana actual
+            weeks.add(week); //Se añaden las 3 semanas futuras a la semana actual
+            calendarAdapter.notifyItemInserted(weeks.size()-1);
         }
-        return newPlusWeeks;
+        weeks.subList(0,3).clear();
+        calendarAdapter.notifyItemRangeRemoved(0,3);
     }
 
-
-    @NonNull
-    public static List<LocalDate[]> generateMinusWeeks(){
-        List<LocalDate[]> newMinusWeeks = new ArrayList<>();
+    public static void generateMinusWeeks(CalendarAdapter calendarAdapter){
         LocalDate[] week = weeks.get(0);
         LocalDate initialDate = week[0].minusDays(1);
         LocalDate newInitialDate = initialDate.minusWeeks(3);
@@ -73,10 +74,11 @@ public class CalendarDatesProvider {
                 week[i] = initialDate;
                 initialDate = initialDate.minusDays(1);
             }
-            newMinusWeeks.add(0,week);
-
+            weeks.add(0,week);
+            calendarAdapter.notifyItemInserted(0);
         }
-        return newMinusWeeks;
+        weeks.subList(weeks.size()-3, weeks.size()).clear();
+        calendarAdapter.notifyItemRangeRemoved(weeks.size()-3,3);
     }
 
     public static String month(@NonNull LocalDate localDate){

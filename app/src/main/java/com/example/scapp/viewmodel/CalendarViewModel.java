@@ -3,46 +3,40 @@ package com.example.scapp.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.scapp.data.providers.CalendarDatesProvider;
+import com.example.scapp.ui.calendarUI.CalendarAdapter;
+
 import java.time.LocalDate;
 import java.util.List;
 
 
 public class CalendarViewModel extends ViewModel{
 
-    private final MutableLiveData<List<LocalDate[]>> weeks, newPlusWeeks, newMinusWeeks;
+    private final MutableLiveData<List<LocalDate[]>> weeks;
     private final MutableLiveData<String> monthAndYear;
 
     public CalendarViewModel() {
         weeks = new MutableLiveData<>();
         monthAndYear = new MutableLiveData<>();
-        newPlusWeeks = new MutableLiveData<>();
-        newMinusWeeks = new MutableLiveData<>();
-        weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
     public LiveData<List<LocalDate[]>> getWeeks(){
         return weeks;
     }
 
-
-    public void generatePlusWeeks(){
-        newPlusWeeks.setValue(CalendarDatesProvider.generatePlusWeeks());
+    public void setWeeks(){
+        weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
-    public List<LocalDate[]> getNewPlusWeeks(){
-        return newPlusWeeks.getValue();
+    public void generatePlusWeeks(CalendarAdapter calendarAdapter){
+        CalendarDatesProvider.generatePlusWeeks(calendarAdapter);
     }
 
-
-    public void generateMinusWeeks(){
-        newMinusWeeks.setValue(CalendarDatesProvider.generateMinusWeeks());
+    public void generateMinusWeeks(CalendarAdapter calendarAdapter){
+        CalendarDatesProvider.generateMinusWeeks(calendarAdapter);
     }
-
-    public List<LocalDate[]> getNewMinusWeeks(){
-        return newMinusWeeks.getValue();
-    }
-
 
     public LiveData<String> getMonthAndYear() {
         return monthAndYear;
