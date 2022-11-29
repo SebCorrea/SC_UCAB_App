@@ -15,6 +15,8 @@ import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
+import java.time.LocalDate;
+
 public class MainActivity extends AppCompatActivity{
 
     private CalendarViewModel calendarViewModel;
@@ -32,20 +34,24 @@ public class MainActivity extends AppCompatActivity{
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
 
         //App configs
-        calendarViewModel.setWeeks();
         recyclerCalendarConfig();
         recyclerSubjectsConfig();
         binding.addSubjectsBtn.setOnClickListener(view -> showSubjectAlertDialogConfig());
     }
 
     private void recyclerCalendarConfig() {
-        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel.getWeeks().getValue());
+
+        calendarViewModel.generateInitialWeeks(); //Genera las primeras semanas que se muestran en el RecyclerView
+        new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation ViewPager
+
+        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel.getInitialWeeks());
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
-        new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation
-        final int ACTUALWEEK = 6;
-        binding.calendarRecyclerView.scrollToPosition(ACTUALWEEK); //Se generan 13 semanas donde la 6ta es la semana actual
+
+        binding.calendarRecyclerView.scrollToPosition(6); //Se generan 13 semanas donde la 6ta es la semana actual
+        calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear-> binding.monthYearTxtView.setText(monthAndYear));
 
         binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int position;
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity{
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if(newState == RecyclerView.SCROLL_STATE_DRAGGING){ //Mientras se scrollea con el dedo (1)
+
                     int totalItems = layoutManager.getItemCount()-1;
                     if(position >= totalItems-3){
                         calendarViewModel.generatePlusWeeks(calendarAdapter);
@@ -67,37 +74,8 @@ public class MainActivity extends AppCompatActivity{
                 super.onScrolled(recyclerView, dx, dy);
 
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
-
-                calendarViewModel.getWeeks().observe(MainActivity.this, weeks-> calendarViewModel.setMonthAndYear(weeks.get(position)[0]));
-                //calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear-> binding.monthYearTxtView.setText(monthAndYear));
-
-
-                /*
-                calendarViewModel.getWeeks().observe(MainActivity.this, new Observer<List<LocalDate[]>>() {
-                    @Override
-                    public void onChanged(List<LocalDate[]> weeks) {
-                        LocalDate scrollDate = weeks.get(position)[0];
-                        calendarViewModel.setMonthAndYear(scrollDate);
-                    }
-                });
-
-                calendarViewModel.getMonthAndYear().observe(MainActivity.this, new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                        binding.monthYearTxtView.setText(s);
-
-                    }
-                });
-                 */
-
-                /*
-                calendarViewModel.getWeeks().observe(MainActivity.this, weeks->{
-                    LocalDate scrollDate = weeks.get(position)[0];
-                    calendarViewModel.setMonthAndYear(scrollDate);
-                    calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear -> binding.monthYearTxtView.setText(monthAndYear));
-                });
-
-                 */
+                LocalDate firstDayOfWeek = calendarViewModel.getInitialWeeks().get(position)[0];
+                calendarViewModel.setMonthAndYear(firstDayOfWeek);
             }
         });
     }

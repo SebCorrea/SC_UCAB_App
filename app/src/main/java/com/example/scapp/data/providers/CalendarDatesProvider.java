@@ -1,12 +1,7 @@
 package com.example.scapp.data.providers;
 
-import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;

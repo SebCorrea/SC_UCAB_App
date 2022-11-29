@@ -3,7 +3,6 @@ package com.example.scapp.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.scapp.data.providers.CalendarDatesProvider;
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
@@ -22,11 +21,11 @@ public class CalendarViewModel extends ViewModel{
         monthAndYear = new MutableLiveData<>();
     }
 
-    public LiveData<List<LocalDate[]>> getWeeks(){
-        return weeks;
+    public List<LocalDate[]> getInitialWeeks(){
+        return weeks.getValue();
     }
 
-    public void setWeeks(){
+    public void generateInitialWeeks(){
         weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
     }
 
