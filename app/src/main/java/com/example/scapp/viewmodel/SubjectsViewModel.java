@@ -13,6 +13,9 @@ public class SubjectsViewModel extends ViewModel {
 
     public SubjectsViewModel() {
         subjects = new MutableLiveData<>();
+    }
+
+    public void set_subjects(){
         subjects.setValue(SubjectsProvider.getSubjects());
     }
 

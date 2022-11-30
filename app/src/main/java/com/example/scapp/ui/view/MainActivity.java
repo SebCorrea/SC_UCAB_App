@@ -81,8 +81,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void recyclerSubjectsConfig(){
+
+        subjectsViewModel.set_subjects();
+
         SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(), this::onItemClickListener);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.subjectRecyclerView.setLayoutManager(layoutManager);
     }
