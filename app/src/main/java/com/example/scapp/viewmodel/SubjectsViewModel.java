@@ -22,9 +22,8 @@ public class SubjectsViewModel extends ViewModel {
     public void addNewSubject(String subject, SubjectsAdapter subjectsAdapter){
         SubjectsProvider.addNewSubject(subject, subjectsAdapter);
     }
-    
+
     public LiveData<List<String>> getSubjects(){
         return subjects;
     }
-
 }
