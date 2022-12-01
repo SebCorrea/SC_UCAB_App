@@ -38,7 +38,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        calendarViewModel.getInitialWeeks2().observe(lifecycleOwner, initialWeeks->{
+        calendarViewModel.getInitialWeeks().observe(lifecycleOwner, initialWeeks->{
             LocalDate[] week = initialWeeks.get(position);
             for(int i = 0; i<week.length; i++){
                 LocalDate date = week[i];
@@ -52,7 +52,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
     @Override
     public int getItemCount() {
-        return calendarViewModel.getInitialWeeks2().getValue().size();
+        return calendarViewModel.getInitialWeeks().getValue().size();
     }
 
     //Metodo para establecer el Background y los colorpalette del calendario

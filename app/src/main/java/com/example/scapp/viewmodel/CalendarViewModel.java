@@ -21,7 +21,7 @@ public class CalendarViewModel extends ViewModel{
         monthAndYear = new MutableLiveData<>();
     }
 
-    public LiveData<List<LocalDate[]>> getInitialWeeks2(){
+    public LiveData<List<LocalDate[]>> getInitialWeeks(){
         return weeks;
     }
 
