@@ -76,9 +76,12 @@ public class CalendarDatesProvider {
         calendarAdapter.notifyItemRangeRemoved(weeks.size()-3,3);
     }
 
-    public static String month(@NonNull LocalDate localDate){
+    @NonNull
+    public static String get_MonthAndYear(int position){
+        
+        LocalDate firstDayOfWeek = weeks.get(position)[0];
         String month="";
-        switch (localDate.getMonth()){
+        switch (firstDayOfWeek.getMonth()){
             case JANUARY:
                 month="Enero";
                 break;
@@ -116,6 +119,7 @@ public class CalendarDatesProvider {
                 month="Diciembre";
                 break;
         }
-        return month;
+        return month + ", " +firstDayOfWeek.getYear();
     }
+
 }

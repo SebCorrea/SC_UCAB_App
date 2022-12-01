@@ -15,8 +15,6 @@ import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
-import java.time.LocalDate;
-
 public class MainActivity extends AppCompatActivity{
 
     private CalendarViewModel calendarViewModel;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity{
         calendarViewModel.generateInitialWeeks(); //Genera las primeras semanas que se muestran en el RecyclerView
         new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation ViewPager
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel.getInitialWeeks());
+        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel, this);
         binding.calendarRecyclerView.setAdapter(calendarAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -72,10 +70,8 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 position = layoutManager.findFirstVisibleItemPosition(); //Obtenemos la posición del adaptador
-                LocalDate firstDayOfWeek = calendarViewModel.getInitialWeeks().get(position)[0];
-                calendarViewModel.setMonthAndYear(firstDayOfWeek);
+                calendarViewModel.setMonthAndYear(position);
             }
         });
     }
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity{
 
         subjectsViewModel.set_subjects();
 
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects().getValue(), this::onItemClickListener);
+        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel.getSubjects(), this::onItemClickListener);
         binding.subjectRecyclerView.setAdapter(subjectsAdapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);

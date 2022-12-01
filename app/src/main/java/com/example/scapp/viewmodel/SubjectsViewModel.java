@@ -1,6 +1,5 @@
 package com.example.scapp.viewmodel;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
@@ -23,7 +22,7 @@ public class SubjectsViewModel extends ViewModel {
         SubjectsProvider.addNewSubject(subject, subjectsAdapter);
     }
 
-    public LiveData<List<String>> getSubjects(){
-        return subjects;
+    public List<String> getSubjects(){
+        return subjects.getValue();
     }
 }
