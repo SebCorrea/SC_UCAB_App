@@ -11,8 +11,6 @@ import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsBinding;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
@@ -41,18 +39,8 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
         subjectsViewModel.getSubjects().observe(lifecycleOwner, subjectsNames->{
             String subjectName = subjectsNames.get(position);
-            if(subjectName!= null){
+            holder.subjects_btn.setText(subjectName);
 
-                String[] words = subjectName.split(" ");
-
-                for (String word : words) {
-
-                }
-
-                Arrays.sort(words);
-
-                holder.subjects_btn.setText(String.valueOf(words[0].charAt(0)) + String.valueOf(words[1].charAt(0)) );
-            }
         });
     }
 
