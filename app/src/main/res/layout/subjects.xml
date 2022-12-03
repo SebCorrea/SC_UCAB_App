@@ -8,11 +8,11 @@
     <Button
         android:id="@+id/subjects_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:insetTop="0dp"
         android:insetBottom="0dp"
-        android:textSize="13dp"
+        android:textSize="10sp"
         android:textAllCaps="false"
-        tools:text="C" />
+        tools:text="Historia de Venezuela"/>
 </FrameLayout>

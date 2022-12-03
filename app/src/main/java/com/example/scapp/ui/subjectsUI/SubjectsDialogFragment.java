@@ -13,10 +13,6 @@ import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsDialogFragmentBinding;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 
 public class SubjectsDialogFragment extends DialogFragment {
 
@@ -59,20 +55,13 @@ public class SubjectsDialogFragment extends DialogFragment {
 
     public void addSubject(View v) {
 
-        String subject = binding.subjectEditText.getText().toString();
-        String[] words = subject.split(" ");
-        List<String> helpArray = new ArrayList<>();
-
-        for(String word: words){
-            if(word.length() >= 5){
-                helpArray.add(word);
-            }
+        String subjectName = binding.subjectEditText.getText().toString();
+        if(subjectName.trim().isEmpty()){
+            binding.subjectTextInputLayout.setError("Campo vacío");
+            return;
         }
-
-        if(!subject.trim().equals("") && !helpArray.isEmpty()){
-            subjectsViewModel.addNewSubject(String.join(" ", helpArray), subjectsAdapter);
-            dialog.dismiss();
-        }
+        subjectsViewModel.addNewSubject(subjectName, subjectsAdapter);
+        dialog.dismiss();
     }
 
 

@@ -11,6 +11,9 @@ import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsBinding;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
@@ -36,12 +39,8 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SubjectsViewHolder holder, int position) {
-
-        subjectsViewModel.getSubjects().observe(lifecycleOwner, subjectsNames->{
-            String subjectName = subjectsNames.get(position);
-            holder.subjects_btn.setText(subjectName);
-
-        });
+        subjectsViewModel.getSubjects().observe(lifecycleOwner, subjectsNames->
+                holder.subjects_btn.setText(subjectsNames.get(position)));
     }
 
     @Override

@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ingresa una por una las materias que cursas actualmente."
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="5dp"
         android:textSize="14sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:hint="Ingresar Materia"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="25"
         android:layout_marginVertical="5dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/subject_EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="30"
+            android:maxLength="25"
             android:textSize="14sp"
             android:inputType="textCapWords"/>
 
@@ -48,8 +48,6 @@
         android:text="Agregar"
         android:textAllCaps="false"
         android:insetTop="0dp"
-        android:insetBottom="0dp"/>
-
-
-
+        android:insetBottom="0dp"
+        android:layout_marginTop="15dp"/>
 </LinearLayout>
