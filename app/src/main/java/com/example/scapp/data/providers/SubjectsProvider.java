@@ -28,7 +28,8 @@ public class SubjectsProvider {
             return Integer.compare(length1, length2);
         });
 
-        //Quiero que solo se muestren las 2 palabras mas largas por lo que removemos el resto de palabras del List
+        //Sin alterar el orden en el que entraron los datos quiero que solo se muestren
+        //las 2 palabras mas largas por lo que removemos el resto de palabras del List
         wordsList.removeIf(n-> !((n.contains(helpList.get(helpList.size()-1))) || (n.contains(helpList.get(helpList.size()-2)))));
         subjects.add(0,String.join(" ", wordsList));
         subjectsAdapter.notifyItemInserted(0);
