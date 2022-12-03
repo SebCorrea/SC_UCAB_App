@@ -14,28 +14,25 @@ public class SubjectsProvider {
         return subjects;
     }
 
-    public static void addNewSubject(String subjectName, @NonNull SubjectsAdapter subjectsAdapter){
-
-
+    public static void addNewSubject(@NonNull String subjectName, @NonNull SubjectsAdapter subjectsAdapter){
 
         String[] wordsArray = subjectName.split(" ");
-
         List<String> wordsList = new ArrayList<>();
-
         Collections.addAll(wordsList, wordsArray);
 
-        final List<String> helpList = new ArrayList<>(wordsList);
+        List<String> helpList = new ArrayList<>(wordsList);
 
-        helpList.sort((o1, o2) -> {
-            int larg1=o1.length();
-            int larg2 = o2.length();
-            return Integer.compare(larg1, larg2);
+        helpList.sort((o1, o2) -> { //Ordenamos la lista de menor a mayor en relación al número de caracteres
+            int length1 = o1.length();
+            int length2 = o2.length();
+            return Integer.compare(length1, length2);
         });
 
+        //Quiero que solo se muestren las 2 palabras mas largas por lo que removemos el resto de palabras del List
         wordsList.removeIf(n-> !((n.contains(helpList.get(helpList.size()-1))) || (n.contains(helpList.get(helpList.size()-2)))));
-
         subjects.add(0,String.join(" ", wordsList));
         subjectsAdapter.notifyItemInserted(0);
+
     }
 
 }
