@@ -13,25 +13,21 @@ import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsDialogFragmentBinding;
 import com.example.scapp.viewmodel.SubjectsViewModel;
 
-
 public class SubjectsDialogFragment extends DialogFragment {
 
     private SubjectsDialogFragmentBinding binding;
-    private final SubjectsAdapter subjectsAdapter;
-
-    SubjectsViewModel subjectsViewModel;
     private Dialog dialog;
+    private final SubjectsAdapter subjectsAdapter;
+    private SubjectsViewModel subjectsViewModel;
 
     public SubjectsDialogFragment(SubjectsAdapter subjectsAdapter) {
         this.subjectsAdapter = subjectsAdapter;
     }
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
 
     @NonNull
     @Override
@@ -63,6 +59,4 @@ public class SubjectsDialogFragment extends DialogFragment {
         subjectsViewModel.addNewSubject(subjectName, subjectsAdapter);
         dialog.dismiss();
     }
-
-
 }
