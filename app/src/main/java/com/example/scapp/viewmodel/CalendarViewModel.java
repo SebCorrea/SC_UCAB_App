@@ -26,7 +26,8 @@ public class CalendarViewModel extends ViewModel{
     }
 
     public void generateInitialWeeks(){
-        weeks.setValue(CalendarDatesProvider.generateInitialWeeks());
+        CalendarDatesProvider.generateInitialWeeks();
+        weeks.postValue(CalendarDatesProvider.get_Weeks());
     }
 
     public void generatePlusWeeks(CalendarAdapter calendarAdapter){

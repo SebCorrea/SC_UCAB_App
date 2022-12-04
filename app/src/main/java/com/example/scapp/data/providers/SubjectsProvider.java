@@ -14,6 +14,7 @@ public class SubjectsProvider {
         return subjects;
     }
 
+
     public static void addNewSubject(@NonNull String subjectName, @NonNull SubjectsAdapter subjectsAdapter){
 
         String[] wordsArray = subjectName.split(" ");
@@ -31,9 +32,9 @@ public class SubjectsProvider {
         //Sin alterar el orden en el que entraron los datos quiero que solo se muestren
         //las 2 palabras mas largas por lo que removemos el resto de palabras del List
         wordsList.removeIf(n-> !((n.contains(helpList.get(helpList.size()-1))) || (n.contains(helpList.get(helpList.size()-2)))));
+
         subjects.add(0,String.join(" ", wordsList));
         subjectsAdapter.notifyItemInserted(0);
-
     }
 
 }

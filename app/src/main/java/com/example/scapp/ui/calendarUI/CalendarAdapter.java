@@ -8,21 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.scapp.R;
 import com.example.scapp.databinding.CalendarCellBinding;
-import com.example.scapp.viewmodel.CalendarViewModel;
 import java.time.LocalDate;
+import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
 
-    private final CalendarViewModel calendarViewModel;
-    private final LifecycleOwner lifecycleOwner;
+    private final List<LocalDate[]> weeks;
 
-    public CalendarAdapter(CalendarViewModel calendarViewModel, LifecycleOwner lifecycleOwner) {
-        this.calendarViewModel = calendarViewModel;
-        this.lifecycleOwner = lifecycleOwner;
+    public CalendarAdapter(List<LocalDate[]> weeks) {
+        this.weeks = weeks;
     }
 
     @NonNull
@@ -38,21 +35,19 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        calendarViewModel.getInitialWeeks().observe(lifecycleOwner, initialWeeks->{
-            LocalDate[] week = initialWeeks.get(position);
-            for(int i = 0; i<week.length; i++){
-                LocalDate date = week[i];
-                TextView weekDateTxtView = holder.weeksDatesTxtViews[i];
-                TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
-                weekDateTxtView.setText(String.valueOf(date.getDayOfMonth())); //Colocamos los dias del mes en el calendario
-                CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
-            }
-        });
+        LocalDate[] week = weeks.get(position);
+        for(int i = 0; i<week.length; i++){
+            LocalDate date = week[i];
+            TextView weekDateTxtView = holder.weeksDatesTxtViews[i];
+            TextView weekDaysTxtView = holder.weeksDaysTxtViews[i];
+            weekDateTxtView.setText(String.valueOf(date.getDayOfMonth())); //Colocamos los dias del mes en el calendario
+            CalendarStyle(weekDateTxtView,weekDaysTxtView,date);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return calendarViewModel.getInitialWeeks().getValue().size();
+        return weeks.size();
     }
 
     //Metodo para establecer el Background y los colorpalette del calendario

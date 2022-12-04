@@ -11,7 +11,10 @@ public class CalendarDatesProvider {
 
     private static final List<LocalDate[]> weeks = new ArrayList<>();
 
-    public static List<LocalDate[]> generateInitialWeeks() {
+    public static List<LocalDate[]> get_Weeks(){
+        return weeks;
+    }
+    public static void generateInitialWeeks() {
         LocalDate[] week;
         LocalDate sundayOfThisWeek = sundayForDate(LocalDate.now()); //Del dia actual obtenemos el día domingo de esa misma semana para asi organizar las semanas
         if(sundayOfThisWeek != null){
@@ -27,7 +30,6 @@ public class CalendarDatesProvider {
                 weeks.add(week); //Añadimos las semanas a la lista
             }
         }
-        return weeks;
     }
 
     //Metodo para obtener el dia domingo

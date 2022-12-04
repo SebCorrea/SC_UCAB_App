@@ -5,26 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsBinding;
-import com.example.scapp.viewmodel.SubjectsViewModel;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
     private final onItemListener onItemListener;
-    private final SubjectsViewModel subjectsViewModel;
-    private final LifecycleOwner lifecycleOwner;
+    private final List<String> subjects;
 
-    public SubjectsAdapter(SubjectsViewModel subjectsViewModel, LifecycleOwner lifecycleOwner, onItemListener onItemListener) {
+    public SubjectsAdapter(onItemListener onItemListener, List<String> subjects) {
         this.onItemListener = onItemListener;
-        this.subjectsViewModel = subjectsViewModel;
-        this.lifecycleOwner = lifecycleOwner;
+        this.subjects = subjects;
     }
 
     @NonNull
@@ -39,13 +33,12 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SubjectsViewHolder holder, int position) {
-        subjectsViewModel.getSubjects().observe(lifecycleOwner, subjectsNames->
-                holder.subjects_btn.setText(subjectsNames.get(position)));
+        holder.subjects_btn.setText(subjects.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return subjectsViewModel.getSubjects().getValue().size();
+        return subjects.size();
     }
 
     public interface onItemListener{

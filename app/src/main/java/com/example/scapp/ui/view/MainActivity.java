@@ -42,14 +42,17 @@ public class MainActivity extends AppCompatActivity{
         calendarViewModel.generateInitialWeeks(); //Genera las primeras semanas que se muestran en el RecyclerView
         new PagerSnapHelper().attachToRecyclerView(binding.calendarRecyclerView); //Scroll Animation ViewPager
 
-        CalendarAdapter calendarAdapter = new CalendarAdapter(calendarViewModel, this);
-        binding.calendarRecyclerView.setAdapter(calendarAdapter);
+        calendarViewModel.getInitialWeeks().observe(this, initialWeeks->{
+            CalendarAdapter calendarAdapter = new CalendarAdapter(initialWeeks);
+            binding.calendarRecyclerView.setAdapter(calendarAdapter);
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.calendarRecyclerView.setLayoutManager(layoutManager);
 
         binding.calendarRecyclerView.scrollToPosition(6); //Se generan 13 semanas donde la 6ta es la semana actual
         calendarViewModel.getMonthAndYear().observe(MainActivity.this, monthAndYear-> binding.monthYearTxtView.setText(monthAndYear));
+
 
         binding.calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             int position;
@@ -61,9 +64,9 @@ public class MainActivity extends AppCompatActivity{
 
                     int totalItems = layoutManager.getItemCount()-1;
                     if(position >= totalItems-3){
-                        calendarViewModel.generatePlusWeeks(calendarAdapter);
+                        calendarViewModel.generatePlusWeeks((CalendarAdapter) binding.calendarRecyclerView.getAdapter());
                     }else if(position<=3){
-                        calendarViewModel.generateMinusWeeks(calendarAdapter);
+                        calendarViewModel.generateMinusWeeks((CalendarAdapter) binding.calendarRecyclerView.getAdapter());
                     }
                 }
             }
@@ -80,8 +83,10 @@ public class MainActivity extends AppCompatActivity{
 
         subjectsViewModel.set_subjects();
 
-        SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsViewModel, this, this::onItemClickListener);
-        binding.subjectRecyclerView.setAdapter(subjectsAdapter);
+        subjectsViewModel.get_Subjects().observe(this, subjects->{
+            SubjectsAdapter subjectsAdapter = new SubjectsAdapter(this::onItemClickListener, subjects);
+            binding.subjectRecyclerView.setAdapter(subjectsAdapter);
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.subjectRecyclerView.setLayoutManager(layoutManager);

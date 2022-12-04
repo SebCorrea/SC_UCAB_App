@@ -16,14 +16,15 @@ public class SubjectsViewModel extends ViewModel {
     }
 
     public void set_subjects(){
-        subjects.setValue(SubjectsProvider.getSubjects());
+        subjects.postValue(SubjectsProvider.getSubjects());
     }
 
     public void addNewSubject(String subjectName, SubjectsAdapter subjectsAdapter){
-        SubjectsProvider.addNewSubject(subjectName, subjectsAdapter);
+        SubjectsProvider.addNewSubject(subjectName,subjectsAdapter);
+        subjects.postValue(SubjectsProvider.getSubjects());
     }
 
-    public LiveData<List<String>> getSubjects(){
+    public LiveData<List<String>> get_Subjects(){
         return subjects;
     }
 }
