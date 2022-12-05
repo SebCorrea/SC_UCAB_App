@@ -27,4 +27,10 @@ public class SubjectsViewModel extends ViewModel {
     public LiveData<List<String>> get_Subjects(){
         return subjects;
     }
+
+    public void removeSubject(SubjectsAdapter subjectsAdapter, String subjectName) {
+        SubjectsProvider.removeSubject(subjectsAdapter, subjectName);
+        subjects.postValue(SubjectsProvider.getSubjects());
+
+    }
 }

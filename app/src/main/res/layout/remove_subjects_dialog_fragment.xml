@@ -29,7 +29,7 @@
 
         <Button
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:id="@+id/agregar_btn"
+            android:id="@+id/cancelDelete_btn"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,10 +37,11 @@
             android:textAllCaps="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:layout_marginHorizontal="10dp"
             android:textColor="@color/black"
-            app:rippleColor="@color/gray"/>
+            app:rippleColor="@color/gray"
+            android:layout_marginHorizontal="5dp"/>
         <Button
+            android:id="@+id/delete_btn"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +49,7 @@
             android:textAllCaps="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:layout_marginHorizontal="10dp"/>
+            android:layout_marginHorizontal="5dp"/>
 
     </LinearLayout>
 

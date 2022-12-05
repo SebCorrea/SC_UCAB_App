@@ -37,4 +37,9 @@ public class SubjectsProvider {
         subjectsAdapter.notifyItemInserted(0);
     }
 
+    public static void removeSubject(@NonNull SubjectsAdapter subjectsAdapter, String subjectName) {
+        subjects.remove(subjectName);
+        subjectsAdapter.notifyItemRemoved(subjects.indexOf(subjectName));
+
+    }
 }

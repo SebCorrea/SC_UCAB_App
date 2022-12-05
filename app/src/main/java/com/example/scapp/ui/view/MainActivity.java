@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity{
 
         @Override
         public boolean onItemLongClickListener(String subjectName) {
-            RemoveSubjects_DialogFragment removeSubjectsDialogFragment = new RemoveSubjects_DialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
+            RemoveSubjects_DialogFragment removeSubjectsDialogFragment = new RemoveSubjects_DialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter(), subjectName);
             removeSubjectsDialogFragment.show(getSupportFragmentManager(),"removeSubjectsDialogFragment");
             return true;
         }
