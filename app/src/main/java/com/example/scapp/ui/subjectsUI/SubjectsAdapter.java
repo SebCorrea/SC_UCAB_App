@@ -41,7 +41,7 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
     public interface SubjectsButtonsActions {
         void onItemClickListener(String subjectName);
-        boolean onItemLongClickListener();
+        boolean onItemLongClickListener(String subjectName);
     }
 }
 
@@ -54,6 +54,6 @@ class SubjectsViewHolder extends RecyclerView.ViewHolder {
         binding = SubjectsBinding.bind(itemView);
 
         binding.subjectsBtn.setOnClickListener(v -> subjectsButtonsActions.onItemClickListener(binding.subjectsBtn.getText().toString()));
-        binding.subjectsBtn.setOnLongClickListener(v-> subjectsButtonsActions.onItemLongClickListener());
+        binding.subjectsBtn.setOnLongClickListener(v-> subjectsButtonsActions.onItemLongClickListener(binding.subjectsBtn.getText().toString()));
     }
 }

@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
+import com.example.scapp.ui.subjectsUI.RemoveSubjects_DialogFragment;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
-import com.example.scapp.ui.subjectsUI.SubjectsDialogFragment;
+import com.example.scapp.ui.subjectsUI.AddSubjects_DialogFragment;
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
@@ -28,8 +29,6 @@ public class MainActivity extends AppCompatActivity{
 
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
-
-
 
         //App configs
         recyclerCalendarConfig();
@@ -93,20 +92,21 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void showSubjectAlertDialogConfig() {
-        SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
-        subjectsDialogFragment.show(getSupportFragmentManager(),"subjectsDialogFragment");
+        AddSubjects_DialogFragment addSubjectsDialogFragment = new AddSubjects_DialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
+        addSubjectsDialogFragment.show(getSupportFragmentManager(),"addSubjectsDialogFragment");
     }
 
     SubjectsAdapter.SubjectsButtonsActions subjectsButtonsActions = new SubjectsAdapter.SubjectsButtonsActions() {
 
         @Override
         public void onItemClickListener(String subjectName) {
-            binding.prueba.setText("onClickListener");
+            binding.prueba.setText(subjectName);
         }
 
         @Override
-        public boolean onItemLongClickListener() {
-            binding.prueba.setText("onLongClickListener");
+        public boolean onItemLongClickListener(String subjectName) {
+            RemoveSubjects_DialogFragment removeSubjectsDialogFragment = new RemoveSubjects_DialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
+            removeSubjectsDialogFragment.show(getSupportFragmentManager(),"removeSubjectsDialogFragment");
             return true;
         }
     };
