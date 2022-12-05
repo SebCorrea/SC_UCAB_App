@@ -3,21 +3,19 @@ package com.example.scapp.ui.subjectsUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.scapp.R;
 import com.example.scapp.databinding.SubjectsBinding;
 import java.util.List;
 
-
 public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
 
-    private final onItemListener onItemListener;
+    private final SubjectsButtonsActions subjectsButtonsActions;
     private final List<String> subjects;
 
-    public SubjectsAdapter(onItemListener onItemListener, List<String> subjects) {
-        this.onItemListener = onItemListener;
+    public SubjectsAdapter(SubjectsButtonsActions onItemListener, List<String> subjects) {
+        this.subjectsButtonsActions = onItemListener;
         this.subjects = subjects;
     }
 
@@ -28,12 +26,12 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
         View view = layoutInflater.inflate(R.layout.subjects,parent,false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (ViewGroup.LayoutParams.WRAP_CONTENT);
-        return new SubjectsViewHolder(view, onItemListener);
+        return new SubjectsViewHolder(view, subjectsButtonsActions);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SubjectsViewHolder holder, int position) {
-        holder.subjects_btn.setText(subjects.get(position));
+        holder.binding.subjectsBtn.setText(subjects.get(position));
     }
 
     @Override
@@ -41,19 +39,21 @@ public class SubjectsAdapter extends RecyclerView.Adapter<SubjectsViewHolder> {
         return subjects.size();
     }
 
-    public interface onItemListener{
-        void onItemClickListener(String dayText);
+    public interface SubjectsButtonsActions {
+        void onItemClickListener(String subjectName);
+        boolean onItemLongClickListener();
     }
 }
 
 class SubjectsViewHolder extends RecyclerView.ViewHolder {
 
-    public Button subjects_btn;
+    public SubjectsBinding binding;
 
-    public SubjectsViewHolder(@NonNull View itemView, SubjectsAdapter.onItemListener onItemListener) {
+    public SubjectsViewHolder(@NonNull View itemView, SubjectsAdapter.SubjectsButtonsActions subjectsButtonsActions) {
         super(itemView);
-        SubjectsBinding binding = SubjectsBinding.bind(itemView);
-        subjects_btn = binding.subjectsBtn;
-        subjects_btn.setOnClickListener(v -> onItemListener.onItemClickListener(subjects_btn.getText().toString()));
+        binding = SubjectsBinding.bind(itemView);
+
+        binding.subjectsBtn.setOnClickListener(v -> subjectsButtonsActions.onItemClickListener(binding.subjectsBtn.getText().toString()));
+        binding.subjectsBtn.setOnLongClickListener(v-> subjectsButtonsActions.onItemLongClickListener());
     }
 }

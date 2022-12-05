@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity{
     private SubjectsViewModel subjectsViewModel;
     private ActivityMainBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,8 @@ public class MainActivity extends AppCompatActivity{
 
         subjectsViewModel = new ViewModelProvider(this).get(SubjectsViewModel.class);
         calendarViewModel = new ViewModelProvider(this).get(CalendarViewModel.class);
+
+
 
         //App configs
         recyclerCalendarConfig();
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
         subjectsViewModel.set_subjects();
 
         subjectsViewModel.get_Subjects().observe(this, subjects->{
-            SubjectsAdapter subjectsAdapter = new SubjectsAdapter(this::onItemClickListener, subjects);
+            SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsButtonsActions, subjects);
             binding.subjectRecyclerView.setAdapter(subjectsAdapter);
         });
 
@@ -93,10 +94,21 @@ public class MainActivity extends AppCompatActivity{
 
     private void showSubjectAlertDialogConfig() {
         SubjectsDialogFragment subjectsDialogFragment = new SubjectsDialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
-        subjectsDialogFragment.show(getSupportFragmentManager(),"SubjectUtils");
+        subjectsDialogFragment.show(getSupportFragmentManager(),"subjectsDialogFragment");
     }
 
-    public void onItemClickListener(String subject) {
-        binding.prueba.setText(subject);
-    }
+    SubjectsAdapter.SubjectsButtonsActions subjectsButtonsActions = new SubjectsAdapter.SubjectsButtonsActions() {
+
+        @Override
+        public void onItemClickListener(String subjectName) {
+            binding.prueba.setText("onClickListener");
+        }
+
+        @Override
+        public boolean onItemLongClickListener() {
+            binding.prueba.setText("onLongClickListener");
+            return true;
+        }
+    };
+
 }
