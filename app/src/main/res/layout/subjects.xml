@@ -15,4 +15,6 @@
         android:textSize="12sp"
         android:textAllCaps="false"
         tools:text="Historia de Venezuela"/>
+
 </FrameLayout>
+

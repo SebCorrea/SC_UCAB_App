@@ -9,11 +9,13 @@ import java.util.List;
 public class SubjectsProvider {
 
     private static final List<String> subjects = new ArrayList<>();
+    private String subjectPercentage;
+    private String subjectsHomeworks;
+    private String subjectDates;
 
     public static List<String> getSubjects(){
         return subjects;
     }
-
 
     public static void addNewSubject(@NonNull String subjectName, @NonNull SubjectsAdapter subjectsAdapter){
 
@@ -42,4 +44,30 @@ public class SubjectsProvider {
         subjectsAdapter.notifyItemRemoved(subjects.indexOf(subjectName));
 
     }
+
+    public String getSubjectPercentage() {
+        return subjectPercentage;
+    }
+
+    public void setSubjectPercentage(String subjectPercentage) {
+        this.subjectPercentage = subjectPercentage;
+    }
+
+    public String getSubjectsHomeworks() {
+        return subjectsHomeworks;
+    }
+
+    public void setSubjectsHomeworks(String subjectsHomeworks) {
+        this.subjectsHomeworks = subjectsHomeworks;
+    }
+
+    public String getSubjectDates() {
+        return subjectDates;
+    }
+
+    public void setSubjectDates(String subjectDates) {
+        this.subjectDates = subjectDates;
+    }
+
+
 }

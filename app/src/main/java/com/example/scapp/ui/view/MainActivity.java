@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
 import com.example.scapp.ui.subjectsUI.AddSubjects_DialogFragment;
@@ -15,6 +17,7 @@ import com.example.scapp.ui.subjectsUI.RemoveSubjects_DialogFragment;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.viewmodel.CalendarViewModel;
 import com.example.scapp.viewmodel.SubjectsViewModel;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -87,11 +90,21 @@ public class MainActivity extends AppCompatActivity{
         subjectsViewModel.get_Subjects().observe(this, subjects->{
             SubjectsAdapter subjectsAdapter = new SubjectsAdapter(subjectsButtonsActions, subjects);
             binding.subjectRecyclerView.setAdapter(subjectsAdapter);
+
+            if(subjects.isEmpty()){
+                binding.subjectRecyclerView.setVisibility(View.GONE);
+                binding.emptySubjectTxtView.setVisibility(View.VISIBLE);
+            }else{
+                binding.emptySubjectTxtView.setVisibility(View.GONE);
+                binding.subjectRecyclerView.setVisibility(View.VISIBLE);
+            }
+
         });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         binding.subjectRecyclerView.setLayoutManager(layoutManager);
     }
+
 
     private void showSubjectAlertDialogConfig() {
         AddSubjects_DialogFragment addSubjectsDialogFragment = new AddSubjects_DialogFragment((SubjectsAdapter) binding.subjectRecyclerView.getAdapter());
