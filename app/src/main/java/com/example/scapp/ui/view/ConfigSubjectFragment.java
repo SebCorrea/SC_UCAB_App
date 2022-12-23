@@ -14,15 +14,13 @@ public class ConfigSubjectFragment extends Fragment {
 
     private FragmentSubjectConfigBinding binding;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_subject_config, container, false);
         binding = FragmentSubjectConfigBinding.bind(view);
         return view;
