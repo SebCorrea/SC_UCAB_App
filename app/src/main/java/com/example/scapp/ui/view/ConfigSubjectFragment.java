@@ -30,5 +30,10 @@ public class ConfigSubjectFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         String subjectName = requireArguments().getString("prueba");
         binding.txtPrueba.setText(subjectName);
+        binding.addEvaluationBtn.setOnClickListener(v ->addEvaluation());
+    }
+
+    private void addEvaluation() {
+
     }
 }

@@ -11,16 +11,20 @@
         android:id="@+id/txtPrueba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Materia"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Materia" />
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/addEvaluation_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar plan de evaluación"
+        android:text="Agregar evaluación"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrueba" />
