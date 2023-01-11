@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.scapp.databinding.ActivityMainBinding;
 import com.example.scapp.ui.calendarUI.CalendarAdapter;
 import com.example.scapp.ui.subjectsUI.AddSubjects_DialogFragment;
+import com.example.scapp.ui.subjectsUI.ConfigSubjectFragment;
 import com.example.scapp.ui.subjectsUI.RemoveSubjects_DialogFragment;
 import com.example.scapp.ui.subjectsUI.SubjectsAdapter;
 import com.example.scapp.viewmodel.CalendarViewModel;

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.ConfigSubjectFragment"
+    tools:context=".ui.subjectsUI.ConfigSubjectFragment"
     android:background="@color/white">
 
     <TextView
@@ -19,6 +19,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Materia" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/TasksRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrueba" />
+
     <Button
         android:id="@+id/addEvaluation_btn"
         android:layout_width="wrap_content"
@@ -27,6 +35,6 @@
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrueba" />
+        app:layout_constraintTop_toBottomOf="@+id/TasksRecyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.scapp.ui.view;
+package com.example.scapp.ui.subjectsUI;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -35,5 +35,7 @@ public class ConfigSubjectFragment extends Fragment {
 
     private void addEvaluation() {
 
+        AddTask_DialogFragment addTaskDialogFragment = new AddTask_DialogFragment();
+        addTaskDialogFragment.show(getActivity().getSupportFragmentManager(), "addTaskDialogFragment");
     }
 }
