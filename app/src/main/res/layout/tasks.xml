@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/taskName_txtView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="Parcial 1"/>
+
+    <TextView
+        android:id="@+id/taskDate_txtView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="19/05/2023"/>
+
+    <TextView
+        android:id="@+id/taskPercent_txtView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="20%"/>
+
+    <Button
+        android:id="@+id/deleteTask_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"/>
+
+
+</LinearLayout>

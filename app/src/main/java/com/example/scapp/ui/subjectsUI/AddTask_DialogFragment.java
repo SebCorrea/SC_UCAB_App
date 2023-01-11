@@ -10,12 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import com.example.scapp.R;
+import com.example.scapp.data.providers.Tasks;
 import com.example.scapp.databinding.AddTasksDialogFragmentBinding;
+
+import java.util.List;
 
 public class AddTask_DialogFragment extends DialogFragment {
 
     private AddTasksDialogFragmentBinding binding;
     private Dialog dialog;
+    private List<Tasks> tasks;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -31,6 +35,12 @@ public class AddTask_DialogFragment extends DialogFragment {
     }
 
     private void saveTasks(View view) {
+
+        Tasks task = new Tasks();
+        task.setTaskName(binding.taskNameTextInputLayout.getEditText().getText().toString());
+        task.setTaskDate(binding.taskDateTextInputLayout.getEditText().getText().toString());
+        task.setTaskPercent(binding.taskPercentTextInputLayout.getEditText().getText().toString());
+        //tasks.add(task);
 
     }
 

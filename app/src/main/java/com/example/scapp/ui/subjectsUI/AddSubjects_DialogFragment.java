@@ -44,6 +44,7 @@ public class AddSubjects_DialogFragment extends DialogFragment {
         String subjectName = binding.subjectEditText.getText().toString();
         if(subjectName.trim().isEmpty()){
             binding.subjectTextInputLayout.setError("Campo vacío");
+
             return;
         }
         subjectsViewModel.addNewSubject(subjectName, subjectsAdapter);
